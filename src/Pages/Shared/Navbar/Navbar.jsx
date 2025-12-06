@@ -1,39 +1,82 @@
-import React from 'react';
-import { NavLink } from 'react-router';
+import React from "react";
+import { Link, NavLink } from "react-router";
+import Container from "../../../Component/Container/Container";
 
 const Navbar = () => {
-    const links = <>
-     <li><NavLink>Home</NavLink></li>
-     <li><NavLink>Services</NavLink></li>
-     <li><NavLink>About</NavLink></li>
-     <li><NavLink>Contact</NavLink></li>
-     <li><NavLink>Dashboard</NavLink></li>
+  const links = (
+    <>
+      <li>
+        <NavLink className="font-bold md:text-lg  text-white hover:text-purple-300">Home</NavLink>
+      </li>
+      <li>
+        <NavLink className="font-bold md:text-lg text-white hover:text-purple-300">Services</NavLink>
+      </li>
+      <li>
+        <NavLink className="font-bold md:text-lg text-white hover:text-purple-300">About</NavLink>
+      </li>
+      <li>
+        <NavLink className="font-bold md:text-lg text-white hover:text-purple-300">Contact</NavLink>
+      </li>
+      <li>
+        <NavLink className="font-bold md:text-lg text-white hover:text-purple-300">Dashboard</NavLink>
+      </li>
     </>
-    return (
-        <div className="navbar bg-base-100 shadow-sm">
-  <div className="navbar-start">
-    <div className="dropdown">
-      <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+  );
+
+  return (
+    <div className="fixed top-0 left-0 w-full z-50">
+      <div className="bg-white/10 backdrop-blur-md">
+        <Container>
+          <div className="navbar">
+            <div className="navbar-start">
+              {/* Mobile Menu */}
+              <div className="dropdown">
+                <label tabIndex={0} className="btn btn-ghost lg:hidden">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  </svg>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-purple-900 rounded-box w-52"
+                >
+                  {links}
+                </ul>
+              </div>
+              <Link to='/' className=" text-3xl text-yellow-400 font-bold ">
+                Spark <span className="text-white text-2xl">Decore</span>
+              </Link>
+            </div>
+
+            {/* Desktop Menu */}
+            <div className="navbar-center hidden lg:flex">
+              <ul className="menu menu-horizontal px-1">{links}</ul>
+            </div>
+
+            <div className="navbar-end">
+              <Link to='/login' className=" px-10 py-2 rounded-2xl bg-yellow-400  text-black font-bold hover:bg-transparent hover:border-2 hover:text-yellow-400 hover:border-yellow-400">
+                Log In
+              </Link>
+              <Link to='/register' className=" px-10 py-2 rounded-2xl bg-yellow-400  text-black font-bold hover:bg-transparent hover:border-2 hover:text-yellow-400 hover:border-yellow-400">
+                Register
+              </Link>
+            </div>
+          </div>
+        </Container>
       </div>
-      <ul
-        tabIndex="-1"
-        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-       {links}
-      </ul>
     </div>
-    <a className="btn btn-ghost text-xl">DecorMate</a>
-  </div>
-  <div className="navbar-center hidden lg:flex">
-    <ul className="menu menu-horizontal px-1">
-      {links}
-    </ul>
-  </div>
-  <div className="navbar-end">
-    <a className="btn">LogIn</a>
-  </div>
-</div>
-    );
+  );
 };
 
 export default Navbar;

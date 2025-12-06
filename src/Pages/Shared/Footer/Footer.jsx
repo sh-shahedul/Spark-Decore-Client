@@ -1,115 +1,85 @@
+// Footer.jsx
 import React from "react";
-import { Link } from "react-router";
-import { motion } from "framer-motion";
 import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
+import Container from "../../../Component/Container/Container";
 
 const Footer = () => {
-  const socialLinks = [
-    { icon: <FaFacebookF />, url: "https://facebook.com" },
-    { icon: <FaInstagram />, url: "https://instagram.com" },
-    { icon: <FaTwitter />, url: "https://twitter.com" },
-    { icon: <FaLinkedinIn />, url: "https://linkedin.com" },
-  ];
-
-  const navLinks = [
-    { name: "Home", to: "/" },
-    { name: "Services", to: "/services" },
-    { name: "About", to: "/about" },
-    { name: "Contact", to: "/contact" },
-  ];
-
   return (
-    <footer className="relative mt-20">
-      {/* Wave SVG */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none rotate-180">
-        <svg
-          className="relative block w-full h-12"
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="none"
-          viewBox="0 0 1200 120"
-        >
-          <path
-            d="M0,0V46.29c47.09,22,98.47,29,148.8,18.52C234.28,50.16,282,31,332.21,27.66c70.66-4.92,134.31,27,203.45,35.44,95.47,12.39,184.56-15.38,275.19-40.15,84.82-23.12,165.46-18.91,248.37,10.31V0Z"
-            className="fill-gradient-to-r from-purple-600 via-pink-500 to-yellow-400"
-          ></path>
-        </svg>
-      </div>
+    <footer className="bg-gray-900 text-gray-200 relative overflow-hidden">
+      <Container>
+        {/* Decorative top wave */}
+        <div className="absolute top-0 left-0 w-full">
+          <svg viewBox="0 0 1440 80" className="w-full h-20">
+            <path
+              fill="#111827"
+              d="M0,32L60,48C120,64,240,96,360,96C480,96,600,64,720,42.7C840,21,960,11,1080,16C1200,21,1320,43,1380,53.3L1440,64L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"
+            ></path>
+          </svg>
+        </div>
 
-      <motion.div
-        initial={{ y: 50, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="bg-gradient-to-r from-purple-900 via-pink-900 to-indigo-900 text-base-200 px-6 pt-20 pb-10 relative z-10"
-      >
-        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
-          {/* Brand & About */}
-          <div className="space-y-3">
-            <h2 className="text-3xl font-bold text-white">Book MY Decore</h2>
-            <p className="text-gray-300 text-sm">
-              Smart booking for home & ceremony decoration services. Explore packages, check availability, and enjoy hassle-free setups.
+        <div className="py-8 grid grid-cols-1 md:grid-cols-3 gap-10 relative z-10">
+          {/* Logo & Tagline */}
+          <div className="">
+            <h1 className="text-3xl font-bold text-yellow-400 tracking-widest">
+              Spark<span className="text-white text-2xl">Decore</span>
+            </h1>
+            <p className="text-gray-300 text-lg md:text-base leading-relaxed">
+              We specialize in transforming your events into unforgettable memories. From smart home decorations
+              to grand ceremony setups, our solutions combine elegance, innovation, and precision to make
+              every celebration truly remarkable.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              className="btn btn-warning text-black mt-3"
-            >
-              Book Now
-            </motion.button>
+            <div className="flex space-x-4 mt-4">
+              <a href="#" className="hover:text-yellow-400 transition"><FaFacebookF /></a>
+              <a href="#" className="hover:text-yellow-400 transition"><FaInstagram /></a>
+              <a href="#" className="hover:text-yellow-400 transition"><FaTwitter /></a>
+              <a href="#" className="hover:text-yellow-400 transition"><FaLinkedinIn /></a>
+            </div>
           </div>
 
-          {/* Navigation Links */}
-          <div className="space-y-2 text-sm">
-            <h3 className="text-white font-semibold mb-2">Quick Links</h3>
-            <ul className="space-y-1">
-              {navLinks.map((link, idx) => (
-                <li key={idx}>
-                  <Link
-                    to={link.to}
-                    className="hover:text-yellow-400 transition-colors duration-300"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+          {/* Quick Links */}
+          <div className="md:ml-30">
+            <h2 className="text-xl font-semibold mb-4 text-yellow-400">Quick Links</h2>
+            <ul className="space-y-2">
+              <li><a href="#" className="hover:text-yellow-400 transition">Home</a></li>
+              <li><a href="#" className="hover:text-yellow-400 transition">Services</a></li>
+              <li><a href="#" className="hover:text-yellow-400 transition">Booking</a></li>
+              <li><a href="#" className="hover:text-yellow-400 transition">Gallery</a></li>
+              <li><a href="#" className="hover:text-yellow-400 transition">Contact</a></li>
             </ul>
           </div>
 
-          {/* Social & Hours */}
-          <div className="space-y-4">
-            <div className="flex space-x-4">
-              {socialLinks.map((link, idx) => (
-                <motion.a
-                  key={idx}
-                  href={link.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  whileHover={{
-                    scale: 1.3,
-                    rotate: 10,
-                    color: "#fbbf24",
-                  }}
-                  className="text-gray-300 transition-all duration-300 text-xl"
-                >
-                  {link.icon}
-                </motion.a>
-              ))}
+          {/* Newsletter & Contact */}
+          <div>
+            <h2 className="text-xl font-semibold mb-4 text-yellow-400">Stay Connected</h2>
+            <p className="text-gray-400 text-lg md:text-base leading-relaxed">
+              Subscribe to get updates, decoration tips, and the latest trends delivered straight to your inbox.
+            </p>
+            <div className="mt-4 flex">
+              <div className="join w-full">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="input input-bordered join-item w-full bg-white text-gray-800 focus:outline-none"
+                />
+                <button className="btn join-item bg-yellow-400 text-gray-900 hover:bg-yellow-500 font-bold">
+                  Subscribe
+                </button>
+              </div>
             </div>
-            <div className="text-sm">
-              <h3 className="text-white font-semibold mb-1">Working Hours</h3>
-              <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
-              <p>Sat: 10:00 AM - 4:00 PM</p>
-              <p>Sun: Closed</p>
+            <div className="mt-6 text-gray-400 space-y-1">
+              <p>📍 123 Event Street, Dhaka, Bangladesh</p>
+              <p>📞 +880 1234 567 890</p>
+              <p>✉ info@shrinkdecore.com</p>
             </div>
           </div>
         </div>
 
-        {/* Bottom Footer */}
-        <div className="border-t border-gray-600 text-center py-4 text-xs text-gray-400 mt-10">
-          © {new Date().getFullYear()} Book MY Decore. All rights reserved.
+        <div className="text-center text-gray-500 text-sm py-6 border-t border-gray-800 relative z-10">
+          &copy; {new Date().getFullYear()} SparkDecore. All rights reserved.
         </div>
-      </motion.div>
+      </Container>
     </footer>
   );
 };
 
 export default Footer;
-
