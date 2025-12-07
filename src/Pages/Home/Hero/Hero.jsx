@@ -66,10 +66,10 @@ const HeroSection = () => {
                   {slide.description}
                 </p>
                 <div className="flex gap-4">
-                  <button className=" px-10 py-2 rounded-2xl bg-yellow-400  text-black font-bold hover:bg-transparent hover:border-2 hover:text-yellow-400 hover:border-yellow-400">
+                  <button className=" md:px-10 px-3 py-2 rounded-lg bg-yellow-400  text-black font-bold hover:bg-transparent hover:border-2 hover:text-yellow-400 hover:border-yellow-400">
                     Book Now
                   </button>
-                  <button className="px-6 py-3 border text-yellow-400 border-yellow  hover:bg-white/20 rounded-lg font-bold transition">
+                  <button className="md:px-6 px-3 py-2 border text-yellow-400 border-yellow  hover:bg-white/20 rounded-lg font-bold transition">
                     Explore Services
                   </button>
                 </div>

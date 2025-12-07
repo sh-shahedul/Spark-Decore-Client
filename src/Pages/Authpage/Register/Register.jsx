@@ -1,27 +1,55 @@
 
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { PiEyeFill } from 'react-icons/pi';
 import { TbEyeClosed } from 'react-icons/tb';
-import { FcGoogle } from "react-icons/fc";
 import regieterLogo from "../../../assets/reg.png";
 import Container from "../../../Component/Container/Container";
 import useAuth from "../../../hooks/useAuth";
+import SocialLogin from "../SocialLogin/SocialLogin";
+import axios from "axios";
 
 const Register = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [showPass, setShowPass] = useState(false);
   const [termsChecked, setTermsChecked] = useState(false);
-  const {createUser} = useAuth()
-
-
+  const {createUser,updateUserProfile,user,setUser} = useAuth()
+ const navigate = useNavigate()
+const location = useLocation();
    
   const handelRegistration = (data) => {
-    
+    console.log('after register data', data.photo[0]);
+    const profileImg = data.photo[0]
     createUser(data.email,data.password)
     .then(result =>{
         console.log(result.user)
+        // store image and get photo url 
+        const formData = new FormData()
+        formData.append('image',profileImg)
+        const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_HOST_KEY}`
+        axios.post(image_API_URL,formData)
+        .then(res=>{
+            console.log('after image upload:',res.data.data.url)
+            //  update user profile
+           const  photo= res.data.data.url
+            const userProfile = {
+                displayName : data.name,
+                photoURL : photo
+            }
+              updateUserProfile(userProfile)
+              .then(()=>{
+                console.log('user profile updated done')
+                setUser({...user,photoURL : photo})
+              })
+              .catch(error=>{
+              console.log(error)
+    })
+        }) 
+      
+
+
+         navigate(location.state || '/');
     })
     .catch(error=>{
         console.log(error)
@@ -88,7 +116,7 @@ const Register = () => {
             type="file"
             {...register('photo', { required: true })}
             className=" file-input w-full   border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-300"
-            placeholder="Your Name"
+            
           />
           {errors.photo?.type === 'required' && <p className="text-red-600 text-sm mt-1">Photo is Required</p>}
           
@@ -100,7 +128,7 @@ const Register = () => {
     {...register("role", { required: true })}
     className=" select w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-300"
      >
-    <option value="">-- Choose Role --</option>
+    <option value="">Choose Role</option>
     <option value="user">User</option>
     <option value="decorator">Decorator</option>
      </select>
@@ -168,9 +196,9 @@ const Register = () => {
             </p>
 
             {/* Google Register */}
-            <button className="mt-4 w-full md:w-[390px] border border-gray-300 rounded py-2 flex items-center justify-center gap-2 hover:bg-gray-100">
-              <FcGoogle size={20}/> Register with Google
-            </button>
+          <div className="w-full max-w-sm mt-4">
+             <SocialLogin />
+            </div>
           </div>
 
           {/* Right side illustration */}

@@ -3,34 +3,31 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
 import { PiEyeFill } from "react-icons/pi";
 import { TbEyeClosed } from "react-icons/tb";
-import loginIllustration from "../../../assets/reg.png"; // Illustration image
+import loginIllustration from "../../../assets/log.png"; 
 import Container from "../../../Component/Container/Container";
 import useAuth from "../../../hooks/useAuth";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
- const {register, handleSubmit,formState:{errors}} = useForm()
- const [showPass, setShowPass] = useState(false);
-   const {signInUser}=useAuth()
-     const navigate = useNavigate()
-   const location = useLocation()
-   console.log('in the log in page',location)
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [showPass, setShowPass] = useState(false);
+  const { signInUser } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-
-
-    const handelLogIn = (data)=>{
-       console.log(data)
-       signInUser(data.email,data.password)
-       .then(result =>{
+  const handelLogIn = (data) => {
+    signInUser(data.email, data.password)
+      .then(result => {
         console.log(result.user)
-         navigate(location.state|| '/')
-       })
-       .catch(error=>{
-        console.log(error)
-       })
-    }
+        navigate(location.state || '/');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   return (
-    <div className="">
+    <div>
       <Container>
         <Link to='/' className="text-3xl font-bold mt-10" style={{ color: "#FFD93D" }}>
           Spark <span className="text-white text-2xl">Decore</span>
@@ -43,7 +40,6 @@ const Login = () => {
             <p className="text-gray-600 mb-6 text-sm md:text-base">Login to Spark Decore</p>
 
             <form onSubmit={handleSubmit(handelLogIn)} className="w-full max-w-sm space-y-4">
-
               {/* Email */}
               <div className="mb-4">
                 <label className="block font-medium mb-1">Email</label>
@@ -94,15 +90,19 @@ const Login = () => {
               <p className="mt-4 text-gray-600 text-sm text-center">
                 Don't have an account? <Link to="/register" className="text-yellow-600 font-semibold">Register</Link>
               </p>
-
             </form>
+
+            {/* Social Login */}
+            <div className="w-full max-w-sm mt-4">
+              <SocialLogin />
+            </div>
           </div>
 
           {/* Right side illustration */}
           <div className="w-full lg:w-1/2 bg-yellow-50 flex justify-center items-center p-6 md:p-10">
-            <img 
-              src={loginIllustration} 
-              alt="Illustration" 
+            <img
+              src={loginIllustration}
+              alt="Illustration"
               className="max-w-full md:max-w-sm"
             />
           </div>

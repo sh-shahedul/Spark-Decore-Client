@@ -30,9 +30,9 @@ const AuthProvider = ({children}) => {
     }
 
     // Update Profile
-    const updateUserProfile = (displayName, photoURL) => {
+    const updateUserProfile = (profile) => {
         // setLoading(true) 
-        return updateProfile(auth.currentUser, { displayName, photoURL })
+        return updateProfile(auth.currentUser, profile)
     }
 
     // Verification Email
@@ -57,6 +57,7 @@ const AuthProvider = ({children}) => {
       useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser)
+            console.log(currentUser);
             setLoading(false)
         })
         return () => {
