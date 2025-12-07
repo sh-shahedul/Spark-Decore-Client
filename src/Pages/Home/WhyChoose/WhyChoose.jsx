@@ -5,28 +5,28 @@ import Container from '../../../Component/Container/Container';
 
 const features = [
   {
-    icon: <FaUserTie size={40} className="text-amber-400" />,
+    icon: <FaUserTie size={45} className="text-pink-600" />,
     title: 'Professional Decorators',
     description: 'Experienced team for home & ceremony decoration. Personalized service for every client.',
   },
   {
-    icon: <FaCalendarCheck size={40} className="text-yellow-400" />,
+    icon: <FaCalendarCheck size={45} className="text-pink-600" />,
     title: 'Smart Booking System',
     description: 'Online appointment booking, hassle-free. Check availability and book instantly.',
   },
   {
-    icon: <FaDollarSign size={40} className="text-yellow-400" />,
+    icon: <FaDollarSign size={45} className="text-pink-600" />,
     title: 'Transparent Pricing',
     description: 'Clear cost structure for every package. No hidden charges.',
   },
   {
-    icon: <FaHandsHelping size={40} className="text-yellow-400" />,
+    icon: <FaHandsHelping size={45} className="text-pink-600" />,
     title: 'End-to-End Service',
     description: 'From consultation to setup completion. Real-time project updates.',
   },
   {
-    icon: <FaSmile size={40} className="text-yellow-400" />,
-    title: 'High Customer Satisfaction',
+    icon: <FaSmile size={45} className="text-pink-600" />,
+    title: 'Customer Satisfaction',
     description: 'Rated highly by clients. Reviews and testimonials to build trust.',
   },
 ];
@@ -36,7 +36,7 @@ const WhyChoose = () => {
     <div className="py-16 bg-base-200 mb-10 rounded-2xl">
       <Container>
         <div className="text-center mb-12 ">
-        <h2 className=" text-4xl md:text-5xl text-yellow-400 mb-4 font-bold">
+        <h2 className=" text-4xl md:text-5xl text-pink-600 mb-4 font-bold">
           Why Choose <span className="text-black">Spark Decor</span>
         </h2>
         <p className="max-w-2xl mx-auto  text-lg md:text-base font-semibold">
@@ -55,13 +55,13 @@ const WhyChoose = () => {
                   <div className="text-5xl mb-4 transform transition-transform duration-700 ease-in-out group-hover:translate-z-12">
                     {feature.icon}
                   </div>
-                  <h3 className="text-lg font-semibold text-yellow-400 transform transition-transform duration-700 ease-in-out group-hover:translate-z-12">
+                  <h3 className="text-lg font-bold text-black transform transition-transform duration-700 ease-in-out group-hover:translate-z-12">
                     {feature.title}
                   </h3>
                 </div>
 
                 {/* Back Side */}
-                <div className="absolute w-full h-full backface-hidden bg-yellow-400 text-white rounded-xl flex flex-col items-center justify-center p-6 rotate-y-180 text-lg font-semibold text-center transform-style-3d transition-transform duration-700 ease-in-out">
+                <div className="absolute w-full h-full backface-hidden bg-pink-600 text-white rounded-xl flex flex-col items-center justify-center p-6 rotate-y-180 text-lg font-semibold text-center transform-style-3d transition-transform duration-700 ease-in-out">
                   <p className="transform transition-transform duration-700 ease-in-out group-hover:translate-z-12">
                     {feature.description}
                   </p>

@@ -20,7 +20,7 @@ const Footer = () => {
         <div className="py-8 grid grid-cols-1 md:grid-cols-3 gap-10 relative z-10">
           {/* Logo & Tagline */}
           <div className="">
-            <h1 className="text-3xl font-bold text-yellow-400 tracking-widest">
+            <h1 className="text-3xl font-bold text-pink-600 tracking-widest">
               Spark<span className="text-white text-2xl">Decore</span>
             </h1>
             <p className="text-gray-300 text-lg md:text-base leading-relaxed">
@@ -29,28 +29,28 @@ const Footer = () => {
               every celebration truly remarkable.
             </p>
             <div className="flex space-x-4 mt-4">
-              <a href="#" className="hover:text-yellow-400 transition"><FaFacebookF /></a>
-              <a href="#" className="hover:text-yellow-400 transition"><FaInstagram /></a>
-              <a href="#" className="hover:text-yellow-400 transition"><FaTwitter /></a>
-              <a href="#" className="hover:text-yellow-400 transition"><FaLinkedinIn /></a>
+              <a href="#" className="hover:text-pink-600 transition"><FaFacebookF /></a>
+              <a href="#" className="hover:text-pink-600 transition"><FaInstagram /></a>
+              <a href="#" className="hover:text-pink-600 transition"><FaTwitter /></a>
+              <a href="#" className="hover:text-pink-600 transition"><FaLinkedinIn /></a>
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="md:ml-30">
-            <h2 className="text-xl font-semibold mb-4 text-yellow-400">Quick Links</h2>
+            <h2 className="text-xl font-semibold mb-4 text-pink-600">Quick Links</h2>
             <ul className="space-y-2">
-              <li><a href="#" className="hover:text-yellow-400 transition">Home</a></li>
-              <li><a href="#" className="hover:text-yellow-400 transition">Services</a></li>
-              <li><a href="#" className="hover:text-yellow-400 transition">Booking</a></li>
-              <li><a href="#" className="hover:text-yellow-400 transition">Gallery</a></li>
-              <li><a href="#" className="hover:text-yellow-400 transition">Contact</a></li>
+              <li><a href="#" className="hover:text-pink-600 transition">Home</a></li>
+              <li><a href="#" className="hover:text-pink-600 transition">Services</a></li>
+              <li><a href="#" className="hover:text-pink-600 transition">Booking</a></li>
+              <li><a href="#" className="hover:text-pink-600 transition">Gallery</a></li>
+              <li><a href="#" className="hover:text-pink-600 transition">Contact</a></li>
             </ul>
           </div>
 
           {/* Newsletter & Contact */}
           <div>
-            <h2 className="text-xl font-semibold mb-4 text-yellow-400">Stay Connected</h2>
+            <h2 className="text-xl font-semibold mb-4 text-pink-600">Stay Connected</h2>
             <p className="text-gray-400 text-lg md:text-base leading-relaxed">
               Subscribe to get updates, decoration tips, and the latest trends delivered straight to your inbox.
             </p>
@@ -61,7 +61,7 @@ const Footer = () => {
                   placeholder="Enter your email"
                   className="input input-bordered join-item w-full bg-white text-gray-800 focus:outline-none"
                 />
-                <button className="btn join-item bg-yellow-400 text-gray-900 hover:bg-yellow-500 font-bold">
+                <button className="btn join-item bg-pink-600 text-gray-900 hover:bg-pink-600 font-bold">
                   Subscribe
                 </button>
               </div>

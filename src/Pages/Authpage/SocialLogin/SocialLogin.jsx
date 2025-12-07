@@ -1,51 +1,99 @@
+// import React from 'react';
+// import { FcGoogle } from 'react-icons/fc';
+
+// import { useLocation, useNavigate } from 'react-router';
+// import useAuth from '../../../hooks/useAuth';
+
+
+// const SocialLogin = () => {
+// //   const axiosSecure = useAxiosSecure()
+//     const {googleSignIn}=useAuth()
+//     const navigate = useNavigate()
+//     const location = useLocation();
+//     console.log('location on social',location)
+//     const handelGoogle =()=>{
+//            googleSignIn()
+//            .then(result=>{
+//             console.log(result.user)
+//              navigate(location.state || '/')
+
+//            })
+//            .catch(error=>{
+//            console.log(error)
+//           })
+//     }
+
+//     return (
+//         <div>
+//              {/* OR Divider */}
+//         <div className="divider before:bg-yellow-400 after:bg-yellow-400 my-4">OR</div>
+
+//         {/* GOOGLE BUTTON */}
+//         <button onClick={handelGoogle}  className="w-full flex items-center justify-center gap-2 py-2 bg-white text-black border border-yellow-400 rounded-lg hover:bg-yellow-100 transition-colors font-bold">
+//           <FcGoogle /> Login with Google
+//         </button> 
+//         </div>
+//     );
+// };
+
+// export default SocialLogin;
+
+
+
 import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
-
 import { useLocation, useNavigate } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
-
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const SocialLogin = () => {
-//   const axiosSecure = useAxiosSecure()
-    const {googleSignIn}=useAuth()
-    const navigate = useNavigate()
+    
+    const { googleSignIn } = useAuth();
+    const axiosSecure = useAxiosSecure();
+
+    const navigate = useNavigate();
     const location = useLocation();
-    console.log('location on social',location)
-    const handelGoogle =()=>{
-           googleSignIn()
-           .then(result=>{
-            console.log(result.user)
-             navigate(location.state || '/')
-           
 
-        //  const userInfo ={
-        //     email:result.user.email,
-        //     displayName:result.user.displayName,
-        //     photoURL :result.user.photoURL,
-        //    }
-  
-    //    axiosSecure.post('/users',userInfo)
-    //    .then(res=>{
-    //     console.log('user data hasbbeen store',res.data)
-    //      navigate(location.state || '/')
-    //    })
+    const handelGoogle = () => {
+        googleSignIn()
+            .then(result => {
+                const user = result.user;
 
+                const userInfo = {
+                    email: user.email,
+                    displayName: user.displayName,
+                    photoURL: user.photoURL,
+                    role: "user",
+                };
 
-           })
-           .catch(error=>{
-           console.log(error)
-          })
-    }
+                //USER POST TO DATABASE
+                axiosSecure.post("/users", userInfo)
+                    .then(res => {
+                        console.log("DB Response:", res.data);
+                    })
+                    .catch(err => {
+                        console.log("DB Error:", err);
+                    });
+
+                navigate(location.state || "/");
+            })
+            .catch(error => {
+                console.log("Google Login Error:", error);
+            });
+    };
 
     return (
         <div>
-             {/* OR Divider */}
-        <div className="divider before:bg-yellow-400 after:bg-yellow-400 my-4">OR</div>
 
-        {/* GOOGLE BUTTON */}
-        <button onClick={handelGoogle}  className="w-full flex items-center justify-center gap-2 py-2 bg-white text-black border border-yellow-400 rounded-lg hover:bg-yellow-100 transition-colors font-bold">
-          <FcGoogle /> Login with Google
-        </button> 
+            <div className="divider before:bg-yellow-400 after:bg-yellow-400 my-4">OR</div>
+
+            <button 
+                onClick={handelGoogle}
+                className="w-full flex items-center justify-center gap-2 py-2 bg-white text-black border border-yellow-400 rounded-lg hover:bg-yellow-100 transition-colors font-bold"
+            >
+                <FcGoogle /> Login with Google
+            </button>
+
         </div>
     );
 };

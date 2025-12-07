@@ -40,7 +40,7 @@ const Service = () => {
     <section className="bg-gray-200 py-16">
       <Container>
         <div className=" px-4">
-        <h1 className="text-4xl font-bold text-center mb-4 text-yellow-400 animate-pulse">
+        <h1 className="text-4xl font-bold text-center mb-4 text-pink-600 animate-pulse">
           Our Services
         </h1>
         <p className="text-gray-600 md:text-lg mb-12 font-semibold max-w-[700px] mx-auto text-center">
@@ -70,7 +70,7 @@ const Service = () => {
               {/* Content */}
               <div className="p-6 flex flex-col justify-between flex-1">
                 <div>
-                  <h2 className="text-xl font-bold text-yellow-400 mb-3">
+                  <h2 className="text-xl font-bold text-pink-600 mb-3">
                     {service.service_name}
                   </h2>
                   <p className="text-gray-800 font-semibold mb-1">
@@ -82,7 +82,7 @@ const Service = () => {
                 {/* Button */}
                 <motion.button
                   whileHover={{ scale: 1.1 }}
-                  className="mt-4 w-full py-2 px-4 bg-yellow-400 text-black font-bold rounded-xl shadow-md flex items-center justify-center gap-2"
+                  className="mt-4 w-full py-2 px-4 bg-linear-to-r from-pink-500 to-red-500 text-white  font-bold  hover:from-pink-400 hover:via-red-500 hover:to-pink500 rounded-xl shadow-md flex items-center justify-center gap-2"
                 >
                   <FaEye /> View Details
                 </motion.button>
