@@ -1,64 +1,299 @@
 import { motion } from "framer-motion";
-import { useParams } from "react-router";
-import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router";
+import { useRef, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-// import useAxiosSecure from "../hooks/useAxiosSecure";
+import { FaArrowLeft } from "react-icons/fa";
+import useAuth from "../../hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
 
 const ServiceDetails = () => {
+  const { user } = useAuth();
   const { id } = useParams();
+  const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
-  const [service, setService] = useState(null);
+  const serviceModalRef = useRef(null);
 
-  useEffect(() => {
-    const fetchService = async () => {
-      try {
-        const res = await axiosSecure.get(`/services/${id}`);
-        setService(res.data);
-      } catch (err) {
-        console.error(err);
-      }
+  const [quantity, setQuantity] = useState(1); 
+
+  // Fetch service using TanStack Query
+  const { data: service, isLoading } = useQuery({
+    queryKey: ["single-service", id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/services/${id}`);
+      return res.data;
+    },
+  });
+
+  // Modal handler
+  const handelServiceModal = () => {
+    if (!user) {
+     navigate()
+      return;
+    }
+    serviceModalRef.current.showModal();
+  };
+
+  // React Hook Form
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const handelBooking = async (data) => {
+    const qty = parseInt(data.quantity || 1);
+    const totalCost = service.cost * qty;
+
+    const bookingInfo = {
+      userName: user?.displayName,
+      userEmail: user?.email,
+      serviceName: service.service_name,
+      serviceId: service._id,
+      // cost: service.cost,
+      unit: service.unit,
+      quantity: qty,
+      totalCost,
+      bookingDate: data.bookingDate,
+      bookingTime: data.bookingTime,
+      location: data.location,
+      status: "Pending",
+      decoratorAssigned: null,
+      createdAt: new Date(),
     };
-    fetchService();
-  }, [id,axiosSecure]);
 
-  if (!service) return <p className="text-center mt-10">Loading...</p>;
+    try {
+      const res = await axiosSecure.post("/bookings", bookingInfo);
+      if (res.data.insertedId) {
+        alert("Booking Successful!");
+        serviceModalRef.current.close();
+        reset();
+        setQuantity(1);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  if (isLoading) return <p className="text-center mt-10">Loading...</p>;
+  if (!service) return <p className="text-center mt-10">Service not found</p>;
 
   return (
     <motion.div
-      className="max-w-4xl mx-auto mt-10 bg-white rounded-3xl shadow-xl overflow-hidden"
+      className="mt-30 max-w-screen-2xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row p-6 lg:p-12 gap-8 relative my-10"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.6 }}
     >
+      {/* Back Button */}
+      <button
+        onClick={() => navigate(-1)}
+        className="absolute top-6 left-6 flex items-center gap-2 bg-white shadow-md rounded-full px-4 py-2 hover:bg-pink-50 transition-colors z-10"
+      >
+        <FaArrowLeft /> Back
+      </button>
+
       {/* Image */}
-      <div className="h-96 w-full overflow-hidden">
+      <div className="lg:w-1/2 h-96 lg:h-[500px] overflow-hidden rounded-2xl shadow-lg relative group">
         <img
           src={service.image}
           alt={service.service_name}
-          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
         />
       </div>
 
       {/* Content */}
-      <div className="p-8 flex flex-col gap-4">
-        <h1 className="text-4xl font-bold text-pink-600">{service.service_name}</h1>
-        <p className="text-gray-800 text-xl font-semibold">
-          Cost: {service.cost} BDT / {service.unit}
+      <div className="lg:w-1/2 flex flex-col justify-center md:gap-6 gap-3">
+        <h1 className="md:text-5xl text-2xl font-extrabold text-pink-600">
+          {service.service_name}
+        </h1>
+
+        <p className="text-gray-800 md:text-2xl text-xl font-semibold">
+          Cost: <span className="text-pink-500">{service.cost} BDT</span> /{" "}
+          {service.unit}
         </p>
-        <p className="text-gray-500 text-lg">Category: {service.service_category}</p>
+
+        <p className="md:text-lg text-base font-bold">
+          Category:{" "}
+          <span className="font-medium text-gray-600">
+            {service.service_category}
+          </span>
+        </p>
+
         {service.description && (
-          <p className="text-gray-700 text-lg mt-4">{service.description}</p>
+          <p className="text-gray-700 text-lg mt-2">{service.description}</p>
+        )}
+
+        <div className="mt-4 space-y-2">
+          <p className="md:text-lg text-base font-bold">
+            Created By:{" "}
+            <span className="font-medium text-gray-600">
+              {service.createdByEmail}
+            </span>
+          </p>
+          <p className="md:text-lg text-base font-bold">
+            Created At:{" "}
+            <span className="font-medium text-gray-600">
+              {new Date(service.createdAt).toLocaleString()}
+            </span>
+          </p>
+        </div>
+
+        {/* Book Button */}
+        <motion.button
+          onClick={handelServiceModal}
+          whileHover={{ scale: 1.05 }}
+          className="mt-6 w-max px-8 py-4 bg-gradient-to-r from-pink-500 to-red-500 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+        >
+          Book This Service
+        </motion.button>
+      </div>
+
+      {/* Modal */}
+     <dialog ref={serviceModalRef} className="modal modal-bottom sm:modal-middle">
+  <motion.div
+    className="modal-box p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-pink-50 to-red-50 shadow-2xl"
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+  >
+    <h3 className="font-extrabold text-3xl mb-6 text-pink-600 text-center">
+      Book This Service
+    </h3>
+
+    <form className="space-y-5" onSubmit={handleSubmit(handelBooking)}>
+      {/* Flex row: Name & Email */}
+      <div className="flex flex-col sm:flex-row sm:gap-4">
+        <div className="flex-1 form-control">
+          <label className="label font-semibold flex items-center gap-2">
+            <span className="material-icons text-pink-500">person</span>
+            Your Name
+          </label>
+          <input
+            type="text"
+            defaultValue={user?.displayName}
+            readOnly
+            className="w-full input input-bordered mt-1 bg-gray-100 rounded-xl shadow-inner px-4 py-2"
+          />
+        </div>
+
+        <div className="flex-1 form-control mt-4 sm:mt-0">
+          <label className="label font-semibold flex items-center gap-2">
+            <span className="material-icons text-pink-500">email</span>
+            Your Email
+          </label>
+          <input
+            type="email"
+            defaultValue={user?.email}
+            readOnly
+            className="w-full input input-bordered mt-1 bg-gray-100 rounded-xl shadow-inner px-4 py-2"
+          />
+        </div>
+      </div>
+
+      {/* Flex row: Quantity & Total Cost */}
+      <div className="flex flex-col sm:flex-row sm:gap-4">
+        <div className="flex-1 form-control">
+          <label className="label font-semibold flex items-center gap-2">
+            <span className="material-icons text-pink-500">add</span>
+            Quantity ({service.unit})
+          </label>
+          <input
+            type="number"
+            {...register("quantity", { required: true, min: 1 })}
+            className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+          />
+          {errors.quantity && (
+            <p className="text-red-500 text-sm mt-1">Quantity is required</p>
+          )}
+        </div>
+
+        <div className="flex-1 form-control mt-4 sm:mt-0">
+          <label className="label font-semibold flex items-center gap-2">
+            <span className="material-icons text-pink-500">attach_money</span>
+            Total Cost
+          </label>
+          <input
+            type="text"
+            value={`${quantity ? quantity * service.cost : service.cost} BDT`}
+            readOnly
+            className="w-full input input-bordered mt-1 bg-gray-100 rounded-xl shadow-inner px-4 py-2"
+          />
+        </div>
+      </div>
+
+      {/* Flex row: Booking Date & Time */}
+      <div className="flex flex-col sm:flex-row sm:gap-4">
+        <div className="flex-1 form-control">
+          <label className="label font-semibold flex items-center gap-2">
+            <span className="material-icons text-pink-500">calendar_today</span>
+            Booking Date
+          </label>
+          <input
+            type="date"
+            {...register("bookingDate", { required: true })}
+            className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
+          />
+          {errors.bookingDate && (
+            <p className="text-red-500 text-sm mt-1">Booking date is required</p>
+          )}
+        </div>
+
+        <div className="flex-1 form-control mt-4 sm:mt-0">
+          <label className="label font-semibold flex items-center gap-2">
+            <span className="material-icons text-pink-500">schedule</span>
+            Booking Time
+          </label>
+          <input
+            type="time"
+            {...register("bookingTime", { required: true })}
+            className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
+          />
+          {errors.bookingTime && (
+            <p className="text-red-500 text-sm mt-1">Booking time is required</p>
+          )}
+        </div>
+      </div>
+
+      {/* Location */}
+      <div className="form-control">
+        <label className="label font-semibold flex items-center gap-2">
+          <span className="material-icons text-pink-500">location_on</span>
+          Location
+        </label>
+        <input
+          type="text"
+          placeholder="Enter location"
+          {...register("location", { required: true })}
+          className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
+        />
+        {errors.location && (
+          <p className="text-red-500 text-sm mt-1">Location is required</p>
         )}
       </div>
 
-      {/* Optional Button */}
-      <motion.a
-        href="#"
-        whileHover={{ scale: 1.05 }}
-        className="block mx-8 mb-8 py-3 text-center bg-gradient-to-r from-pink-500 to-red-500 text-white font-bold rounded-xl shadow-md"
+      {/* Submit */}
+      <button
+        type="submit"
+        className="w-full py-3 bg-gradient-to-r from-pink-500 to-red-500 text-white font-bold rounded-2xl mt-4 shadow-lg hover:shadow-xl transition-shadow duration-300"
       >
-        Book This Service
-      </motion.a>
+        Confirm Booking
+      </button>
+    </form>
+
+    {/* Close Button */}
+    <div className="modal-action mt-4">
+      <form method="dialog">
+        <button className="btn btn-outline w-full rounded-xl">Close</button>
+      </form>
+    </div>
+  </motion.div>
+</dialog>
+
+
     </motion.div>
   );
 };
