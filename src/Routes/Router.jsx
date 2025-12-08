@@ -5,7 +5,6 @@ import AuthLayout from "../LayOut/AuthLayout";
 import Login from "../Pages/Authpage/Login/Login";
 import Register from "../Pages/Authpage/Register/Register";
 import Coverage from "../Pages/Covergae/Coverage";
-// import Profile from "../Pages/Profile/Profile";
 import AllService from "../Pages/AllService/AllService";
 import Contact from "../Pages/Contact/Contact";
 import About from "../Pages/About/About";
@@ -13,6 +12,8 @@ import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../LayOut/DashboardLayout";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Profile from "../Pages/Profile/Profile";
+import ServiceDetails from "../Pages/ServiceDetails/ServiceDetails";
+
 
 
 
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
         {
           path:'service',
           Component:AllService,
+        },
+        {
+          path:'services/:id',
+          Component:ServiceDetails,
         },
     ]
   },

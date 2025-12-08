@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
+import Container from "../../../Component/Container/Container";
 
 const slides = [
   {
@@ -27,8 +28,9 @@ const slides = [
 
 const HeroSection = () => {
   return (
-    <section className="relative w-full">
-      <Swiper
+    <section className="relative w-full bg-base-300">
+      <Container>
+        <Swiper
         modules={[Autoplay, Pagination]}
         autoplay={{ delay: 4000, disableOnInteraction: false }}
         pagination={{ clickable: true }}
@@ -78,6 +80,7 @@ const HeroSection = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+      </Container>
     </section>
   );
 };
