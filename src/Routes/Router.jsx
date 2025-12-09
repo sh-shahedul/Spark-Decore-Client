@@ -10,9 +10,11 @@ import Contact from "../Pages/Contact/Contact";
 import About from "../Pages/About/About";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../LayOut/DashboardLayout";
-import Dashboard from "../Pages/Dashboard/Dashboard";
 import Profile from "../Pages/Profile/Profile";
 import ServiceDetails from "../Pages/ServiceDetails/ServiceDetails";
+import BookingHistory from "../Pages/Dashboard/BookingHistory/BookingHistory";
+import Payment from "../Pages/Dashboard/Payment/Payment";
+
 
 
 
@@ -70,8 +72,13 @@ export const router = createBrowserRouter([
     element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
     children: [
       {
-        path:'dashboard',
-        Component:Dashboard
+        path:'booking-history',
+        Component:BookingHistory
+     
+      },
+      {
+        path:'payment/:bookingId',
+        Component:Payment
      
       },
        {

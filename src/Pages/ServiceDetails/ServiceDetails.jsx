@@ -6,6 +6,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const ServiceDetails = () => {
   const { user } = useAuth();
@@ -14,7 +15,7 @@ const ServiceDetails = () => {
   const axiosSecure = useAxiosSecure();
   const serviceModalRef = useRef(null);
 
-  const [quantity, setQuantity] = useState(1); 
+  const [quantity, setQuantity] = useState(1);
 
   // Fetch service using TanStack Query
   const { data: service, isLoading } = useQuery({
@@ -28,7 +29,7 @@ const ServiceDetails = () => {
   // Modal handler
   const handelServiceModal = () => {
     if (!user) {
-     navigate()
+      navigate("/login"); // redirect to login if not logged in
       return;
     }
     serviceModalRef.current.showModal();
@@ -39,6 +40,7 @@ const ServiceDetails = () => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm();
 
@@ -51,28 +53,26 @@ const ServiceDetails = () => {
       userEmail: user?.email,
       serviceName: service.service_name,
       serviceId: service._id,
-      // cost: service.cost,
       unit: service.unit,
       quantity: qty,
       totalCost,
       bookingDate: data.bookingDate,
       bookingTime: data.bookingTime,
       location: data.location,
-      status: "Pending",
-      decoratorAssigned: null,
       createdAt: new Date(),
     };
 
     try {
       const res = await axiosSecure.post("/bookings", bookingInfo);
       if (res.data.insertedId) {
-        alert("Booking Successful!");
+        toast.success("Booking Successful!");
         serviceModalRef.current.close();
         reset();
         setQuantity(1);
       }
     } catch (error) {
       console.error(error);
+      toast.error("Booking failed!");
     }
   };
 
@@ -144,156 +144,172 @@ const ServiceDetails = () => {
         <motion.button
           onClick={handelServiceModal}
           whileHover={{ scale: 1.05 }}
-          className="mt-6 w-max px-8 py-4 bg-gradient-to-r from-pink-500 to-red-500 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+          className="mt-6 w-max px-8 py-4 bg-linear-to-r from-pink-500 to-red-500 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
         >
           Book This Service
         </motion.button>
       </div>
 
       {/* Modal */}
-     <dialog ref={serviceModalRef} className="modal modal-bottom sm:modal-middle">
-  <motion.div
-    className="modal-box p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-pink-50 to-red-50 shadow-2xl"
-    initial={{ opacity: 0, y: 50 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-  >
-    <h3 className="font-extrabold text-3xl mb-6 text-pink-600 text-center">
-      Book This Service
-    </h3>
+      <dialog ref={serviceModalRef} className="modal modal-bottom sm:modal-middle">
+        <motion.div
+          className="modal-box p-6 sm:p-8 rounded-3xl bg-linear-to-br from-pink-50 to-red-50 shadow-2xl"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h3 className="font-extrabold text-3xl mb-6 text-pink-600 text-center">
+            Book This Service
+          </h3>
 
-    <form className="space-y-5" onSubmit={handleSubmit(handelBooking)}>
-      {/* Flex row: Name & Email */}
-      <div className="flex flex-col sm:flex-row sm:gap-4">
-        <div className="flex-1 form-control">
-          <label className="label font-semibold flex items-center gap-2">
-            <span className="material-icons text-pink-500">person</span>
-            Your Name
-          </label>
-          <input
-            type="text"
-            defaultValue={user?.displayName}
-            readOnly
-            className="w-full input input-bordered mt-1 bg-gray-100 rounded-xl shadow-inner px-4 py-2"
-          />
-        </div>
+          <form className="space-y-5" onSubmit={handleSubmit(handelBooking)}>
+            {/* Service Name */}
+            <div className="form-control">
+              <label className="label font-semibold flex items-center gap-2">
+                <span className="material-icons text-pink-500">room_service</span>
+                Service Name
+              </label>
+              <input
+                type="text"
+                value={service.service_name}
+                readOnly
+                className="w-full input input-bordered mt-1 bg-gray-100 rounded-xl shadow-inner px-4 py-2"
+              />
+            </div>
 
-        <div className="flex-1 form-control mt-4 sm:mt-0">
-          <label className="label font-semibold flex items-center gap-2">
-            <span className="material-icons text-pink-500">email</span>
-            Your Email
-          </label>
-          <input
-            type="email"
-            defaultValue={user?.email}
-            readOnly
-            className="w-full input input-bordered mt-1 bg-gray-100 rounded-xl shadow-inner px-4 py-2"
-          />
-        </div>
-      </div>
+            {/* Name & Email */}
+            <div className="flex flex-col sm:flex-row sm:gap-4">
+              <div className="flex-1 form-control">
+                <label className="label font-semibold flex items-center gap-2">
+                  <span className="material-icons text-pink-500">person</span>
+                  Your Name
+                </label>
+                <input
+                  type="text"
+                  defaultValue={user?.displayName}
+                  readOnly
+                  className="w-full input input-bordered mt-1 bg-gray-100 rounded-xl shadow-inner px-4 py-2"
+                />
+              </div>
 
-      {/* Flex row: Quantity & Total Cost */}
-      <div className="flex flex-col sm:flex-row sm:gap-4">
-        <div className="flex-1 form-control">
-          <label className="label font-semibold flex items-center gap-2">
-            <span className="material-icons text-pink-500">add</span>
-            Quantity ({service.unit})
-          </label>
-          <input
-            type="number"
-            {...register("quantity", { required: true, min: 1 })}
-            className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-          />
-          {errors.quantity && (
-            <p className="text-red-500 text-sm mt-1">Quantity is required</p>
-          )}
-        </div>
+              <div className="flex-1 form-control mt-4 sm:mt-0">
+                <label className="label font-semibold flex items-center gap-2">
+                  <span className="material-icons text-pink-500">email</span>
+                  Your Email
+                </label>
+                <input
+                  type="email"
+                  defaultValue={user?.email}
+                  readOnly
+                  className="w-full input input-bordered mt-1 bg-gray-100 rounded-xl shadow-inner px-4 py-2"
+                />
+              </div>
+            </div>
 
-        <div className="flex-1 form-control mt-4 sm:mt-0">
-          <label className="label font-semibold flex items-center gap-2">
-            <span className="material-icons text-pink-500">attach_money</span>
-            Total Cost
-          </label>
-          <input
-            type="text"
-            value={`${quantity ? quantity * service.cost : service.cost} BDT`}
-            readOnly
-            className="w-full input input-bordered mt-1 bg-gray-100 rounded-xl shadow-inner px-4 py-2"
-          />
-        </div>
-      </div>
+            {/* Quantity & Total Cost */}
+            <div className="flex flex-col sm:flex-row sm:gap-4">
+              <div className="flex-1 form-control">
+                <label className="label font-semibold flex items-center gap-2">
+                  <span className="material-icons text-pink-500">add</span>
+                  Quantity ({service.unit})
+                </label>
+                <input
+                  type="number"
+                  {...register("quantity", { required: true, min: 1 })}
+                  value={quantity}
+                  onChange={(e) => {
+                    const val = Number(e.target.value);
+                    setQuantity(val);
+                    setValue("quantity", val);
+                  }}
+                  className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
+                />
+                {errors.quantity && (
+                  <p className="text-red-500 text-sm mt-1">Quantity is required</p>
+                )}
+              </div>
 
-      {/* Flex row: Booking Date & Time */}
-      <div className="flex flex-col sm:flex-row sm:gap-4">
-        <div className="flex-1 form-control">
-          <label className="label font-semibold flex items-center gap-2">
-            <span className="material-icons text-pink-500">calendar_today</span>
-            Booking Date
-          </label>
-          <input
-            type="date"
-            {...register("bookingDate", { required: true })}
-            className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
-          />
-          {errors.bookingDate && (
-            <p className="text-red-500 text-sm mt-1">Booking date is required</p>
-          )}
-        </div>
+              <div className="flex-1 form-control mt-4 sm:mt-0">
+                <label className="label font-semibold flex items-center gap-2">
+                  <span className="material-icons text-pink-500">attach_money</span>
+                  Total Cost
+                </label>
+                <input
+                  type="text"
+                  value={`${quantity ? quantity * service.cost : service.cost} BDT`}
+                  readOnly
+                  className="w-full input input-bordered mt-1 bg-gray-100 rounded-xl shadow-inner px-4 py-2"
+                />
+              </div>
+            </div>
 
-        <div className="flex-1 form-control mt-4 sm:mt-0">
-          <label className="label font-semibold flex items-center gap-2">
-            <span className="material-icons text-pink-500">schedule</span>
-            Booking Time
-          </label>
-          <input
-            type="time"
-            {...register("bookingTime", { required: true })}
-            className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
-          />
-          {errors.bookingTime && (
-            <p className="text-red-500 text-sm mt-1">Booking time is required</p>
-          )}
-        </div>
-      </div>
+            {/* Booking Date & Time */}
+            <div className="flex flex-col sm:flex-row sm:gap-4">
+              <div className="flex-1 form-control">
+                <label className="label font-semibold flex items-center gap-2">
+                  <span className="material-icons text-pink-500">calendar_today</span>
+                  Booking Date
+                </label>
+                <input
+                  type="date"
+                  {...register("bookingDate", { required: true })}
+                  className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
+                />
+                {errors.bookingDate && (
+                  <p className="text-red-500 text-sm mt-1">Booking date is required</p>
+                )}
+              </div>
 
-      {/* Location */}
-      <div className="form-control">
-        <label className="label font-semibold flex items-center gap-2">
-          <span className="material-icons text-pink-500">location_on</span>
-          Location
-        </label>
-        <input
-          type="text"
-          placeholder="Enter location"
-          {...register("location", { required: true })}
-          className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
-        />
-        {errors.location && (
-          <p className="text-red-500 text-sm mt-1">Location is required</p>
-        )}
-      </div>
+              <div className="flex-1 form-control mt-4 sm:mt-0">
+                <label className="label font-semibold flex items-center gap-2">
+                  <span className="material-icons text-pink-500">schedule</span>
+                  Booking Time
+                </label>
+                <input
+                  type="time"
+                  {...register("bookingTime", { required: true })}
+                  className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
+                />
+                {errors.bookingTime && (
+                  <p className="text-red-500 text-sm mt-1">Booking time is required</p>
+                )}
+              </div>
+            </div>
 
-      {/* Submit */}
-      <button
-        type="submit"
-        className="w-full py-3 bg-gradient-to-r from-pink-500 to-red-500 text-white font-bold rounded-2xl mt-4 shadow-lg hover:shadow-xl transition-shadow duration-300"
-      >
-        Confirm Booking
-      </button>
-    </form>
+            {/* Location */}
+            <div className="form-control">
+              <label className="label font-semibold flex items-center gap-2">
+                <span className="material-icons text-pink-500">location_on</span>
+                Location
+              </label>
+              <input
+                type="text"
+                placeholder="Enter location"
+                {...register("location", { required: true })}
+                className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
+              />
+              {errors.location && (
+                <p className="text-red-500 text-sm mt-1">Location is required</p>
+              )}
+            </div>
 
-    {/* Close Button */}
-    <div className="modal-action mt-4">
-      <form method="dialog">
-        <button className="btn btn-outline w-full rounded-xl">Close</button>
-      </form>
-    </div>
-  </motion.div>
-</dialog>
+            {/* Submit */}
+            <button
+              type="submit"
+              className="w-full py-3 bg-linear-to-r from-pink-500 to-red-500 text-white font-bold rounded-2xl mt-4 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              Confirm Booking
+            </button>
+          </form>
 
-
+          {/* Close Button */}
+          <div className="modal-action mt-4">
+            <form method="dialog">
+              <button className="btn btn-outline w-full rounded-xl">Close</button>
+            </form>
+          </div>
+        </motion.div>
+      </dialog>
     </motion.div>
   );
 };

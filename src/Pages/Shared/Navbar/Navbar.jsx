@@ -183,7 +183,7 @@ const Navbar = () => {
 
       {user && (
         <li>
-          <NavLink to="/dashboard/dashboard" className={linkStyle}>
+          <NavLink to="/dashboard/booking-history" className={linkStyle}>
             Dashboard
           </NavLink>
         </li>
@@ -263,7 +263,7 @@ const Navbar = () => {
 
                     <li>
                       <Link 
-                        to="/dashboard/dashboard" 
+                        to="/dashboard/booking-history" 
                         className="flex items-center gap-1 font-semibold mt-2 mb-3"
                       >
                         <TbLayoutDashboardFilled /> DashBoard
@@ -283,7 +283,7 @@ const Navbar = () => {
               ) : (
                 <Link
                   to="/login"
-                  className="flex gap-1 items-center md:px-10 px-4 md:py-2 py-1 rounded-xl bg-gradient-to-r from-pink-500 to-red-500 text-white font-bold"
+                  className="flex gap-1 items-center md:px-10 px-4 md:py-2 py-1 rounded-xl bg-linearz-to-r from-pink-500 to-red-500 text-white font-bold"
                 >
                   <IoLogIn /> Log In
                 </Link>

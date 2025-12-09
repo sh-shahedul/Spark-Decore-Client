@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router';
 import Footer from '../Pages/Shared/Footer/Footer';
 import Navbar from '../Pages/Shared/Navbar/Navbar';
-import toast, { Toaster } from 'react-hot-toast';
+import  { Toaster } from 'react-hot-toast';
 const MainLayOut = () => {
     return (
       
@@ -12,7 +12,7 @@ const MainLayOut = () => {
             <Outlet></Outlet>
             </div> 
             <Footer></Footer>
-            <Toaster position='center'/>
+            <Toaster />
      </div>
       
     );
