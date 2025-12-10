@@ -18,6 +18,27 @@ const Payment = () => {
     },
   });
 
+   const handelPayment = async()=>{
+      const paymentInfo = {
+        cost : booking.totalCost,
+        serviceName:booking.serviceName,
+        serviceId : booking.serviceId,
+        userEmail : booking.userEmail,
+        bookingId
+      }
+
+      const res =  await axiosSecure.post('/create-checkout-session',paymentInfo)
+      
+      console.log(res.data);
+      window.location.href = res.data.url
+      // window.location.assign (res.data.url)
+      
+
+   }
+
+
+
+
   if (isLoading) {
     return <h1 className="text-center text-xl mt-10">Loading...</h1>;
   }
@@ -96,7 +117,7 @@ const Payment = () => {
             <h2 className="text-xl font-semibold">Total to Pay</h2>
             <p className="text-3xl font-bold text-green-600 flex gap-2 items-center"><FaBangladeshiTakaSign /> {booking.totalCost}</p>
           </div>
-          <button className="px-10 py-4 bg-pink-600 text-white font-bold rounded-xl hover:bg-pink-700 transition-all shadow-lg">
+          <button onClick={handelPayment} className="px-10 py-4 bg-pink-600 text-white font-bold rounded-xl hover:bg-pink-700 transition-all shadow-lg">
             Pay Now
           </button>
         </div>

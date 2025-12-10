@@ -88,7 +88,7 @@ const BookingHistory = () => {
               <td className="py-2 px-4 border-b">{booking.serviceName}</td>
               <td className="py-2 px-4 border-b">
                  {
-                    booking.bookingStatus === 'paid' ? <span className='text-green-700 bg-green-300 font-bold'>Paid</span> :
+                    booking.bookingStatus === 'paid' ? <span className='text-green-700 bg-green-300 font-bold px-2 py-1 rounded-full'>Paid</span> :
                     // <span className='text-red-600 font-bold px-2 py-1 rounded-full bg-red-100'>Unpaid</span>
                     <Link to={`/dashboard/payment/${booking._id}`}>
                        <button className='btn btn-sm bg-pink-300 text-black font-bold hover:bg-pink-600 hover:text-white'> Pay </button>

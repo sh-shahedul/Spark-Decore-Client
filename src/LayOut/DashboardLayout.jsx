@@ -5,6 +5,7 @@ import Container from '../Component/Container/Container';
 import { CiTextAlignJustify } from "react-icons/ci";
 import { IoHomeSharp } from "react-icons/io5";
 import { MdHistoryEdu } from 'react-icons/md';
+import { BsCreditCard2BackFill } from 'react-icons/bs';
 const DashboardLayout = () => {
     return (
         <Container>
@@ -40,10 +41,17 @@ const DashboardLayout = () => {
 
         {/* List item */}
         <li>
-          <NavLink to='/dashboard/booking-history' className="is-drawer-close:tooltip is-drawer-close:tooltip-right -ml-1 mt-2" data-tip="profile">
+          <NavLink to='/dashboard/booking-history' className="is-drawer-close:tooltip is-drawer-close:tooltip-right -ml-1 mt-2" data-tip="Booking History">
             
             <MdHistoryEdu size={25} />
             <span className="is-drawer-close:hidden">Booking History</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to='/dashboard/payment-history' className="is-drawer-close:tooltip is-drawer-close:tooltip-right -ml-1 mt-2" data-tip="Payment History">
+            
+            <BsCreditCard2BackFill size={25} />
+            <span className="is-drawer-close:hidden">Payment History</span>
           </NavLink>
         </li>
         <li>

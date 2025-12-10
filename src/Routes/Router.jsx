@@ -14,6 +14,9 @@ import Profile from "../Pages/Profile/Profile";
 import ServiceDetails from "../Pages/ServiceDetails/ServiceDetails";
 import BookingHistory from "../Pages/Dashboard/BookingHistory/BookingHistory";
 import Payment from "../Pages/Dashboard/Payment/Payment";
+import PaymentSuccess from "../Pages/Dashboard/Payment/PaymentSuccess";
+import PaymentCancelled from "../Pages/Dashboard/Payment/PaymentCancelled";
+import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 
 
 
@@ -79,6 +82,24 @@ export const router = createBrowserRouter([
       {
         path:'payment/:bookingId',
         Component:Payment
+     
+      },
+      {
+        path:'payment-success',
+        Component: PaymentSuccess
+        
+     
+      },
+      {
+        path:'payment-cancelled',
+        Component: PaymentCancelled
+
+     
+      },
+      {
+        path:'payment-history',
+        Component: PaymentHistory
+
      
       },
        {

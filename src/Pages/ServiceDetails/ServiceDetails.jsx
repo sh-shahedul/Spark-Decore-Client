@@ -53,9 +53,11 @@ const ServiceDetails = () => {
       userEmail: user?.email,
       serviceName: service.service_name,
       serviceId: service._id,
+
       unit: service.unit,
       quantity: qty,
       totalCost,
+      // bookingStatus: "unpaid",
       bookingDate: data.bookingDate,
       bookingTime: data.bookingTime,
       location: data.location,
@@ -65,6 +67,7 @@ const ServiceDetails = () => {
     try {
       const res = await axiosSecure.post("/bookings", bookingInfo);
       if (res.data.insertedId) {
+        navigate('/dashboard/booking-history')
         toast.success("Booking Successful!");
         serviceModalRef.current.close();
         reset();
