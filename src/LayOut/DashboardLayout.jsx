@@ -5,8 +5,23 @@ import Container from '../Component/Container/Container';
 import { CiTextAlignJustify } from "react-icons/ci";
 import { IoHomeSharp } from "react-icons/io5";
 import { MdHistoryEdu } from 'react-icons/md';
-import { BsCreditCard2BackFill } from 'react-icons/bs';
+import { BsCreditCard2BackFill, BsHouseAddFill } from 'react-icons/bs';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../hooks/useAxiosSecure';
+import useAuth from '../hooks/useAuth';
+import { FaBuffer } from 'react-icons/fa';
 const DashboardLayout = () => {
+ const axiosSecure = useAxiosSecure()
+ const{user}= useAuth()
+  const {data:users=[]} = useQuery({
+    queryKey: ['users', user?.email],
+    queryFn: async ()=> {
+      const res = await axiosSecure.get(`/users/email?email=${user?.email}`)
+       return res.data
+    }
+  })
+
+  console.log(users);
     return (
         <Container>
             <div className="drawer lg:drawer-open">
@@ -38,6 +53,40 @@ const DashboardLayout = () => {
             <span className="is-drawer-close:hidden">Homepage</span>
           </NavLink>
         </li>
+
+
+         {
+          users.role === "admin" &&   <>
+          
+         <li>
+          <NavLink
+              to='/dashboard/add-service'
+                className={({ isActive }) =>`is-drawer-close:tooltip is-drawer-close:tooltip-right -ml-1 mt-2 ${isActive ? 'text-pink-500' : ''}`}data-tip="Add Service">
+              <BsHouseAddFill size={25} />
+             <span className="is-drawer-close:hidden">Add Service</span>
+        </NavLink>
+         </li>
+         <li>
+          <NavLink to='/dashboard/services' className={({ isActive }) =>`is-drawer-close:tooltip is-drawer-close:tooltip-right -ml-1 mt-2 ${isActive ? 'text-pink-500' : '' }` } data-tip="All Service">         
+           <FaBuffer size={25} />
+            <span className="is-drawer-close:hidden">All Service </span>
+          </NavLink>
+        </li> 
+                
+          </>
+         }
+
+        
+
+
+
+
+
+
+
+
+
+
 
         {/* List item */}
         <li>
