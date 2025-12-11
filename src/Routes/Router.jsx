@@ -18,7 +18,9 @@ import PaymentSuccess from "../Pages/Dashboard/Payment/PaymentSuccess";
 import PaymentCancelled from "../Pages/Dashboard/Payment/PaymentCancelled";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 import AddService from "../Pages/Dashboard/Admin/AddService/AddService";
-import Services from "../Pages/Dashboard/Admin/Services/Services";
+import ManageService from "../Pages/Dashboard/Admin/ManageService/ManageService";
+import UpdateService from "../Pages/Dashboard/Admin/UpdateService/UpdateService";
+import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 
 
 
@@ -113,8 +115,16 @@ export const router = createBrowserRouter([
           Component:AddService,
         },
        {
-          path:'services',
-          Component: Services,
+          path:'manage-service',
+          Component: ManageService,
+        },
+       {
+          path:'update-service',
+          Component: UpdateService,
+        },
+       {
+          path:'manage-users',
+          Component: ManageUsers,
         },
     ]
   }

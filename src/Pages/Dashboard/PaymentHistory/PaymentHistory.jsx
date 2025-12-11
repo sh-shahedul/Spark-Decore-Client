@@ -45,7 +45,7 @@ const PaymentHistory = () => {
               {payments.map((pay) => (
                 <tr key={pay._id} className="border-b hover:bg-gray-50">
                   <td className="py-3 px-4">{pay.serviceName}</td>
-                  <td className="py-3 px-4">${pay.ammount}</td>
+                  <td className="py-3 px-4">  tk{pay.amount/100*122}</td>
                   <td className="py-3 px-4 uppercase">{pay.currency}</td>
                   <td className="py-3 px-4">{pay.transactionId}</td>
                   <td className="py-3 px-4">

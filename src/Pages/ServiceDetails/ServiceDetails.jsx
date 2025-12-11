@@ -53,14 +53,15 @@ const ServiceDetails = () => {
       userEmail: user?.email,
       serviceName: service.service_name,
       serviceId: service._id,
-
       unit: service.unit,
+      serviceType : data.serviceType,
+      serviceCategory: service.service_category,
       quantity: qty,
       totalCost,
-      // bookingStatus: "unpaid",
+      // bookingStatus: "pending",
       bookingDate: data.bookingDate,
       bookingTime: data.bookingTime,
-      location: data.location,
+      location: data.location,  
       createdAt: new Date(),
     };
 
@@ -166,144 +167,184 @@ const ServiceDetails = () => {
           </h3>
 
           <form className="space-y-5" onSubmit={handleSubmit(handelBooking)}>
-            {/* Service Name */}
-            <div className="form-control">
-              <label className="label font-semibold flex items-center gap-2">
-                <span className="material-icons text-pink-500">room_service</span>
-                Service Name
-              </label>
-              <input
-                type="text"
-                value={service.service_name}
-                readOnly
-                className="w-full input input-bordered mt-1 bg-gray-100 rounded-xl shadow-inner px-4 py-2"
-              />
-            </div>
 
-            {/* Name & Email */}
-            <div className="flex flex-col sm:flex-row sm:gap-4">
-              <div className="flex-1 form-control">
-                <label className="label font-semibold flex items-center gap-2">
-                  <span className="material-icons text-pink-500">person</span>
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  defaultValue={user?.displayName}
-                  readOnly
-                  className="w-full input input-bordered mt-1 bg-gray-100 rounded-xl shadow-inner px-4 py-2"
-                />
-              </div>
+  {/* Service Name */}
+  <div className="form-control">
+    <label className="label font-semibold flex items-center gap-2">
+      <span className="material-icons text-pink-500">room_service</span>
+      Service Name
+    </label>
+    <input
+      type="text"
+      value={service.service_name}
+      readOnly
+      className="w-full input input-bordered mt-1 bg-gray-100 rounded-xl shadow-inner px-4 py-2"
+    />
+  </div>
 
-              <div className="flex-1 form-control mt-4 sm:mt-0">
-                <label className="label font-semibold flex items-center gap-2">
-                  <span className="material-icons text-pink-500">email</span>
-                  Your Email
-                </label>
-                <input
-                  type="email"
-                  defaultValue={user?.email}
-                  readOnly
-                  className="w-full input input-bordered mt-1 bg-gray-100 rounded-xl shadow-inner px-4 py-2"
-                />
-              </div>
-            </div>
+  {/* Name & Email */}
+  <div className="flex flex-col sm:flex-row sm:gap-4">
+    <div className="flex-1 form-control">
+      <label className="label font-semibold flex items-center gap-2">
+        <span className="material-icons text-pink-500">person</span>
+        Your Name
+      </label>
+      <input
+        type="text"
+        defaultValue={user?.displayName}
+        readOnly
+        className="w-full input input-bordered mt-1 bg-gray-100 rounded-xl shadow-inner px-4 py-2"
+      />
+    </div>
 
-            {/* Quantity & Total Cost */}
-            <div className="flex flex-col sm:flex-row sm:gap-4">
-              <div className="flex-1 form-control">
-                <label className="label font-semibold flex items-center gap-2">
-                  <span className="material-icons text-pink-500">add</span>
-                  Quantity ({service.unit})
-                </label>
-                <input
-                  type="number"
-                  {...register("quantity", { required: true, min: 1 })}
-                  value={quantity}
-                  onChange={(e) => {
-                    const val = Number(e.target.value);
-                    setQuantity(val);
-                    setValue("quantity", val);
-                  }}
-                  className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
-                />
-                {errors.quantity && (
-                  <p className="text-red-500 text-sm mt-1">Quantity is required</p>
-                )}
-              </div>
+    <div className="flex-1 form-control mt-4 sm:mt-0">
+      <label className="label font-semibold flex items-center gap-2">
+        <span className="material-icons text-pink-500">email</span>
+        Your Email
+      </label>
+      <input
+        type="email"
+        defaultValue={user?.email}
+        readOnly
+        className="w-full input input-bordered mt-1 bg-gray-100 rounded-xl shadow-inner px-4 py-2"
+      />
+    </div>
+  </div>
 
-              <div className="flex-1 form-control mt-4 sm:mt-0">
-                <label className="label font-semibold flex items-center gap-2">
-                  <span className="material-icons text-pink-500">attach_money</span>
-                  Total Cost
-                </label>
-                <input
-                  type="text"
-                  value={`${quantity ? quantity * service.cost : service.cost} BDT`}
-                  readOnly
-                  className="w-full input input-bordered mt-1 bg-gray-100 rounded-xl shadow-inner px-4 py-2"
-                />
-              </div>
-            </div>
+  {/* Service Type (Radio) */}
+  <div className="form-control mt-4">
+    <label className="label font-semibold flex items-center gap-2">
+      <span className="material-icons text-pink-500">category</span>
+      Service Type
+    </label>
 
-            {/* Booking Date & Time */}
-            <div className="flex flex-col sm:flex-row sm:gap-4">
-              <div className="flex-1 form-control">
-                <label className="label font-semibold flex items-center gap-2">
-                  <span className="material-icons text-pink-500">calendar_today</span>
-                  Booking Date
-                </label>
-                <input
-                  type="date"
-                  {...register("bookingDate", { required: true })}
-                  className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
-                />
-                {errors.bookingDate && (
-                  <p className="text-red-500 text-sm mt-1">Booking date is required</p>
-                )}
-              </div>
+    <div className="flex items-center gap-6 mt-2">
+      {/* In studio */}
+      <label className="flex items-center gap-2 cursor-pointer">
+        <input
+          type="radio"
+          value="in-studio"
+          {...register("serviceType", { required: true })}
+          className="radio checked:bg-pink-500"
+        />
+        <span className="font-medium">In Studio</span>
+      </label>
 
-              <div className="flex-1 form-control mt-4 sm:mt-0">
-                <label className="label font-semibold flex items-center gap-2">
-                  <span className="material-icons text-pink-500">schedule</span>
-                  Booking Time
-                </label>
-                <input
-                  type="time"
-                  {...register("bookingTime", { required: true })}
-                  className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
-                />
-                {errors.bookingTime && (
-                  <p className="text-red-500 text-sm mt-1">Booking time is required</p>
-                )}
-              </div>
-            </div>
+      {/* On site */}
+      <label className="flex items-center gap-2 cursor-pointer">
+        <input
+          type="radio"
+          value="on-site"
+          {...register("serviceType", { required: true })}
+          className="radio checked:bg-pink-500"
+        />
+        <span className="font-medium">On Site</span>
+      </label>
+    </div>
 
-            {/* Location */}
-            <div className="form-control">
-              <label className="label font-semibold flex items-center gap-2">
-                <span className="material-icons text-pink-500">location_on</span>
-                Location
-              </label>
-              <input
-                type="text"
-                placeholder="Enter location"
-                {...register("location", { required: true })}
-                className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
-              />
-              {errors.location && (
-                <p className="text-red-500 text-sm mt-1">Location is required</p>
-              )}
-            </div>
+    {errors.serviceType && (
+      <p className="text-red-500 text-sm mt-1">
+        Please select a service type
+      </p>
+    )}
+  </div>
 
-            {/* Submit */}
-            <button
-              type="submit"
-              className="w-full py-3 bg-linear-to-r from-pink-500 to-red-500 text-white font-bold rounded-2xl mt-4 shadow-lg hover:shadow-xl transition-shadow duration-300"
-            >
-              Confirm Booking
-            </button>
-          </form>
+  {/* Quantity & Total Cost */}
+  <div className="flex flex-col sm:flex-row sm:gap-4">
+    <div className="flex-1 form-control">
+      <label className="label font-semibold flex items-center gap-2">
+        <span className="material-icons text-pink-500">add</span>
+        Quantity ({service.unit})
+      </label>
+      <input
+        type="number"
+        {...register("quantity", { required: true, min: 1 })}
+        value={quantity}
+        onChange={(e) => {
+          const val = Number(e.target.value);
+          setQuantity(val);
+          setValue("quantity", val);
+        }}
+        className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
+      />
+      {errors.quantity && (
+        <p className="text-red-500 text-sm mt-1">Quantity is required</p>
+      )}
+    </div>
+
+    <div className="flex-1 form-control mt-4 sm:mt-0">
+      <label className="label font-semibold flex items-center gap-2">
+        <span className="material-icons text-pink-500">attach_money</span>
+        Total Cost
+      </label>
+      <input
+        type="text"
+        value={`${quantity ? quantity * service.cost : service.cost} BDT`}
+        readOnly
+        className="w-full input input-bordered mt-1 bg-gray-100 rounded-xl shadow-inner px-4 py-2"
+      />
+    </div>
+  </div>
+
+  {/* Booking Date & Time */}
+  <div className="flex flex-col sm:flex-row sm:gap-4">
+    <div className="flex-1 form-control">
+      <label className="label font-semibold flex items-center gap-2">
+        <span className="material-icons text-pink-500">calendar_today</span>
+        Booking Date
+      </label>
+      <input
+        type="date"
+        {...register("bookingDate", { required: true })}
+        className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
+      />
+      {errors.bookingDate && (
+        <p className="text-red-500 text-sm mt-1">Booking date is required</p>
+      )}
+    </div>
+
+    <div className="flex-1 form-control mt-4 sm:mt-0">
+      <label className="label font-semibold flex items-center gap-2">
+        <span className="material-icons text-pink-500">schedule</span>
+        Booking Time
+      </label>
+      <input
+        type="time"
+        {...register("bookingTime", { required: true })}
+        className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
+      />
+      {errors.bookingTime && (
+        <p className="text-red-500 text-sm mt-1">Booking time is required</p>
+      )}
+    </div>
+  </div>
+
+  {/* Location */}
+  <div className="form-control">
+    <label className="label font-semibold flex items-center gap-2">
+      <span className="material-icons text-pink-500">location_on</span>
+      Location
+    </label>
+    <input
+      type="text"
+      placeholder="Enter location"
+      {...register("location", { required: true })}
+      className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
+    />
+    {errors.location && (
+      <p className="text-red-500 text-sm mt-1">Location is required</p>
+    )}
+  </div>
+
+  {/* Submit */}
+  <button
+    type="submit"
+    className="w-full py-3 bg-linear-to-r from-pink-500 to-red-500 text-white font-bold rounded-2xl mt-4 shadow-lg hover:shadow-xl transition-shadow duration-300"
+  >
+    Confirm Booking
+  </button>
+</form>
+
 
           {/* Close Button */}
           <div className="modal-action mt-4">
