@@ -99,6 +99,14 @@ const DashboardLayout = () => {
             <span className="is-drawer-close:hidden">Manage Decorator </span>
           </NavLink>
         </li> 
+
+         <li>
+
+          <NavLink to='/dashboard/report-analysis' className={({ isActive }) =>`is-drawer-close:tooltip is-drawer-close:tooltip-right -ml-1 mt-2 ${isActive ? 'text-pink-500' : '' }` } data-tip="Report Analysis ">         
+           <MdManageAccounts size={25} />
+            <span className="is-drawer-close:hidden">Report Analysis</span>
+          </NavLink>
+        </li> 
                 
           {/* </>
          } */}

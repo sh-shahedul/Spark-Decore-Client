@@ -26,6 +26,7 @@ import TodaySchedule from "../Pages/Dashboard/Decorator/TodayShedule/TodaySchedu
 import EarningSummary from "../Pages/Dashboard/Decorator/EarningSummary/EarningSummary";
 import ManageDecorater from "../Pages/Dashboard/Admin/ManageDecorator/ManageDecorater";
 import ManageBooking from "../Pages/Dashboard/Admin/ManageBooking/ManageBooking";
+import ReportAnalisis from "../Pages/Dashboard/Admin/ReportAnalysis/ReportAnalisis";
 
 
 
@@ -151,6 +152,10 @@ export const router = createBrowserRouter([
        {
           path:'manage-booking',
           Component: ManageBooking,
+        },
+       {
+          path:'report-analysis',
+          Component: ReportAnalisis,
         },
       
     ]
