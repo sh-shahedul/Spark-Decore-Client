@@ -1,595 +1,182 @@
-// // import React, { useState } from "react";
-// // import { useQuery } from "@tanstack/react-query";
-// // import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-// // import toast from "react-hot-toast";
-
-// // const ManageBookings = () => {
-// //   const axiosSecure = useAxiosSecure();
-
-// //   const [selectedBooking, setSelectedBooking] = useState(null);
-// //   const [decoratorEmail, setDecoratorEmail] = useState("");
-// //   const [decoratorName, setDecoratorName] = useState("");
-
-// //   // Load all bookings
-// //   const { data: bookings = [], isLoading, refetch } = useQuery({
-// //     queryKey: ["bookings"],
-// //     queryFn: async () => {
-// //       const res = await axiosSecure.get("/bookings");
-// //       return res.data;
-// //     },
-// //   });
-
-// //   // -------- DELETE BOOKING ----------
-// //   const handleDelete = async (id) => {
-// //     const confirm = window.confirm("Are you sure to delete?");
-// //     if (!confirm) return;
-
-// //     const res = await axiosSecure.delete(`/bookings/${id}`);
-
-// //     if (res.data.deletedCount > 0) {
-// //       toast.success("Booking deleted!");
-// //       refetch();
-// //     }
-// //   };
-
-// //   // -------- UPDATE STATUS ----------
-// //   const handleStatusUpdate = async (id, status) => {
-// //     const res = await axiosSecure.patch(`/bookings/status/${id}`, { status });
-
-// //     if (res.data.modifiedCount > 0) {
-// //       toast.success("Status updated!");
-// //       refetch();
-// //     }
-// //   };
-
-// //   // -------- ASSIGN DECORATOR ----------
-// //   const handleAssignDecorator = async () => {
-// //     if (!decoratorEmail || !decoratorName) {
-// //       toast.error("Please fill all decorator info!");
-// //       return;
-// //     }
-
-// //     const res = await axiosSecure.patch(
-// //       `/bookings/assign/${selectedBooking._id}`,
-// //       {
-// //         decoratorEmail,
-// //         decoratorName,
-// //       }
-// //     );
-
-// //     if (res.data.modifiedCount > 0) {
-// //       toast.success("Decorator Assigned!");
-// //       refetch();
-// //       setSelectedBooking(null);
-// //       setDecoratorEmail("");
-// //       setDecoratorName("");
-// //     }
-// //   };
-
-// //   if (isLoading) return <div>Loading...</div>;
-
-// //   return (
-// //     <div className="p-6">
-// //       <h2 className="text-3xl font-bold mb-4">
-// //         Manage All Bookings ({bookings.length})
-// //       </h2>
-
-// //       <div className="overflow-x-auto">
-// //         <table className="table w-full border">
-// //           <thead className="bg-gray-200">
-// //             <tr className="text-center">
-// //               <th>User</th>
-// //               <th>Email</th>
-// //               <th>Service</th>
-// //               <th>Date</th>
-// //               <th>Payment</th>
-// //               <th>Status</th>
-// //               <th>Decorator</th>
-// //               <th>Actions</th>
-// //             </tr>
-// //           </thead>
-
-// //           <tbody>
-// //             {bookings.map((book) => (
-// //               <tr key={book._id} className="text-center border">
-// //                 <td>{book.userName}</td>
-// //                 <td>{book.userEmail}</td>
-// //                 <td>{book.serviceName}</td>
-// //                 <td>{book.bookingDate}</td>
-// //                 <td>
-// //                   {book.paymentStatus === "paid" ? (
-// //                     <span className="text-green-600 font-bold">PAID</span>
-// //                   ) : (
-// //                     <span className="text-red-600 font-bold">UNPAID</span>
-// //                   )}
-// //                 </td>
-
-// //                 <td>{book.bookingStatus || "pending"}</td>
-
-// //                 <td>
-// //                   {book.decoratorName ? (
-// //                     <>
-// //                       <p>{book.decoratorName}</p>
-// //                       <small className="text-gray-500">
-// //                         {book.decoratorEmail}
-// //                       </small>
-// //                     </>
-// //                   ) : (
-// //                     "Not Assigned"
-// //                   )}
-// //                 </td>
-
-// //                 <td className="space-y-2">
-
-// //                   {/* Assign decorator only if paid */}
-// //                   {book.paymentStatus === "paid" && (
-// //                     <button
-// //                       className="btn btn-sm btn-primary"
-// //                       onClick={() => setSelectedBooking(book)}
-// //                     >
-// //                       Assign
-// //                     </button>
-// //                   )}
-
-// //                   {/* Status update */}
-// //                   <button
-// //                     className="btn btn-sm btn-warning"
-// //                     onClick={() =>
-// //                       handleStatusUpdate(book._id, "confirmed")
-// //                     }
-// //                   >
-// //                     Confirm
-// //                   </button>
-
-// //                   <button
-// //                     className="btn btn-sm btn-success"
-// //                     onClick={() =>
-// //                       handleStatusUpdate(book._id, "completed")
-// //                     }
-// //                   >
-// //                     Complete
-// //                   </button>
-
-// //                   {/* Delete */}
-// //                   <button
-// //                     className="btn btn-sm btn-error"
-// //                     onClick={() => handleDelete(book._id)}
-// //                   >
-// //                     Delete
-// //                   </button>
-
-// //                 </td>
-// //               </tr>
-// //             ))}
-// //           </tbody>
-// //         </table>
-// //       </div>
-
-// //       {/* ------------------ ASSIGN MODAL ------------------ */}
-// //       {selectedBooking && (
-// //         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-// //           <div className="bg-white p-6 rounded shadow-lg w-96">
-
-// //             <h3 className="text-xl font-bold mb-4">Assign Decorator</h3>
-
-// //             <input
-// //               type="text"
-// //               className="input input-bordered w-full mb-2"
-// //               placeholder="Decorator Name"
-// //               value={decoratorName}
-// //               onChange={(e) => setDecoratorName(e.target.value)}
-// //             />
-
-// //             <input
-// //               type="email"
-// //               className="input input-bordered w-full mb-4"
-// //               placeholder="Decorator Email"
-// //               value={decoratorEmail}
-// //               onChange={(e) => setDecoratorEmail(e.target.value)}
-// //             />
-
-// //             <div className="flex justify-between">
-// //               <button
-// //                 className="btn btn-primary"
-// //                 onClick={handleAssignDecorator}
-// //               >
-// //                 Assign
-// //               </button>
-
-// //               <button
-// //                 className="btn"
-// //                 onClick={() => setSelectedBooking(null)}
-// //               >
-// //                 Close
-// //               </button>
-// //             </div>
-
-// //           </div>
-// //         </div>
-// //       )}
-// //     </div>
-// //   );
-// // };
-
-// // export default ManageBookings;
-
-
-
-// import React, { useState, useEffect } from "react";
-// import { useQuery } from "@tanstack/react-query";
-// import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-// import toast from "react-hot-toast";
-
-// const ManageBookings = () => {
-//   const axiosSecure = useAxiosSecure();
-
-//   const [selectedBooking, setSelectedBooking] = useState(null);
-//   const [decoratorEmail, setDecoratorEmail] = useState("");
-//   const [decoratorName, setDecoratorName] = useState("");
-//   const [decorators, setDecorators] = useState([]);
-
-//   // Load all bookings
-//   const { data: bookings = [], isLoading, refetch } = useQuery({
-//     queryKey: ["bookings"],
-//     queryFn: async () => {
-//       const res = await axiosSecure.get("/bookings");
-//       return res.data;
-//     },
-//   });
-
-//   // Load decorators
-//   useEffect(() => {
-//     axiosSecure.get("/users/decorators").then(res => setDecorators(res.data));
-//   }, []);
-
-//   // Delete booking
-//   const handleDelete = async (id) => {
-//     if (!window.confirm("Are you sure to delete?")) return;
-//     const res = await axiosSecure.delete(`/bookings/${id}`);
-//     if (res.data.deletedCount > 0) {
-//       toast.success("Booking deleted!");
-//       refetch();
-//     }
-//   };
-
-//   // Update booking status
-//   const handleStatusUpdate = async (id, status) => {
-//     const res = await axiosSecure.patch(`/bookings/status/${id}`, { status });
-//     if (res.data.modifiedCount > 0) {
-//       toast.success("Status updated!");
-//       refetch();
-//     }
-//   };
-
-//   // Assign decorator
-//   const handleAssignDecorator = async () => {
-//     if (!decoratorEmail || !decoratorName) {
-//       toast.error("Please select a decorator!");
-//       return;
-//     }
-//     const res = await axiosSecure.patch(`/bookings/assign/${selectedBooking._id}`, {
-//       decoratorEmail,
-//       decoratorName,
-//     });
-//     if (res.data.modifiedCount > 0) {
-//       toast.success("Decorator Assigned!");
-//       refetch();
-//       setSelectedBooking(null);
-//       setDecoratorEmail("");
-//       setDecoratorName("");
-//     }
-//   };
-
-//   if (isLoading) return <div>Loading...</div>;
-
-//   return (
-//     <div className="p-6">
-//       <h2 className="text-3xl font-bold mb-4">Manage All Bookings ({bookings.length})</h2>
-
-//       <div className="overflow-x-auto">
-//         <table className="table w-full border">
-//           <thead className="bg-gray-200">
-//             <tr className="text-center">
-//               <th>User</th>
-//               <th>Email</th>
-//               <th>Service</th>
-//               <th>Date</th>
-//               <th>Payment</th>
-//               <th>Status</th>
-//               <th>Decorator</th>
-//               <th>Actions</th>
-//             </tr>
-//           </thead>
-
-//           <tbody>
-//             {bookings.map((book) => (
-//               <tr key={book._id} className="text-center border">
-//                 <td>{book.userName}</td>
-//                 <td>{book.userEmail}</td>
-//                 <td>{book.serviceName}</td>
-//                 <td>{book.bookingDate}</td>
-//                 <td>
-//                   {book.paymentStatus === "paid" ? (
-//                     <span className="text-green-600 font-bold">PAID</span>
-//                   ) : (
-//                     <span className="text-red-600 font-bold">UNPAID</span>
-//                   )}
-//                 </td>
-//                 <td>{book.bookingStatus || "pending"}</td>
-//                 <td>
-//                   {book.decoratorName ? (
-//                     <>
-//                       <p>{book.decoratorName}</p>
-//                       <small className="text-gray-500">{book.decoratorEmail}</small>
-//                     </>
-//                   ) : (
-//                     "Not Assigned"
-//                   )}
-//                 </td>
-//                 <td className="space-y-2">
-//                   {book.paymentStatus === "paid" && (
-//                     <button
-//                       className="btn btn-sm btn-primary"
-//                       onClick={() => setSelectedBooking(book)}
-//                     >
-//                       Assign
-//                     </button>
-//                   )}
-//                   <button
-//                     className="btn btn-sm btn-warning"
-//                     onClick={() => handleStatusUpdate(book._id, "confirmed")}
-//                   >
-//                     Confirm
-//                   </button>
-//                   <button
-//                     className="btn btn-sm btn-success"
-//                     onClick={() => handleStatusUpdate(book._id, "completed")}
-//                   >
-//                     Complete
-//                   </button>
-//                   <button
-//                     className="btn btn-sm btn-error"
-//                     onClick={() => handleDelete(book._id)}
-//                   >
-//                     Delete
-//                   </button>
-//                 </td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table>
-//       </div>
-
-//       {/* Assign Decorator Modal */}
-//       {selectedBooking && (
-//         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-//           <div className="bg-white p-6 rounded shadow-lg w-96">
-//             <h3 className="text-xl font-bold mb-4">Assign Decorator</h3>
-//             <select
-//               className="input input-bordered w-full mb-4"
-//               value={decoratorEmail}
-//               onChange={(e) => {
-//                 const selected = decorators.find((d) => d.email === e.target.value);
-//                 setDecoratorEmail(selected.email);
-//                 setDecoratorName(selected.displayName);
-//               }}
-//             >
-//               <option value="">Select a decorator</option>
-//               {decorators.map((d) => (
-//                 <option key={d._id} value={d.email}>
-//                   {d.displayName} ({d.email})
-//                 </option>
-//               ))}
-//             </select>
-//             <div className="flex justify-between">
-//               <button className="btn btn-primary" onClick={handleAssignDecorator}>
-//                 Assign
-//               </button>
-//               <button className="btn" onClick={() => setSelectedBooking(null)}>
-//                 Close
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default ManageBookings;
-
-
-
-
-
 import React, { useState, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import toast from "react-hot-toast";
+import axios from "axios";
 
 const ManageBookings = () => {
-  const axiosSecure = useAxiosSecure();
-
-  const [selectedBooking, setSelectedBooking] = useState(null);
+  const [bookings, setBookings] = useState([]);
   const [decorators, setDecorators] = useState([]);
+  const [selectedBooking, setSelectedBooking] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
-  // Load all bookings
-  const { data: bookings = [], isLoading, refetch } = useQuery({
-    queryKey: ["bookings"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/bookings");
-      return res.data;
-    },
-  });
-
-  // Load decorators
+  // Load bookings
   useEffect(() => {
-    axiosSecure.get("/users/decorators").then((res) => setDecorators(res.data));
-  }, [axiosSecure]);
+    axios.get("http://localhost:3000/bookings").then((res) => setBookings(res.data));
+  }, []);
 
-  // Delete booking
-  const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure to delete?")) return;
-    const res = await axiosSecure.delete(`/bookings/${id}`);
-    if (res.data.deletedCount > 0) {
-      toast.success("Booking deleted!");
-      refetch();
-    }
+  // Open modal and load decorators
+  const openDecoratorModal = async (booking) => {
+    setSelectedBooking(booking);
+    const res = await axios.get("http://localhost:3000/users/decorators/active");
+    setDecorators(res.data);
+    setShowModal(true);
   };
 
-  // Update booking status
-  const handleStatusUpdate = async (id, status) => {
-    const res = await axiosSecure.patch(`/bookings/status/${id}`, { status });
-    if (res.data.modifiedCount > 0) {
-      toast.success("Status updated!");
-      refetch();
-    }
-  };
-
-  // Assign decorator by clicking card
-  const handleAssignDecorator = async (decorator) => {
+  // Assign decorator
+  const assignDecorator = async (decoratorId) => {
     if (!selectedBooking) return;
+    try {
+      await axios.patch(
+        `http://localhost:3000/bookings/${selectedBooking._id}/assign-decorator`,
+        { decoratorId }
+      );
 
-    const res = await axiosSecure.patch(`/bookings/assign/${selectedBooking._id}`, {
-      decoratorEmail: decorator.email,
-      decoratorName: decorator.displayName,
-    });
+      const decorator = decorators.find((d) => d._id === decoratorId);
 
-    if (res.data.modifiedCount > 0) {
-      toast.success(`Decorator ${decorator.displayName} assigned!`);
-      refetch();
-      setSelectedBooking(null);
+      setBookings(
+        bookings.map((b) =>
+          b._id === selectedBooking._id
+            ? {
+                ...b,
+                assignedDecoratorId: decorator._id,
+                assignedDecoratorName: decorator.name,
+                assignedDecoratorEmail: decorator.email,
+                assignedDecoratorSpecialty: decorator.specialty,
+                decoratorAssigned: true,
+              }
+            : b
+        )
+      );
+
+      setShowModal(false);
+      alert("Decorator assigned successfully!");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to assign decorator");
     }
   };
-
-  if (isLoading) return <div>Loading...</div>;
 
   return (
     <div className="p-6">
-      <h2 className="text-3xl font-bold mb-4">Manage All Bookings ({bookings.length})</h2>
+      <h1 className="text-3xl font-bold mb-6">Manage Bookings</h1>
 
-      <div className="overflow-x-auto">
-        <table className="table w-full border">
-          <thead className="bg-gray-200">
-            <tr className="text-center">
-              <th>User</th>
-              <th>Email</th>
-              <th>Service</th>
-              <th>Date</th>
-              <th>Payment</th>
-              <th>Status</th>
-              <th>Decorator</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
+      <table className="table-auto w-full border shadow-md rounded">
+        <thead>
+          <tr className="bg-gray-100 text-left">
+            <th className="px-3 py-2 border">User</th>
+            <th className="px-3 py-2 border">Service</th>
+            <th className="px-3 py-2 border">Type</th>
+            <th className="px-3 py-2 border">Booking Date</th>
+            <th className="px-3 py-2 border">Location</th>
+            <th className="px-3 py-2 border">Payment</th>
+            <th className="px-3 py-2 border">Decorator</th>
+            <th className="px-3 py-2 border">Action</th>
+          </tr>
+        </thead>
 
-          <tbody>
-            {bookings.map((book) => (
-              <tr key={book._id} className="text-center border">
-                <td>{book.userName}</td>
-                <td>{book.userEmail}</td>
-                <td>{book.serviceName}</td>
-                <td>{book.bookingDate}</td>
-                <td>
-                  {book.paymentStatus === "paid" ? (
-                    <span className="text-green-600 font-bold">PAID</span>
+        <tbody>
+          {bookings.map((booking) => {
+            const isInStudio = booking.serviceType === "in-studio";
+            const isPaid = booking.paymentStatus === "paid";
+
+            return (
+              <tr key={booking._id} className="hover:bg-gray-50">
+                <td className="border px-3 py-2">{booking.userName}</td>
+                <td className="border px-3 py-2">{booking.serviceName}</td>
+
+                <td className="border px-3 py-2 font-semibold">
+                  {booking.serviceType}
+                </td>
+
+                <td className="border px-3 py-2">{booking.bookingDate}</td>
+                <td className="border px-3 py-2">{booking.location}</td>
+
+                <td className="border px-3 py-2">
+                 <span
+                   className={
+                     booking.paymentStatus === "paid"
+                       ? "bg-green-200 text-green-900 px-2 py-1 rounded"
+                       : "bg-red-200 text-red-900 px-2 py-1 rounded"
+                   }
+                  >
+                    {booking.paymentStatus === "paid" ? "Paid" : "Unpaid"}
+                  </span>
+                </td>
+
+                <td className="border px-3 py-2">
+                  {booking.decoratorAssigned ? (
+                    <span className="text-green-700 font-semibold">
+                      Assigned ({booking.assignedDecoratorName})
+                    </span>
                   ) : (
-                    <span className="text-red-600 font-bold">UNPAID</span>
+                    <span className="text-red-500">Not Assigned</span>
                   )}
                 </td>
-                <td>{book.bookingStatus || "pending"}</td>
-                <td>
-                  {book.decoratorName ? (
-                    <>
-                      <p>{book.decoratorName}</p>
-                      <small className="text-gray-500">{book.decoratorEmail}</small>
-                    </>
-                  ) : (
-                    "Not Assigned"
-                  )}
-                </td>
-                <td className="space-y-2">
-                  {book.paymentStatus === "paid" && (
+
+                <td className="border px-3 py-2">
+                  {/* FULL LOGIC */}
+                  {isInStudio ? (
                     <button
-                      className="btn btn-sm btn-primary"
-                      onClick={() => setSelectedBooking(book)}
+                      disabled
+                      className="bg-gray-300 text-gray-600 px-3 py-1 rounded cursor-not-allowed"
                     >
-                      Assign
+                      Assign Decorator
+                    </button>
+                  ) : !isPaid ? (
+                    <button
+                      disabled
+                      className="bg-gray-300 text-gray-600 px-3 py-1 rounded cursor-not-allowed"
+                    >
+                      Assign Decorator
+                    </button>
+                  ) : booking.decoratorAssigned ? (
+                    <span className="text-green-700 font-semibold">Assigned</span>
+                  ) : (
+                    <button
+                      className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                      onClick={() => openDecoratorModal(booking)}
+                    >
+                      Assign Decorator
                     </button>
                   )}
-                  <button
-                    className="btn btn-sm btn-warning"
-                    onClick={() => handleStatusUpdate(book._id, "confirmed")}
-                  >
-                    Confirm
-                  </button>
-                  <button
-                    className="btn btn-sm btn-success"
-                    onClick={() => handleStatusUpdate(book._id, "completed")}
-                  >
-                    Complete
-                  </button>
-                  <button
-                    className="btn btn-sm btn-error"
-                    onClick={() => handleDelete(book._id)}
-                  >
-                    Delete
-                  </button>
                 </td>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            );
+          })}
+        </tbody>
+      </table>
 
-      {/* ------------------ ASSIGN DECORATOR MODAL ------------------ */}
-     {selectedBooking && (
-  <div
-    className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50"
-    onClick={() => setSelectedBooking(null)}
-  >
-    <div
-      className="bg-white p-6 rounded-2xl shadow-2xl w-11/12 md:w-3/4 max-h-[85vh] overflow-y-auto transform transition-all duration-300 scale-95 md:scale-100"
-      onClick={(e) => e.stopPropagation()}
-    >
-      <h3 className="text-2xl font-bold mb-6 text-center">
-        Assign Decorator for {selectedBooking.userName}'s Booking
-      </h3>
+      {/* Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-lg w-3/4 max-h-[80vh] overflow-y-auto shadow-lg">
+            <h2 className="text-xl font-bold mb-4">
+              Select Decorator for {selectedBooking.serviceName}
+            </h2>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {decorators.map((decorator) => (
-          <div
-            key={decorator._id}
-            className="flex flex-col items-center bg-gray-50 p-4 rounded-xl shadow-md hover:shadow-xl transition transform hover:scale-105 cursor-pointer border border-transparent hover:border-pink-500"
-            onClick={() => handleAssignDecorator(decorator)}
-          >
-            <div className="w-20 h-20 mb-3">
-              <img
-                src={decorator.photoURL}
-                alt={decorator.displayName}
-                className="w-full h-full rounded-full object-cover border-2 border-gray-200"
-              />
+            <div className="grid grid-cols-3 gap-4">
+              {decorators.map((d) => (
+                <div
+                  key={d._id}
+                  className="border p-4 rounded shadow hover:shadow-xl cursor-pointer"
+                  onClick={() => assignDecorator(d._id)}
+                >
+                  <h3 className="font-semibold text-lg">{d.name}</h3>
+                  <p className="text-sm">{d.email}</p>
+                  <p className="text-sm italic text-gray-600">{d.specialty}</p>
+                </div>
+              ))}
             </div>
-            <p className="font-semibold text-lg text-gray-700">{decorator.displayName}</p>
-            <small className="text-gray-400">{decorator.email}</small>
-          </div>
-        ))}
-      </div>
 
-      <div className="flex justify-end mt-6">
-        <button
-          className="btn bg-gray-200 text-gray-800 hover:bg-gray-300"
-          onClick={() => setSelectedBooking(null)}
-        >
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+            <button
+              className="mt-4 bg-gray-500 text-white px-4 py-1 rounded"
+              onClick={() => setShowModal(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default ManageBookings;
-
