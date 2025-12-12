@@ -4,15 +4,18 @@ import { FaCircleUser } from "react-icons/fa6";
 import Container from '../Component/Container/Container';
 import { CiTextAlignJustify } from "react-icons/ci";
 import { IoHomeSharp } from "react-icons/io5";
-import { MdHistoryEdu } from 'react-icons/md';
+import { MdAssignmentReturned, MdHistoryEdu, MdManageAccounts } from 'react-icons/md';
 import { BsCreditCard2BackFill, BsHouseAddFill } from 'react-icons/bs';
+import { RiCalendarScheduleFill, RiMoneyEuroBoxFill } from "react-icons/ri";
 // import { useQuery } from '@tanstack/react-query';
 // import useAxiosSecure from '../hooks/useAxiosSecure';
-// import useAuth from '../hooks/useAuth';
+import useAuth from '../hooks/useAuth';
 import { FaBuffer } from 'react-icons/fa';
+// import AssignDecorator from '../Pages/Dashboard/Admin/AssignDecorator/AssignDecorator';
 const DashboardLayout = () => {
 //  const axiosSecure = useAxiosSecure()
-//  const{user}= useAuth()
+ const{user}= useAuth()
+ const decoratorEmail = user?.email;
 //   const {data:users=[]} = useQuery({
 //     queryKey: ['users', user?.email],
 //     queryFn: async ()=> {
@@ -53,7 +56,7 @@ const DashboardLayout = () => {
             <span className="is-drawer-close:hidden">Homepage</span>
           </NavLink>
         </li>
-
+         {/* admin  */}
         {/* 
          {
           users.role === "admin" &&   <> */}
@@ -75,8 +78,25 @@ const DashboardLayout = () => {
         </li> 
          <li>
           <NavLink to='/dashboard/manage-users' className={({ isActive }) =>`is-drawer-close:tooltip is-drawer-close:tooltip-right -ml-1 mt-2 ${isActive ? 'text-pink-500' : '' }` } data-tip="Manage Service">         
-           <FaBuffer size={25} />
+           <MdManageAccounts size={25} />
             <span className="is-drawer-close:hidden">Manage users </span>
+          </NavLink>
+        </li> 
+         <li>
+          <NavLink to='/dashboard/manage-booking' className={({ isActive }) =>`is-drawer-close:tooltip is-drawer-close:tooltip-right -ml-1 mt-2 ${isActive ? 'text-pink-500' : '' }` } data-tip="Manage Booking ">         
+           <MdManageAccounts size={25} />
+            <span className="is-drawer-close:hidden">Manage Booking </span>
+          </NavLink>
+        </li> 
+         
+
+
+
+         <li>
+
+          <NavLink to='/dashboard/manage-decorator' className={({ isActive }) =>`is-drawer-close:tooltip is-drawer-close:tooltip-right -ml-1 mt-2 ${isActive ? 'text-pink-500' : '' }` } data-tip="Manage Decorator ">         
+           <MdManageAccounts size={25} />
+            <span className="is-drawer-close:hidden">Manage Decorator </span>
           </NavLink>
         </li> 
                 
@@ -84,7 +104,27 @@ const DashboardLayout = () => {
          } */}
 
         
+        {/* decorator  */}
 
+          <li>
+          <NavLink to='/dashboard/my-assign-project' className={({ isActive }) =>`is-drawer-close:tooltip is-drawer-close:tooltip-right -ml-1 mt-2 ${isActive ? 'text-pink-500' : '' }` } data-tip="My Assign Project">         
+           <MdAssignmentReturned size={25} decoratorEmail={decoratorEmail} />
+            <span className="is-drawer-close:hidden">My Assign Project </span>
+          </NavLink>
+          </li>
+
+          <li>
+          <NavLink to='/dashboard/today-schedule' className={({ isActive }) =>`is-drawer-close:tooltip is-drawer-close:tooltip-right -ml-1 mt-2 ${isActive ? 'text-pink-500' : '' }` } data-tip="Today's Schedule">         
+            <RiCalendarScheduleFill size={25} />
+            <span className="is-drawer-close:hidden">Today's Schedule</span>
+          </NavLink>
+          </li> 
+          <li>
+          <NavLink to='/dashboard/earning-summary' className={({ isActive }) =>`is-drawer-close:tooltip is-drawer-close:tooltip-right -ml-1 mt-2 ${isActive ? 'text-pink-500' : '' }` } data-tip="Earning Summary">         
+           <RiMoneyEuroBoxFill size={25} />
+            <span className="is-drawer-close:hidden">Earning Summary</span>
+          </NavLink>
+          </li> 
 
 
 

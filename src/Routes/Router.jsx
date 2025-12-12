@@ -21,6 +21,12 @@ import AddService from "../Pages/Dashboard/Admin/AddService/AddService";
 import ManageService from "../Pages/Dashboard/Admin/ManageService/ManageService";
 import UpdateService from "../Pages/Dashboard/Admin/UpdateService/UpdateService";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
+import MyAssignProject from "../Pages/Dashboard/Decorator/MyAssignProject/MyAssignProject";
+import TodaySchedule from "../Pages/Dashboard/Decorator/TodayShedule/TodaySchedule";
+import EarningSummary from "../Pages/Dashboard/Decorator/EarningSummary/EarningSummary";
+import ManageDecorater from "../Pages/Dashboard/Admin/ManageDecorator/ManageDecorater";
+import ManageBooking from "../Pages/Dashboard/Admin/ManageBooking/ManageBooking";
+
 
 
 
@@ -126,6 +132,27 @@ export const router = createBrowserRouter([
           path:'manage-users',
           Component: ManageUsers,
         },
+       {
+          path:'my-assign-project',
+          Component: MyAssignProject,
+        },
+       {
+          path:'today-schedule',
+          Component: TodaySchedule,
+        },
+       {
+          path:'earning-summary',
+          Component: EarningSummary,
+        },
+       {
+          path:'manage-decorator',
+          Component: ManageDecorater,
+        },
+       {
+          path:'manage-booking',
+          Component: ManageBooking,
+        },
+      
     ]
   }
 ]);
