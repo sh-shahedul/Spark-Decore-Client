@@ -54,6 +54,7 @@ const ServiceDetails = () => {
       serviceName: service.service_name,
       serviceId: service._id,
       unit: service.unit,
+      photoURL:user?.photoURL,
       serviceType : data.serviceType,
       serviceCategory: service.service_category,
       quantity: qty,

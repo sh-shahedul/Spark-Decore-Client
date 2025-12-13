@@ -120,6 +120,12 @@ const DashboardLayout = () => {
             <span className="is-drawer-close:hidden">My Assign Project </span>
           </NavLink>
           </li>
+          <li>
+          <NavLink to='/dashboard/update-project' className={({ isActive }) =>`is-drawer-close:tooltip is-drawer-close:tooltip-right -ml-1 mt-2 ${isActive ? 'text-pink-500' : '' }` } data-tip="Update Project Status">         
+           <MdAssignmentReturned size={25} decoratorEmail={decoratorEmail} />
+            <span className="is-drawer-close:hidden">Update Project Status </span>
+          </NavLink>
+          </li>
 
           <li>
           <NavLink to='/dashboard/today-schedule' className={({ isActive }) =>`is-drawer-close:tooltip is-drawer-close:tooltip-right -ml-1 mt-2 ${isActive ? 'text-pink-500' : '' }` } data-tip="Today's Schedule">         

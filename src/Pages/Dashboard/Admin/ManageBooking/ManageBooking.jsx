@@ -40,6 +40,7 @@ const ManageBookings = () => {
                 assignedDecoratorName: decorator.name,
                 assignedDecoratorEmail: decorator.email,
                 assignedDecoratorSpecialty: decorator.specialty,
+                assignedDecoatorStatus:'assigned',
                 decoratorAssigned: true,
               }
             : b

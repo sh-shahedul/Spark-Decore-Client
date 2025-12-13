@@ -27,6 +27,7 @@ import EarningSummary from "../Pages/Dashboard/Decorator/EarningSummary/EarningS
 import ManageDecorater from "../Pages/Dashboard/Admin/ManageDecorator/ManageDecorater";
 import ManageBooking from "../Pages/Dashboard/Admin/ManageBooking/ManageBooking";
 import ReportAnalisis from "../Pages/Dashboard/Admin/ReportAnalysis/ReportAnalisis";
+import UpdateProjectStatus from "../Pages/Dashboard/Decorator/UpdateProjectStatus/UpdateProjectStatus";
 
 
 
@@ -156,6 +157,10 @@ export const router = createBrowserRouter([
        {
           path:'report-analysis',
           Component: ReportAnalisis,
+        },
+       {
+          path:'update-project',
+          Component: UpdateProjectStatus,
         },
       
     ]
