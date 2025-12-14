@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const SpecialOffer = () => {
   return (
-    <section className="relative bg-gradient-to-r from-pink-500 to-yellow-400 py-20 overflow-hidden">
+    <section className="relative bg-gradient-to-r from-[#005461] to-[#FAB12F] py-20 overflow-hidden">
       {/* Background animated circles */}
       <motion.div 
         className="absolute top-0 left-0 w-72 h-72 bg-white opacity-10 rounded-full animate-pulse"
@@ -36,8 +36,8 @@ const SpecialOffer = () => {
         </motion.p>
 
         <motion.button
-          className="bg-white text-pink-500 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-pink-500 hover:text-white transition-colors duration-300"
-          whileHover={{ scale: 1.1, rotate: 5 }}
+          className="bg-white text-[#005461] font-bold py-3 px-8 rounded-full shadow-lg hover:bg-[#005461] hover:text-white transition-colors duration-300"
+          whileHover={{ scale: 1.1, rotate: 360 }}
           whileTap={{ scale: 0.95 }}
         >
           Book Now

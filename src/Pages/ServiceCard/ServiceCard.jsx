@@ -23,7 +23,7 @@ const ServiceCard = ({ service }) => {
       {/* Content */}
       <div className="p-4 flex flex-col justify-between flex-1">
         <div>
-          <h2 className="text-lg font-bold text-pink-600 mb-2">
+          <h2 className="text-lg font-bold text-[#3e71f1] mb-2">
             {service?.service_name}
           </h2>
           <p className="text-gray-800 font-semibold mb-1">
@@ -36,8 +36,8 @@ const ServiceCard = ({ service }) => {
   
         {/* Button */}
         <MotionLink to={`/services/${service?._id}`}
-          whileHover={{ scale: 1.1 }}
-          className="mt-2 w-full py-2 bg-linear-to-r from-pink-500 to-red-500 text-white font-bold rounded-xl shadow-md flex items-center justify-center gap-2"
+          whileHover={{ scale: 1.05 }}
+          className="mt-2 w-full py-2 bg-[#005461] text-white hover:text-[#FAB12F] font-bold rounded-xl shadow-md flex items-center justify-center gap-2"
         >
           <FaEye /> View Details
         </MotionLink>

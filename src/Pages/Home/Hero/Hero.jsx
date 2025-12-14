@@ -7,6 +7,7 @@ import "swiper/css/pagination";
 import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 import Container from "../../../Component/Container/Container";
+import { Link } from "react-router";
 
 const slides = [
   {
@@ -68,12 +69,10 @@ const HeroSection = () => {
                   {slide.description}
                 </p>
                 <div className="flex gap-4">
-                  <button className=" md:px-10 px-3 py-2 rounded-lg bg-linear-to-r from-pink-500 to-red-500 text-white hover:from-pink-400 hover:via-red-500 hover:to-pink500 font-bold hover:bg-transparent hover:border-2 ">
-                    Book Now
-                  </button>
-                  <button className="md:px-6 px-3 py-2 border text-white border-pink-600  hover:bg-white/20 rounded-lg font-bold transition">
-                    Explore Services
-                  </button>
+                  <Link to='/service' className=" md:px-10 px-3 py-3 rounded-lg bg-[#005461] hover:text-[#005461] text-white font-bold hover:bg-[#FAB12F]  ">
+                   Book Decoration Service
+                  </Link>
+                  
                 </div>
               </motion.div>
             </div>

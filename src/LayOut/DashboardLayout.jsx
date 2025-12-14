@@ -28,15 +28,15 @@ const DashboardLayout = () => {
     return (
         <Container>
             <div className="drawer lg:drawer-open">
-  <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-  <div className="drawer-content">
+  <input id="my-drawer-4" type="checkbox" className="drawer-toggle " />
+  <div className="drawer-content ">
     {/* Navbar */}
-    <nav  className="navbar w-full bg-base-300">
-      <label htmlFor="my-drawer-4" aria-label="open sidebar" className="btn btn-square btn-ghost">
+    <nav  className="navbar w-full bg-[#005461]">
+      <label htmlFor="my-drawer-4" aria-label="open sidebar" className="cursor-pointer">
         {/* Sidebar toggle icon */}
-         <CiTextAlignJustify size={25} className=' text-pink-600'/>
+         <CiTextAlignJustify size={25} className=' text-[#FAB12F]'/>
       </label>
-      <div className="px-4 text-pink-600 text-4xl font-bold">Spark <span className='text-2xl text-black'>Decore</span></div>
+      <div className="px-4 text-[#3e71f1] text-4xl font-bold">Spark <span className='text-2xl text-[#FAB12F]'>Decore</span></div>
     </nav>
     {/* Page content here */}
     <Outlet></Outlet>

@@ -124,7 +124,7 @@ const Service = () => {
 
         {/* Title */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-pink-600 animate-pulse">
+          <h1 className="text-4xl font-bold text-[#005461] animate-pulse">
             Our Services
           </h1>
           <p className="text-gray-600 md:text-lg mb-12 font-semibold max-w-[700px] mx-auto">
@@ -145,7 +145,7 @@ const Service = () => {
           {/* CENTER IMAGE */}
           <div className="hidden lg:flex flex-col items-center text-center order-2">
             <img
-              src="https://i.pinimg.com/736x/0c/0f/31/0c0f31f90fa4b474298609b987e67a22.jpg"
+              src="https://i.pinimg.com/736x/46/1b/0a/461b0a2be1882d105b623acc38f6ac07.jpg"
               alt="Center Banner"
               className="rounded-3xl shadow-xl w-full h-[1100px] object-cover"
             />
@@ -162,7 +162,7 @@ const Service = () => {
 
         {/* ALL SERVICES BUTTON */}
         <div className="flex justify-center mt-5">
-          <Link to='/service' className="px-8 py-3 bg-pink-600 text-white font-semibold rounded-xl shadow-md hover:bg-pink-500">
+          <Link to='/service' className="px-8 py-3 bg-[#005461] text-white font-semibold rounded-xl shadow-md ">
             All Services
           </Link>
         </div>
