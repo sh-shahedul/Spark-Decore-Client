@@ -102,9 +102,9 @@ const DashboardLayout = () => {
 
          <li>
 
-          <NavLink to='/dashboard/report-analysis' className={({ isActive }) =>`is-drawer-close:tooltip is-drawer-close:tooltip-right -ml-1 mt-2 ${isActive ? 'text-pink-500' : '' }` } data-tip="Report Analysis ">         
+          <NavLink to='/dashboard/admin-analysis' className={({ isActive }) =>`is-drawer-close:tooltip is-drawer-close:tooltip-right -ml-1 mt-2 ${isActive ? 'text-pink-500' : '' }` } data-tip="Admin Analysis ">         
            <MdManageAccounts size={25} />
-            <span className="is-drawer-close:hidden">Report Analysis</span>
+            <span className="is-drawer-close:hidden">Admin Analysis</span>
           </NavLink>
         </li> 
                 
