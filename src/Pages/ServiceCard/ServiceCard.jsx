@@ -37,7 +37,7 @@ const ServiceCard = ({ service }) => {
         {/* Button */}
         <MotionLink to={`/services/${service?._id}`}
           whileHover={{ scale: 1.05 }}
-          className="mt-2 w-full py-2 bg-[#005461] text-white hover:text-[#FAB12F] font-bold rounded-xl shadow-md flex items-center justify-center gap-2"
+          className="mt-2 w-full py-2 bg-gradient-to-r from-[#005461] to-[#008080] hover:from-[#008080] hover:to-[#005461] text-white hover:text-[#FAB12F] font-bold rounded-xl shadow-md flex items-center justify-center gap-2"
         >
           <FaEye /> View Details
         </MotionLink>

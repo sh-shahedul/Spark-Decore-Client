@@ -1,7 +1,93 @@
+// import { useQuery } from "@tanstack/react-query";
+// import useAuth from "../../../../hooks/useAuth";
+// import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+
+
+// const statusColor = {
+//   assigned: "badge-info",
+//   planning: "badge-warning",
+//   "materials-prepared": "badge-primary",
+//   "on-the-way": "badge-accent",
+//   "setup-in-progress": "badge-secondary",
+//   completed: "badge-success",
+// };
+
+// const TodaySchedule = () => {
+//   const { user } = useAuth();
+//   const axiosSecure = useAxiosSecure();
+
+//   const { data: schedules = [], isLoading } = useQuery({
+//     queryKey: ["todaySchedule", user?.email],
+//     enabled: !!user?.email,
+//     queryFn: async () => {
+//       const res = await axiosSecure.get(
+//         `/bookings/decorator/today?email=${user.email}`
+//       );
+//       return res.data;
+//     },
+//   });
+
+//   if (isLoading) {
+//     return <span className="loading loading-spinner loading-lg"></span>;
+//   }
+
+//   return (
+//     <div>
+//       <h2 className="text-2xl font-bold mb-6">📅 Today’s Schedule</h2>
+
+//       {schedules.length === 0 && (
+//         <p className="text-gray-500">
+//           No decoration projects scheduled for today 🎉
+//         </p>
+//       )}
+
+//       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+//         {schedules.map((item) => (
+//           <div key={item._id} className="card bg-base-100 shadow-xl">
+//             <div className="card-body">
+//               <h2 className="card-title text-lg">
+//                 {item.serviceName}
+//               </h2>
+
+//               <p>
+//                 <strong>Client:</strong> {item.userName}
+//               </p>
+
+//               <p>
+//                 <strong>Time:</strong> {item.bookingTime}
+//               </p>
+
+//               <p>
+//                 <strong>Location:</strong> {item.location}
+//               </p>
+
+//               <p>
+//                 <strong>Total Cost:</strong> ৳{item.totalCost}
+//               </p>
+
+//               <div className="mt-2">
+//                 <span className={`badge ${statusColor[item.assignedDecoatorStatus]}`}>
+//                   {item.assignedDecoatorStatus}
+//                 </span>
+//               </div>
+
+//               <div className="mt-4">
+//                 <p className="text-xs text-gray-400">
+//                   Tracking ID: {item.trackingId}
+//                 </p>
+//               </div>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default TodaySchedule;
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-
 
 const statusColor = {
   assigned: "badge-info",
@@ -17,35 +103,47 @@ const TodaySchedule = () => {
   const axiosSecure = useAxiosSecure();
 
   const { data: schedules = [], isLoading } = useQuery({
-    queryKey: ["todaySchedule", user?.email],
+    queryKey: ["todaySchedule", user?.email?.toLowerCase()],
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/bookings/decorator/today?email=${user.email}`
+        `/bookings/decorator/today?email=${user.email.toLowerCase()}`
       );
       return res.data;
     },
   });
 
   if (isLoading) {
-    return <span className="loading loading-spinner loading-lg"></span>;
+    return (
+      <div className="flex justify-center items-center py-10">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
+
+  if (!schedules.length) {
+    return (
+      <p className="text-gray-500 text-center mt-10">
+        No decoration projects scheduled for today 🎉
+      </p>
+    );
   }
 
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6">📅 Today’s Schedule</h2>
-
-      {schedules.length === 0 && (
-        <p className="text-gray-500">
-          No decoration projects scheduled for today 🎉
-        </p>
-      )}
-
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {schedules.map((item) => (
           <div key={item._id} className="card bg-base-100 shadow-xl">
             <div className="card-body">
-              <h2 className="card-title text-lg">
+              <h2 className="card-title flex items-center gap-2">
+                {item.photoURL && (
+                  <img
+                    src={item.photoURL}
+                    alt={item.serviceName}
+                    className="w-10 h-10 object-cover rounded-md"
+                  />
+                )}
                 {item.serviceName}
               </h2>
 
@@ -62,19 +160,21 @@ const TodaySchedule = () => {
               </p>
 
               <p>
-                <strong>Total Cost:</strong> ৳{item.totalCost}
+                <strong>Total Cost:</strong> ৳{item.totalCost.toLocaleString()}
               </p>
 
               <div className="mt-2">
-                <span className={`badge ${statusColor[item.assignedDecoatorStatus]}`}>
-                  {item.assignedDecoatorStatus}
+                <span
+                  className={`badge ${
+                    statusColor[item.assignedDecoatorStatus] || "badge-ghost"
+                  }`}
+                >
+                  {item.assignedDecoatorStatus.replaceAll("-", " ")}
                 </span>
               </div>
 
-              <div className="mt-4">
-                <p className="text-xs text-gray-400">
-                  Tracking ID: {item.trackingId}
-                </p>
+              <div className="mt-4 text-xs text-gray-400">
+                Tracking ID: {item.trackingId}
               </div>
             </div>
           </div>

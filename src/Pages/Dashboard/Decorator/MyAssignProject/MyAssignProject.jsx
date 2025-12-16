@@ -1,9 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useAuth from '../../../../hooks/useAuth';
-import { FaCalendarAlt, FaMoneyBillWave, FaUser } from 'react-icons/fa';
-
+import { FaCalendarAlt, FaMoneyBillWave } from 'react-icons/fa';
+import { TbCoinTakaFilled, TbCurrencyTaka } from "react-icons/tb";
 const MyAssignProject = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
@@ -27,126 +27,109 @@ const MyAssignProject = () => {
     );
   }
 
-  /* =====================
-     Dashboard Calculations
-  ====================== */
+  /* Dashboard Calculations */
   const totalProjects = assignDeco.length;
-  const paidProjects = assignDeco.filter(
-    (p) => p.paymentStatus === 'paid'
-  ).length;
-  const pendingProjects = totalProjects - paidProjects;
+  const paidProjects = assignDeco.filter(p => p.paymentStatus === 'paid').length;
   const totalRevenue = assignDeco
-    .filter((p) => p.paymentStatus === 'paid')
+    .filter(p => p.paymentStatus === 'paid')
     .reduce((sum, p) => sum + (p.totalCost || 0), 0);
 
   return (
-    <div className="p-4">
-      {/* =====================
-          Header
-      ====================== */}
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">My Assigned Projects</h2>
-        <span className="badge badge-primary badge-outline">
-          {totalProjects} Projects
+    <div className="">
+      {/* Header */}
+      
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#005461] text-center p-8">My Assigned <span className="text-[#FAB12F]">Projects</span></h2>
+     
+
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-6 mb-10 bg-[#005461] p-8 rounded-xl text-center ">
+          <div className="text-gray-500 font-bold bg-white px-2 py-3 rounded-xl sm:text-xl ">Total Assigned : <span className='text-sky-500'>{totalProjects}</span></div>
+          <div className="text-gray-500 font-bold bg-white px-2 py-3 rounded-xl sm:text-xl ">Paid Projects : <span className='text-[#FAB12F]'>{paidProjects}</span></div>
+          <div className="text-gray-500 font-bold bg-white px-2 py-3 rounded-xl sm:text-xl flex items-center justify-center gap-1  ">Total Revenue : <span className='mt-0.5 flex items-center  gap-1 text-green-500 '>{totalRevenue} <TbCoinTakaFilled /></span></div>
+      </div>
+
+      {/* Project Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        {assignDeco.map(project => (
+  <div
+    key={project._id}
+    className="relative group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
+  >
+    {/* Top gradient color */}
+    <div className="h-1 w-full bg-gradient-to-r from-[#005461] via-[#FAB12F] to-accent"></div>
+
+    <div className="p-4 sm:p-5 md:p-6 flex flex-col justify-between h-full">
+      {/* Header */}
+      <div>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3">
+          <h3 className="text-lg sm:text-xl md:text-2xl font-semibold line-clamp-2 text-gray-800 break-words">{project.serviceName}</h3>
+          <span className="mt-2 sm:mt-0 bg-[#005461] text-white font-semibold px-3 py-1 rounded-full text-xs sm:text-sm">{project.serviceCategory}</span>
+        </div>
+
+        {/* User Info */}
+        <div className="flex items-center gap-3 mb-3">
+          <img className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover" src={project.photoURL} alt={project.userName} />
+          <div className="truncate">
+            <p className="font-medium text-gray-700 text-sm sm:text-base truncate">{project.userName}</p>
+            <p className="text-xs sm:text-sm text-gray-500 truncate">{project.userEmail}</p>
+          </div>
+        </div>
+
+        {/* Project Details */}
+        <div className="space-y-1 sm:space-y-2 text-sm sm:text-base text-gray-700">
+          <p className="flex items-center gap-2">
+            <FaCalendarAlt className="text-primary" />
+            <span className="font-bold">Date:</span><span className='text-primary font-semibold'> {project.bookingDate}</span>
+          </p>
+          <p className="flex items-center gap-2">
+            <FaMoneyBillWave className="text-green-500" />
+            <span className="font-bold flex items-center ">Total: &nbsp; <span className='text-green-600 flex items-center font-semibold'>{project.totalCost} <TbCurrencyTaka size={20} /> </span></span>
+          </p>
+        </div>
+      </div>
+
+      {/* Status Badges */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-4 pt-4 border-t border-gray-100 gap-2 sm:gap-0">
+        {/* Payment Status */}
+        <span
+          className={`${
+            project.paymentStatus === 'paid'
+              ? 'bg-green-200 text-green-600 font-semibold px-3 py-1 rounded-full'
+              : 'bg-yellow-200 text-yellow-600 font-semibold px-3 py-1 rounded-full'
+          } text-xs sm:text-sm`}
+        >
+          {project.paymentStatus}
+        </span>
+
+        {/* Assigned Decorator Status */}
+        <span
+          className={`text-xs sm:text-sm font-semibold px-3 py-1 rounded-full ${
+            project.assignedDecoatorStatus === 'assigned'
+              ? 'bg-gray-300 text-gray-800'
+              : project.assignedDecoatorStatus === 'planning'
+              ? 'bg-blue-400 text-white'
+              : project.assignedDecoatorStatus === 'materials-prepared'
+              ? 'bg-yellow-400 text-white'
+              : project.assignedDecoatorStatus === 'on-the-way'
+              ? 'bg-indigo-500 text-white'
+              : project.assignedDecoatorStatus === 'setup-in-progress'
+              ? 'bg-orange-500 text-white'
+              : project.assignedDecoatorStatus === 'completed'
+              ? 'bg-green-600 text-white'
+              : 'bg-gray-400 text-white'
+          }`}
+        >
+          {project.assignedDecoatorStatus}
         </span>
       </div>
+    </div>
 
-      {/* =====================
-          Stats Cards
-      ====================== */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-        <div className="stat bg-base-100 shadow rounded-xl">
-          <div className="stat-title">Total Assigned</div>
-          <div className="stat-value text-primary">{totalProjects}</div>
-        </div>
+    {/* Hover Overlay */}
+    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none bg-gradient-to-tr from-primary/10 via-transparent to-secondary/10 rounded-2xl"></div>
+  </div>
+))}
 
-        <div className="stat bg-base-100 shadow rounded-xl">
-          <div className="stat-title">Paid Projects</div>
-          <div className="stat-value text-success">{paidProjects}</div>
-        </div>
 
-        <div className="stat bg-base-100 shadow rounded-xl">
-          <div className="stat-title">Pending Payment</div>
-          <div className="stat-value text-warning">{pendingProjects}</div>
-        </div>
-
-        <div className="stat bg-base-100 shadow rounded-xl">
-          <div className="stat-title">Total Revenue</div>
-          <div className="stat-value text-green-600">
-            {totalRevenue} ৳
-          </div>
-        </div>
-      </div>
-
-      {/* =====================
-          Project Cards
-      ====================== */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {assignDeco.map((project) => (
-          <div
-            key={project._id}
-            className="relative group rounded-2xl overflow-hidden bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300"
-          >
-            <div className="h-2 bg-gradient-to-r from-primary via-secondary to-accent"></div>
-
-            <div className="p-6">
-              <div className="flex justify-between items-start mb-4">
-                <h3 className="text-lg font-bold line-clamp-2">
-                  {project.serviceName}
-                </h3>
-                <span className="badge badge-info badge-sm">
-                  {project.serviceCategory}
-                </span>
-              </div>
-
-              <div className="flex items-center gap-3 mb-4">
-                <div className="avatar placeholder">
-                  <div className="bg-primary text-primary-content rounded-full w-10">
-                    <FaUser />
-                  </div>
-                </div>
-                <div>
-                  <p className="font-medium">{project.userName}</p>
-                  <p className="text-xs text-gray-500">
-                    {project.userEmail}
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-2 text-sm">
-                <p className="flex items-center gap-2">
-                  <FaCalendarAlt className="text-primary" />
-                  <span className="font-semibold">Date:</span>
-                  {project.bookingDate}
-                </p>
-
-                <p className="flex items-center gap-2">
-                  <FaMoneyBillWave className="text-green-500" />
-                  <span className="font-semibold">Total:</span>
-                  {project.totalCost} BDT
-                </p>
-              </div>
-
-              <div className="flex justify-between items-center mt-6 pt-4 border-t border-base-200">
-                <span
-                  className={`badge ${
-                    project.paymentStatus === 'paid'
-                      ? 'badge-success'
-                      : 'badge-warning'
-                  }`}
-                >
-                  {project.paymentStatus}
-                </span>
-
-                <span className="badge badge-outline badge-info">
-                  {project.assignedDecoatorStatus}
-                </span>
-              </div>
-            </div>
-
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none bg-gradient-to-tr from-primary/10 via-transparent to-secondary/10"></div>
-          </div>
-        ))}
       </div>
     </div>
   );

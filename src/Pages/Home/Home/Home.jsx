@@ -3,6 +3,8 @@ import Hero from '../Hero/Hero';
 import WhyChoose from '../WhyChoose/WhyChoose';
 import Service from '../../service/Service';
 import SpecialOffer from '../../SpecialOffer/SpecialOffer';
+import TopDecorators from '../../TopDecorators/TopDecorators';
+import OurGallery from '../../../Component/OurGallery/OurGallery';
 
 const Home = () => {
     return (
@@ -10,7 +12,10 @@ const Home = () => {
          <Hero></Hero> 
          <Service></Service>
          <WhyChoose></WhyChoose>
+         <TopDecorators></TopDecorators>
+         <OurGallery></OurGallery>
          <SpecialOffer></SpecialOffer>
+         
          
         </div>
     );

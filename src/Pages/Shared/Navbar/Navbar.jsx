@@ -1,13 +1,16 @@
 import React from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import Container from "../../../Component/Container/Container";
 import useAuth from "../../../hooks/useAuth";
 import { IoLogIn, IoLogOut } from "react-icons/io5";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
+import useRole from "../../../hooks/useRole";
 
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
-
+  const navigate = useNavigate()
+   const{role} =useRole()
+   console.log(role);
   const handelLogOut = () => {
     signOutUser().catch((error) => console.log(error));
   };
@@ -16,6 +19,20 @@ const Navbar = () => {
     `font-bold md:text-lg transition ${
       isActive ? "text-[#FAB12F]" : "text-white hover:text-[#FAB12F]"
     }`;
+
+
+    const handleRole = () => {
+
+        if (role === "admin") {
+            navigate("/dashboard/admin-analysis")
+        }
+        if (role === "user") {
+            navigate("/dashboard/booking-history")
+        }
+        if (role === "decorator") {
+            navigate("/dashboard/my-assign-project")
+        }
+    }
 
   const links = (
     <>
@@ -37,14 +54,16 @@ const Navbar = () => {
 
       {user && (
         <li>
-          <NavLink to="/dashboard/booking-history" className={linkStyle}>
+         <button onClick={handleRole} className="font-bold md:text-lg text-white hover:text-[#FAB12F]">
+           
             Dashboard
-          </NavLink>
+         
+         </button>
         </li>
       )}
     </>
   );
-
+     
   return (
     <div className="fixed top-0 left-0 w-full z-[500]">
       {/* Transparent / Glassmorphism Navbar */}
@@ -116,12 +135,13 @@ const Navbar = () => {
                     </div>
 
                     <li>
-                      <Link 
-                        to="/dashboard/booking-history" 
+                      <button
+                        // to="/dashboard/booking-history"
+                        onClick={handleRole} 
                         className="flex items-center gap-1 font-semibold mt-2 mb-3"
                       >
                         <TbLayoutDashboardFilled /> DashBoard
-                      </Link>
+                      </button>
                     </li>
 
                     <li>

@@ -29,7 +29,7 @@ const ServiceDetails = () => {
   // Modal handler
   const handelServiceModal = () => {
     if (!user) {
-      navigate("/login"); // redirect to login if not logged in
+      navigate("/login"); 
       return;
     }
     serviceModalRef.current.showModal();

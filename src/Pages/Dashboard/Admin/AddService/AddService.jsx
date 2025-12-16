@@ -1,7 +1,16 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import {
+  FaPlusCircle,
+  FaEnvelope,
+  FaMoneyBillWave,
+  FaLayerGroup,
+  FaImage,
+  FaTag,
+} from "react-icons/fa";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const AddService = () => {
   const { user } = useAuth();
@@ -16,119 +25,153 @@ const AddService = () => {
       createdAt: new Date().toISOString(),
     };
 
-    axiosSecure
-      .post("/services", payload)
-      .then((res) => {
-        if (res.data.insertedId) {
-          alert("Service added successfully!");
-          reset();
-        }
-      })
-      .catch((err) => {
-        console.log("Error adding service:", err);
-        alert("Failed to add service");
-      });
+    axiosSecure.post("/services", payload).then((res) => {
+      if (res.data.insertedId) {
+        reset();
+        Swal.fire({
+            title: "Service Added!",
+            text: "Your service has been added successfully.",
+            icon: "success",
+            confirmButtonText: "OK",
+            confirmButtonColor: "#005461",
+            iconColor: "#FAB12F",
+            background: "#ffffff",
+            color: "#005461",
+          });
+      }
+    });
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 sm:p-8 lg:p-12 bg-white rounded-3xl shadow-2xl">
-      <h2 className="text-3xl sm:text-4xl font-extrabold mb-8 text-gray-800 text-center">
-        Add New Service
-      </h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-
-        {/* Email Field */}
-        <div>
-          <label className="block mb-2 font-semibold text-gray-700">Your Email</label>
-          <input
-            value={user?.email || ""}
-            readOnly
-            className="w-full border border-gray-300 px-4 py-3 rounded-lg bg-gray-100 text-gray-700 cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-pink-600"
-          />
+    <div className="min-h-screen bg-[#e6f3f5]  py-8 px-2 sm:px-6 lg:px-12">
+      <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl p-6 sm:p-8 lg:p-10">
+        
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-8">
+          <FaPlusCircle className="text-[#FAB12F] text-3xl" />
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#005461]">
+            Add New Service
+          </h2>
         </div>
 
-        {/* Service Name */}
-        <div>
-          <label className="block mb-2 font-semibold text-gray-700">Service Name</label>
-          <input
-            {...register("service_name", { required: true })}
-            placeholder="Outdoor Holud Night Event"
-            className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-pink-600 focus:outline-none"
-          />
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
-        {/* Cost & Unit */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {/* Email */}
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">Cost</label>
+            <label className="flex items-center gap-2 text-sm font-semibold text-gray-600 mb-1">
+              <FaEnvelope className="text-[#005461]" /> Your Email
+            </label>
             <input
-              type="number"
-              {...register("cost", { required: true })}
-              placeholder="60000"
-              className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-pink-600 focus:outline-none"
+              value={user?.email || ""}
+              readOnly
+              className="w-full bg-gray-100 border border-gray-300 px-4 py-3 rounded-lg text-gray-600 cursor-not-allowed"
             />
           </div>
+
+          {/* Service Name */}
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">Unit</label>
+            <label className="flex items-center gap-2 text-sm font-semibold text-gray-600 mb-1">
+              <FaTag className="text-[#005461]" /> Service Name
+            </label>
+            <input
+              {...register("service_name", { required: true })}
+              placeholder="Outdoor Holud Night Event"
+              className="w-full border border-gray-300 px-4 py-3 rounded-lg
+              focus:ring-2 focus:ring-[#005461] outline-none"
+            />
+          </div>
+
+          {/* Cost & Unit */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="flex items-center gap-2 text-sm font-semibold text-gray-600 mb-1">
+                <FaMoneyBillWave className="text-[#005461]" /> Cost
+              </label>
+              <input
+                type="number"
+                {...register("cost", { required: true })}
+                placeholder="60000"
+                className="w-full border border-gray-300 px-4 py-3 rounded-lg
+                focus:ring-2 focus:ring-[#005461] outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-semibold text-gray-600 mb-1 block">
+                Unit
+              </label>
+              <select
+                {...register("unit", { required: true })}
+                className="w-full border border-gray-300 px-4 py-3 rounded-lg
+                focus:ring-2 focus:ring-[#005461] outline-none"
+              >
+                <option value="">Select Unit</option>
+                <option value="per event">Per Event</option>
+                <option value="per hall">Per Hall</option>
+                <option value="per floor">Per Floor</option>
+                <option value="per room">Per Room</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Category */}
+          <div>
+            <label className="flex items-center gap-2 text-sm font-semibold text-gray-600 mb-1">
+              <FaLayerGroup className="text-[#005461]" /> Category
+            </label>
             <select
-              {...register("unit", { required: true })}
-              className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-pink-600 focus:outline-none"
+              {...register("service_category", { required: true })}
+              className="w-full border border-gray-300 px-4 py-3 rounded-lg
+              focus:ring-2 focus:ring-[#005461] outline-none"
             >
-              <option value="">Select Unit</option>
-              <option value="per event">Per Event</option>
-              <option value="per hall">Per Hall</option>
-              <option value="per floor">Per Floor</option>
-              <option value="per room">Per Room</option>
+              <option value="">Select Category</option>
+              <option value="wedding">Wedding</option>
+              <option value="party">Party</option>
+              <option value="office">Office</option>
+              <option value="home">Home</option>
+              <option value="meeting">Meeting</option>
+              <option value="seminar">Seminar</option>
             </select>
           </div>
-        </div>
 
-        {/* Category */}
-        <div>
-          <label className="block mb-2 font-semibold text-gray-700">Category</label>
-          <select
-            {...register("service_category", { required: true })}
-            className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-pink-600 focus:outline-none"
+          {/* Description */}
+          <div>
+            <label className="text-sm font-semibold text-gray-600 mb-1 block">
+              Description
+            </label>
+            <textarea
+              {...register("description", { required: true })}
+              rows={4}
+              placeholder="Describe your service..."
+              className="w-full border border-gray-300 px-4 py-3 rounded-lg
+              focus:ring-2 focus:ring-[#005461] outline-none"
+            />
+          </div>
+
+          {/* Image */}
+          <div>
+            <label className="flex items-center gap-2 text-sm font-semibold text-gray-600 mb-1">
+              <FaImage className="text-[#005461]" /> Image URL
+            </label>
+            <input
+              {...register("image", { required: true })}
+              placeholder="https://example.com/image.jpg"
+              className="w-full border border-gray-300 px-4 py-3 rounded-lg
+              focus:ring-2 focus:ring-[#005461] outline-none"
+            />
+          </div>
+
+          {/* Submit */}
+          <button
+            type="submit"
+            className="w-full flex items-center justify-center gap-2
+            bg-[#005461] hover:bg-[#00414c] text-white font-semibold
+            py-3 rounded-xl transition"
           >
-            <option value="">Select Category</option>
-            <option value="wedding">Wedding</option>
-            <option value="party">Party</option>
-            <option value="office">Office</option>
-            <option value="home">Home</option>
-            <option value="meeting">Meeting</option>
-            <option value="seminar">Seminar</option>
-          </select>
-        </div>
-
-        {/* Description */}
-        <div>
-          <label className="block mb-2 font-semibold text-gray-700">Description</label>
-          <textarea
-            {...register("description", { required: true })}
-            placeholder="Describe your service here..."
-            rows={5}
-            className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-pink-600 focus:outline-none"
-          />
-        </div>
-
-        {/* Image URL */}
-        <div>
-          <label className="block mb-2 font-semibold text-gray-700">Image URL</label>
-          <input
-            {...register("image", { required: true })}
-            placeholder="https://example.com/image.jpg"
-            className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-pink-600 focus:outline-none"
-          />
-        </div>
-
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full bg-pink-600 text-white font-bold py-4 rounded-xl hover:bg-pink-700 transition-colors text-lg shadow-lg"
-        >
-          Add Service
-        </button>
-      </form>
+            <FaPlusCircle /> Add Service
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

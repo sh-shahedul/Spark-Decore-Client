@@ -352,38 +352,50 @@ const ManageBookings = () => {
       </div>
 
       {/* Decorator Modal */}
-      {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-          <div className="bg-white rounded-xl w-[600px] max-w-full max-h-[80vh] overflow-y-auto shadow-xl p-6 border border-gray-200">
-            <h2 className="text-2xl font-bold mb-5 text-center text-gray-800">
-              Select Decorator for {selectedBooking.serviceName}
-            </h2>
+     {showModal && (
+  <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/40 backdrop-blur-sm transition-opacity p-4 sm:p-6">
+    <div className="bg-white rounded-3xl w-full sm:w-[600px] max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 border border-gray-100 animate-fadeIn">
+      {/* Header */}
+      <h2 className="text-2xl sm:text-3xl font-extrabold mb-6 text-center text-gray-900">
+        Select Decorator for <span className="text-[#005461]">{selectedBooking.serviceName}</span>
+      </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {decorators.map((d) => (
-                <div
-                  key={d._id}
-                  className="card bg-base-100 shadow hover:shadow-lg cursor-pointer border border-gray-100"
-                  onClick={() => assignDecorator(d._id)}
-                >
-                  <div className="card-body">
-                    <h3 className="card-title">{d.name}</h3>
-                    <p className="text-sm text-gray-500">{d.email}</p>
-                    <p className="text-sm italic text-gray-400">{d.specialty}</p>
-                  </div>
-                </div>
-              ))}
+      {/* Decorators Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        {decorators.map((d) => (
+          <div
+            key={d._id}
+            className="bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer overflow-hidden relative"
+            onClick={() => assignDecorator(d._id)}
+          >
+            {/* Optional: subtle top accent */}
+            <div className="h-1 bg-gradient-to-r from-[#005461] to-[#008080] rounded-t-xl"></div>
+
+            <div className="p-4 sm:p-5">
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-1">{d.name}</h3>
+              <p className="text-xs sm:text-sm text-gray-500 mb-1">{d.email}</p>
+              <p className="text-xs sm:text-sm italic text-gray-400">{d.specialty}</p>
             </div>
 
-            <button
-              className="btn btn-secondary w-full mt-5"
-              onClick={() => setShowModal(false)}
-            >
-              Close
-            </button>
+            {/* Hover overlay effect */}
+            <div className="absolute inset-0 bg-white/20 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
           </div>
-        </div>
-      )}
+        ))}
+      </div>
+
+      {/* Close Button */}
+      <button
+        className="mt-6 w-full bg-gradient-to-r from-[#005461] to-[#008080] hover:from-[#008080] hover:to-[#005461] text-white font-bold py-3 rounded-xl shadow-lg transition-all duration-300"
+        onClick={() => setShowModal(false)}
+      >
+        Close
+      </button>
+    </div>
+  </div>
+)}
+
+
+
     </div>
   );
 };

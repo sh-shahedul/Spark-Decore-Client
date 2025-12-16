@@ -24,15 +24,12 @@ import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import MyAssignProject from "../Pages/Dashboard/Decorator/MyAssignProject/MyAssignProject";
 import TodaySchedule from "../Pages/Dashboard/Decorator/TodayShedule/TodaySchedule";
 import EarningSummary from "../Pages/Dashboard/Decorator/EarningSummary/EarningSummary";
-import ManageDecorater from "../Pages/Dashboard/Admin/ManageDecorator/ManageDecorater";
 import ManageBooking from "../Pages/Dashboard/Admin/ManageBooking/ManageBooking";
 import UpdateProjectStatus from "../Pages/Dashboard/Decorator/UpdateProjectStatus/UpdateProjectStatus";
 import AdminAnalytics from "../Pages/Dashboard/Admin/AdminAnalytics/AdminAnalytics";
-
-
-
-
-
+import TopDecorators from "../Pages/TopDecorators/TopDecorators";
+import AdminRoute from "./AdminRoute";
+import DecoratorRoute from "./DecoratorRoute";
 
 
 export const router = createBrowserRouter([
@@ -65,6 +62,10 @@ export const router = createBrowserRouter([
         {
           path:'services/:id',
           Component:ServiceDetails,
+        },
+        {
+          path:'top-ecorators',
+          Component:TopDecorators,
         },
     ]
   },
@@ -118,49 +119,48 @@ export const router = createBrowserRouter([
           path:'profile',
           Component:Profile,
         },
+        //Admin Route
        {
           path:'add-service',
-          Component:AddService,
+          element: <AdminRoute><AddService></AddService></AdminRoute>
         },
        {
           path:'manage-service',
-          Component: ManageService,
+          element:<AdminRoute><ManageService></ManageService></AdminRoute>
         },
        {
           path:'update-service',
-          Component: UpdateService,
+          element : <AdminRoute><UpdateService></UpdateService></AdminRoute>
         },
        {
           path:'manage-users',
-          Component: ManageUsers,
+          element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
         },
-       {
-          path:'my-assign-project',
-          Component: MyAssignProject,
-        },
-       {
-          path:'today-schedule',
-          Component: TodaySchedule,
-        },
-       {
-          path:'earning-summary',
-          Component: EarningSummary,
-        },
-       {
-          path:'manage-decorator',
-          Component: ManageDecorater,
-        },
-       {
+         {
           path:'manage-booking',
-          Component: ManageBooking,
+          element:<AdminRoute><ManageBooking></ManageBooking></AdminRoute>
         },
        {
           path:'admin-analysis',
-          Component: AdminAnalytics,
+          element: <AdminRoute><AdminAnalytics></AdminAnalytics></AdminRoute>
+        },
+        //Decorator Route
+       {
+          path:'my-assign-project',
+          element:<DecoratorRoute><MyAssignProject></MyAssignProject></DecoratorRoute>
         },
        {
+          path:'today-schedule',
+          element: <DecoratorRoute><TodaySchedule></TodaySchedule></DecoratorRoute>
+        },
+       {
+          path:'earning-summary',
+          element:<DecoratorRoute><EarningSummary></EarningSummary></DecoratorRoute>
+        },
+        
+       {
           path:'update-project',
-          Component: UpdateProjectStatus,
+          element: <DecoratorRoute><UpdateProjectStatus></UpdateProjectStatus></DecoratorRoute>
         },
       
     ]
