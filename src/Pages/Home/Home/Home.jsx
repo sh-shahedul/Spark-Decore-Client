@@ -5,6 +5,7 @@ import Service from '../../service/Service';
 import SpecialOffer from '../../SpecialOffer/SpecialOffer';
 import TopDecorators from '../../TopDecorators/TopDecorators';
 import OurGallery from '../../../Component/OurGallery/OurGallery';
+import Coverage from '../../Covergae/Coverage';
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
          <TopDecorators></TopDecorators>
          <OurGallery></OurGallery>
          <SpecialOffer></SpecialOffer>
+         <Coverage></Coverage>
          
          
         </div>

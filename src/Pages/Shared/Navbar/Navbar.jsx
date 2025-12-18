@@ -116,10 +116,10 @@ const Navbar = () => {
               {user ? (
                 <div className="dropdown dropdown-end">
                   <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                    <div className="w-10 h-10 rounded-full border-2 border-pink-400">
+                    <div className="w-10 h-10 rounded-full border-2 border-white">
                       <img
                         referrerPolicy="no-referrer"
-                        src={user.photoURL || ""}
+                        src={user?.photoURL || ""}
                         alt="User Avatar"
                       />
                     </div>
@@ -130,24 +130,24 @@ const Navbar = () => {
                     className="menu menu-sm dropdown-content bg-white/90 backdrop-blur-xl rounded-box z-50 mt-3 w-52 p-2 shadow"
                   >
                     <div className="pb-3 border-b border-gray-300">
-                      <li className="text-sm font-bold">{user.displayName}</li>
-                      <li className="text-xs">{user.email}</li>
+                      <li className="text-sm font-bold">{user?.displayName}</li>
+                      <li className="text-xs">{user?.email}</li>
                     </div>
 
                     <li>
                       <button
-                        // to="/dashboard/booking-history"
+                        
                         onClick={handleRole} 
-                        className="flex items-center gap-1 font-semibold mt-2 mb-3"
+                        className="flex items-center gap-1 font-semibold mt-2 mb-3 text-base"
                       >
-                        <TbLayoutDashboardFilled /> DashBoard
+                        <TbLayoutDashboardFilled size={20}/> DashBoard
                       </button>
                     </li>
 
                     <li>
                       <button
                         onClick={handelLogOut}
-                        className="flex gap-1 items-center md:px-10 px-4 md:py-2 py-1 rounded-xl bg-gradient-to-r from-pink-500 to-red-500 text-white font-bold"
+                        className="flex gap-1 items-center md:px-10 px-4 md:py-2 py-1 rounded-xl bg-[#005461] text-white font-bold"
                       >
                         <IoLogOut /> Logout
                       </button>

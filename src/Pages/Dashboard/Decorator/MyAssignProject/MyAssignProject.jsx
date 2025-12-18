@@ -4,6 +4,7 @@ import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useAuth from '../../../../hooks/useAuth';
 import { FaCalendarAlt, FaMoneyBillWave } from 'react-icons/fa';
 import { TbCoinTakaFilled, TbCurrencyTaka } from "react-icons/tb";
+import Loading from '../../../../Component/Loading/Loading';
 const MyAssignProject = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
@@ -20,11 +21,7 @@ const MyAssignProject = () => {
   });
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center mt-10">
-        <span className="loading loading-spinner loading-md"></span>
-      </div>
-    );
+    return <Loading></Loading>
   }
 
   /* Dashboard Calculations */
@@ -35,7 +32,7 @@ const MyAssignProject = () => {
     .reduce((sum, p) => sum + (p.totalCost || 0), 0);
 
   return (
-    <div className="">
+    <div className="sm:p-6">
       {/* Header */}
       
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#005461] text-center p-8">My Assigned <span className="text-[#FAB12F]">Projects</span></h2>

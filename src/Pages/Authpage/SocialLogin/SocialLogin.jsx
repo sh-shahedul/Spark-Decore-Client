@@ -1,50 +1,9 @@
-// import React from 'react';
-// import { FcGoogle } from 'react-icons/fc';
-
-// import { useLocation, useNavigate } from 'react-router';
-// import useAuth from '../../../hooks/useAuth';
-
-
-// const SocialLogin = () => {
-// //   const axiosSecure = useAxiosSecure()
-//     const {googleSignIn}=useAuth()
-//     const navigate = useNavigate()
-//     const location = useLocation();
-//     console.log('location on social',location)
-//     const handelGoogle =()=>{
-//            googleSignIn()
-//            .then(result=>{
-//             console.log(result.user)
-//              navigate(location.state || '/')
-
-//            })
-//            .catch(error=>{
-//            console.log(error)
-//           })
-//     }
-
-//     return (
-//         <div>
-//              {/* OR Divider */}
-//         <div className="divider before:bg-yellow-400 after:bg-yellow-400 my-4">OR</div>
-
-//         {/* GOOGLE BUTTON */}
-//         <button onClick={handelGoogle}  className="w-full flex items-center justify-center gap-2 py-2 bg-white text-black border border-yellow-400 rounded-lg hover:bg-yellow-100 transition-colors font-bold">
-//           <FcGoogle /> Login with Google
-//         </button> 
-//         </div>
-//     );
-// };
-
-// export default SocialLogin;
-
-
-
 import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { useLocation, useNavigate } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import toast from 'react-hot-toast';
 
 const SocialLogin = () => {
     
@@ -74,7 +33,7 @@ const SocialLogin = () => {
                     .catch(err => {
                         console.log("DB Error:", err);
                     });
-
+                  toast.success(" 🎉 Login Successful")
                 navigate(location.state || "/");
             })
             .catch(error => {
@@ -89,7 +48,7 @@ const SocialLogin = () => {
 
             <button 
                 onClick={handelGoogle}
-                className="w-full flex items-center justify-center gap-2 py-2 bg-white text-black border border-yellow-400 rounded-lg hover:bg-yellow-100 transition-colors font-bold"
+                className="w-full cursor-pointer flex items-center justify-center gap-2 py-2 bg-white text-black border border-yellow-400 rounded-lg hover:bg-yellow-100 transition-colors font-bold"
             >
                 <FcGoogle /> Login with Google
             </button>

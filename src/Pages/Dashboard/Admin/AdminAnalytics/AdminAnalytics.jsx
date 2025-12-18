@@ -43,7 +43,7 @@ const AdminAnalytics = () => {
             Total Revenue
           </h2>
           <p className="text-2xl sm:text-3xl md:text-4xl font-extrabold mt-2 sm:mt-3">
-            ৳ {totalRevenue.toLocaleString()}
+            {totalRevenue.toLocaleString()}(BDT)
           </p>
         </div>
       </div>

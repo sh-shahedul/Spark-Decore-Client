@@ -4,6 +4,7 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { FaCalendarAlt, FaClock, FaMapMarkerAlt, FaDollarSign, FaUser, FaEnvelope, FaTools, FaArrowLeft } from 'react-icons/fa';
 import { FaBangladeshiTakaSign } from 'react-icons/fa6';
+import Loading from '../../../Component/Loading/Loading';
 
 const Payment = () => {
   const { bookingId } = useParams();
@@ -40,7 +41,7 @@ const Payment = () => {
 
 
   if (isLoading) {
-    return <h1 className="text-center text-xl mt-10">Loading...</h1>;
+    return <Loading></Loading>
   }
 
   return (
@@ -49,7 +50,7 @@ const Payment = () => {
       <div className="max-w-3xl mx-auto mb-6">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-pink-700 hover:text-gray-900 font-bold"
+          className="flex items-center gap-2 text-[#005461] hover:text-gray-900 font-bold"
         >
           <FaArrowLeft /> Go Back
         </button>
@@ -57,7 +58,7 @@ const Payment = () => {
 
       {/* Header */}
       <div className="text-center mb-10">
-        <h1 className="text-4xl font-bold text-gray-800 mb-2">Checkout</h1>
+        <h1 className="text-4xl font-bold text-[#005461] mb-2">Checkout</h1>
         <p className="text-gray-600">Review your booking and proceed to payment</p>
       </div>
 
@@ -117,7 +118,7 @@ const Payment = () => {
             <h2 className="text-xl font-semibold">Total to Pay</h2>
             <p className="text-3xl font-bold text-green-600 flex gap-2 items-center"><FaBangladeshiTakaSign /> {booking.totalCost}</p>
           </div>
-          <button onClick={handelPayment} className="px-10 py-4 bg-pink-600 text-white font-bold rounded-xl hover:bg-pink-700 transition-all shadow-lg">
+          <button onClick={handelPayment} className="px-10 py-4 bg-[#005461] cursor-pointer text-white font-bold rounded-xl hover:text-[#FAB12F] transition-all shadow-lg">
             Pay Now
           </button>
         </div>

@@ -30,17 +30,21 @@ import AdminAnalytics from "../Pages/Dashboard/Admin/AdminAnalytics/AdminAnalyti
 import TopDecorators from "../Pages/TopDecorators/TopDecorators";
 import AdminRoute from "./AdminRoute";
 import DecoratorRoute from "./DecoratorRoute";
+import PageNotFound from "../Pages/Error/PageNotFound/PageNotFound";
+import Loading from "../Component/Loading/Loading";
 
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component:MainLayOut,
+    hydrateFallbackElement:<Loading></Loading>,
+    errorElement:<PageNotFound></PageNotFound>,
     children: [
         {
             index:true,
-            Component:Home
-
+            Component:Home,
+            loader:()=>fetch('/serviceCenter.json').then(res=>res.json())
         },
         {
           path:'coverage',

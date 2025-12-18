@@ -7,6 +7,14 @@ import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { SlCalender } from "react-icons/sl";
+import { HiCalendar } from "react-icons/hi";
+import { FaChartSimple, FaUserGroup } from "react-icons/fa6";
+import { BiSolidCategoryAlt } from "react-icons/bi";
+import { ImCross } from "react-icons/im";
+import Loading from "../../Component/Loading/Loading";
+// import PageNotFound from "../Error/PageNotFound/PageNotFound";
+import Error404 from "../Error/Error404/Error404";
 
 const ServiceDetails = () => {
   const { user } = useAuth();
@@ -81,8 +89,8 @@ const ServiceDetails = () => {
     }
   };
 
-  if (isLoading) return <p className="text-center mt-10">Loading...</p>;
-  if (!service) return <p className="text-center mt-10">Service not found</p>;
+  if (isLoading) return <Loading></Loading>;
+  if (!service) return <Error404></Error404>
 
   return (
     <motion.div
@@ -110,17 +118,17 @@ const ServiceDetails = () => {
 
       {/* Content */}
       <div className="lg:w-1/2 flex flex-col justify-center md:gap-6 gap-3">
-        <h1 className="md:text-5xl text-2xl font-extrabold text-pink-600">
+        <h1 className="md:text-5xl text-2xl font-extrabold text-[#005461]">
           {service.service_name}
         </h1>
 
-        <p className="text-gray-800 md:text-2xl text-xl font-semibold">
-          Cost: <span className="text-pink-500">{service.cost} BDT</span> /{" "}
-          {service.unit}
+        <p className="text-gray-800 md:text-2xl text-xl font-semibold flex items-center gap-1">
+         <FaChartSimple size={22} /> Cost: <span className="text-[#005461]">{service.cost} BDT</span> /{" "}
+         <span className="text-[#FAB12F]"> {service.unit}</span>
         </p>
 
-        <p className="md:text-lg text-base font-bold">
-          Category:{" "}
+        <p className="md:text-lg text-base font-bold flex items-center gap-1">
+        <BiSolidCategoryAlt size={18}/>  Category:{" "}
           <span className="font-medium text-gray-600">
             {service.service_category}
           </span>
@@ -131,14 +139,14 @@ const ServiceDetails = () => {
         )}
 
         <div className="mt-4 space-y-2">
-          <p className="md:text-lg text-base font-bold">
-            Created By:{" "}
+          <p className="md:text-lg text-base font-bold flex items-center gap-1">
+           <FaUserGroup size={18} /> Created By:{" "}
             <span className="font-medium text-gray-600">
               {service.createdByEmail}
             </span>
           </p>
-          <p className="md:text-lg text-base font-bold">
-            Created At:{" "}
+          <p className="md:text-lg text-base font-bold flex items-center gap-1">
+           <HiCalendar size={20}/> Created At:{" "}
             <span className="font-medium text-gray-600">
               {new Date(service.createdAt).toLocaleString()}
             </span>
@@ -149,8 +157,8 @@ const ServiceDetails = () => {
         <motion.button
           onClick={handelServiceModal}
           whileHover={{ scale: 1.05 }}
-          className="mt-6 w-max px-8 py-4 bg-linear-to-r from-pink-500 to-red-500 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
-        >
+          className="mt-6 w-max px-8 py-4 bg-gradient-to-r from-[#005461] to-[#008080] hover:from-[#008080] hover:to-[#005461] text-white hover:text-[#FAB12F] font-bold rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center gap-2"
+        ><SlCalender />
           Book This Service
         </motion.button>
       </div>
@@ -158,12 +166,12 @@ const ServiceDetails = () => {
       {/* Modal */}
       <dialog ref={serviceModalRef} className="modal modal-bottom sm:modal-middle">
         <motion.div
-          className="modal-box p-6 sm:p-8 rounded-3xl bg-linear-to-br from-pink-50 to-red-50 shadow-2xl"
+          className="modal-box p-6 sm:p-8 rounded-3xl shadow-2xl"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h3 className="font-extrabold text-3xl mb-6 text-pink-600 text-center">
+          <h3 className="font-extrabold text-3xl mb-6 text-[#005461] text-center">
             Book This Service
           </h3>
 
@@ -172,7 +180,7 @@ const ServiceDetails = () => {
   {/* Service Name */}
   <div className="form-control">
     <label className="label font-semibold flex items-center gap-2">
-      <span className="material-icons text-pink-500">room_service</span>
+      <span className="material-icons text-[#005461]">room_service</span>
       Service Name
     </label>
     <input
@@ -187,7 +195,7 @@ const ServiceDetails = () => {
   <div className="flex flex-col sm:flex-row sm:gap-4">
     <div className="flex-1 form-control">
       <label className="label font-semibold flex items-center gap-2">
-        <span className="material-icons text-pink-500">person</span>
+        <span className="material-icons text-[#005461]">person</span>
         Your Name
       </label>
       <input
@@ -200,7 +208,7 @@ const ServiceDetails = () => {
 
     <div className="flex-1 form-control mt-4 sm:mt-0">
       <label className="label font-semibold flex items-center gap-2">
-        <span className="material-icons text-pink-500">email</span>
+        <span className="material-icons text-[#005461]">email</span>
         Your Email
       </label>
       <input
@@ -215,7 +223,7 @@ const ServiceDetails = () => {
   {/* Service Type (Radio) */}
   <div className="form-control mt-4">
     <label className="label font-semibold flex items-center gap-2">
-      <span className="material-icons text-pink-500">category</span>
+      <span className="material-icons text-[#005461]">category</span>
       Service Type
     </label>
 
@@ -226,7 +234,7 @@ const ServiceDetails = () => {
           type="radio"
           value="in-studio"
           {...register("serviceType", { required: true })}
-          className="radio checked:bg-pink-500"
+          className="radio checked:text-[#005461]"
         />
         <span className="font-medium">In Studio</span>
       </label>
@@ -237,14 +245,14 @@ const ServiceDetails = () => {
           type="radio"
           value="on-site"
           {...register("serviceType", { required: true })}
-          className="radio checked:bg-pink-500"
+          className="radio checked:text-[#005461]"
         />
         <span className="font-medium">On Site</span>
       </label>
     </div>
 
     {errors.serviceType && (
-      <p className="text-red-500 text-sm mt-1">
+      <p className="text-[#005461] text-sm mt-1">
         Please select a service type
       </p>
     )}
@@ -254,7 +262,7 @@ const ServiceDetails = () => {
   <div className="flex flex-col sm:flex-row sm:gap-4">
     <div className="flex-1 form-control">
       <label className="label font-semibold flex items-center gap-2">
-        <span className="material-icons text-pink-500">add</span>
+        <span className="material-icons text-[#005461] ">add</span>
         Quantity ({service.unit})
       </label>
       <input
@@ -269,13 +277,13 @@ const ServiceDetails = () => {
         className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
       />
       {errors.quantity && (
-        <p className="text-red-500 text-sm mt-1">Quantity is required</p>
+        <p className="text-[#005461] text-sm mt-1">Quantity is required</p>
       )}
     </div>
 
     <div className="flex-1 form-control mt-4 sm:mt-0">
       <label className="label font-semibold flex items-center gap-2">
-        <span className="material-icons text-pink-500">attach_money</span>
+        <span className="material-icons text-[#005461]">attach_money</span>
         Total Cost
       </label>
       <input
@@ -291,7 +299,7 @@ const ServiceDetails = () => {
   <div className="flex flex-col sm:flex-row sm:gap-4">
     <div className="flex-1 form-control">
       <label className="label font-semibold flex items-center gap-2">
-        <span className="material-icons text-pink-500">calendar_today</span>
+        <span className="material-icons text-[#005461]">calendar_today</span>
         Booking Date
       </label>
       <input
@@ -300,13 +308,13 @@ const ServiceDetails = () => {
         className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
       />
       {errors.bookingDate && (
-        <p className="text-red-500 text-sm mt-1">Booking date is required</p>
+        <p className="text-[#005461] text-sm mt-1">Booking date is required</p>
       )}
     </div>
 
     <div className="flex-1 form-control mt-4 sm:mt-0">
       <label className="label font-semibold flex items-center gap-2">
-        <span className="material-icons text-pink-500">schedule</span>
+        <span className="material-icons text-[#005461]">schedule</span>
         Booking Time
       </label>
       <input
@@ -315,7 +323,7 @@ const ServiceDetails = () => {
         className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
       />
       {errors.bookingTime && (
-        <p className="text-red-500 text-sm mt-1">Booking time is required</p>
+        <p className="text-[#005461] text-sm mt-1">Booking time is required</p>
       )}
     </div>
   </div>
@@ -323,7 +331,7 @@ const ServiceDetails = () => {
   {/* Location */}
   <div className="form-control">
     <label className="label font-semibold flex items-center gap-2">
-      <span className="material-icons text-pink-500">location_on</span>
+      <span className="material-icons text-[#005461]">location_on</span>
       Location
     </label>
     <input
@@ -333,14 +341,14 @@ const ServiceDetails = () => {
       className="w-full input input-bordered mt-1 rounded-xl px-4 py-2"
     />
     {errors.location && (
-      <p className="text-red-500 text-sm mt-1">Location is required</p>
+      <p className="text-[#005461] text-sm mt-1">Location is required</p>
     )}
   </div>
 
   {/* Submit */}
   <button
     type="submit"
-    className="w-full py-3 bg-linear-to-r from-pink-500 to-red-500 text-white font-bold rounded-2xl mt-4 shadow-lg hover:shadow-xl transition-shadow duration-300"
+    className="w-full py-3 bg-gradient-to-r from-[#005461] to-[#008080] hover:from-[#008080] hover:to-[#005461] text-white hover:text-[#FAB12F] font-bold rounded-2xl mt-4 shadow-lg hover:shadow-xl transition-shadow duration-300"
   >
     Confirm Booking
   </button>
@@ -348,9 +356,9 @@ const ServiceDetails = () => {
 
 
           {/* Close Button */}
-          <div className="modal-action mt-4">
+          <div className="modal-action mt-4 ">
             <form method="dialog">
-              <button className="btn btn-outline w-full rounded-xl">Close</button>
+              <button className=" w-full rounded-xl text-[#005461] hover:text-[#FAB12F]"><ImCross /></button>
             </form>
           </div>
         </motion.div>

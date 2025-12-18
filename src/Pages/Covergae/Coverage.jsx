@@ -73,12 +73,12 @@ const Coverage = () => {
 
       {/* Map Section */}
      <Container>
-         <div className='w-full h-[700px]'>
+         <div className='w-full h-[600px]'>
         <MapContainer
           center={position}
           zoom={8}
-          scrollWheelZoom={true}
-          className='h-[700px] rounded-xl shadow-md'
+          scrollWheelZoom={false}
+          className='h-[600px] rounded-xl shadow-md'
           ref={mapref}
         >
           <TileLayer
@@ -86,7 +86,7 @@ const Coverage = () => {
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
           />
 
-          {serviceCenter.map((center, index) => (
+          {serviceCenter?.map((center, index) => (
             <Marker
               key={index}
               position={[center.latitude, center.longitude]}

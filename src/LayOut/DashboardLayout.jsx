@@ -13,6 +13,7 @@ import useRole from '../hooks/useRole';
 import { HiViewBoards } from 'react-icons/hi';
 import Loading from '../Component/Loading/Loading';
 import { PiToolboxFill } from 'react-icons/pi';
+import { Toaster } from 'react-hot-toast';
 
 const DashboardLayout = () => {
   const {role, roleLoading} = useRole()
@@ -169,6 +170,7 @@ const DashboardLayout = () => {
     </div>
   </div>
         </div>
+         <Toaster />
         </Container>
     );
 };

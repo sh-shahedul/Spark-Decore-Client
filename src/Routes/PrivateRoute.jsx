@@ -1,12 +1,13 @@
 import React from 'react';
 import useAuth from '../hooks/useAuth';
 import { Navigate } from 'react-router';
+import Loading from '../Component/Loading/Loading';
 
 
 const PrivateRoute = ({children}) => {
     const{user,loading}= useAuth()
     if(loading){
-        return  <div className='flex justify-center p-10'><progress className="progress w-56 text-yellow-400"></progress></div>
+        return  <Loading></Loading>
     }
     if(!user){
          return <Navigate to='/login'></Navigate>
