@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import useAuth from './useAuth';
 import { useNavigate } from 'react-router';
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:3000'
+    baseURL: 'https://spark-decore.vercel.app'
 })
 
 
@@ -25,13 +25,13 @@ const useAxiosSecure = () => {
     (error) =>{
    console.log(error);
 
-  //  const statusCode = error.status;
-  //   if(statusCode === 401 || statusCode ===403){
-  //         signOutUser()
-  //         .then(()=>{
-  //           navigate('/login')
-  //         })
-  //   }
+   const statusCode = error.status;
+    if(statusCode === 401 || statusCode ===403){
+          signOutUser()
+          .then(()=>{
+            navigate('/login')
+          })
+    }
    return Promise.reject(error)
     })
      return () =>{

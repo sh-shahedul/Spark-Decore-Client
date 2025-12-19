@@ -89,6 +89,7 @@ export const router = createBrowserRouter([
   },
   {
     path:'dashboard',
+    HydrateFallback:<Loading></Loading>,
     element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
     children: [
       {

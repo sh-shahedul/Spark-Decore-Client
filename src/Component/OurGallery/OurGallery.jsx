@@ -37,48 +37,151 @@ const OurGallery = () => {
   );
 
   return (
-    <Container>
-      <div className="py-12">
-        <h2 className="text-2xl font-bold text-center mb-8">
-          Our Gallery
-        </h2>
-
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-          {currentImages.map((img, index) => (
-            <div
-              key={index}
-              className="overflow-hidden rounded-xl shadow-sm hover:shadow-md transition"
-            >
-              <img
-                src={img}
-                alt="Gallery"
-                className="w-full h-56 object-cover hover:scale-105 transition-transform duration-300"
-              />
+    <div className="relative bg-gradient-to-b from-white via-amber-50/30 to-white overflow-hidden">
+      {/* Background Decorative Elements */}
+      <div className="absolute top-10 right-10 w-64 h-64 bg-amber-200/20 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-10 w-80 h-80 bg-teal-200/20 rounded-full blur-3xl"></div>
+      
+      <Container>
+        <div className="py-16 lg:py-20 relative z-10">
+          {/* Section Header */}
+          <div className="text-center mb-12 space-y-4">
+            <div className="inline-block animate-bounce">
+              <span className="bg-gradient-to-r from-[#FAB12F] to-amber-500 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-lg">
+                ✨ Visual Showcase
+              </span>
             </div>
-          ))}
-        </div>
+            
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-[#005461] via-teal-600 to-[#FAB12F] bg-clip-text text-transparent">
+              Our Creative Gallery
+            </h2>
+            
+            <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+              Explore stunning decorations and memorable moments from our portfolio of beautifully crafted events
+            </p>
+            
+            <div className="flex items-center justify-center gap-2 mt-4">
+              <div className="h-1 w-16 bg-gradient-to-r from-transparent to-[#FAB12F] rounded-full"></div>
+              <div className="h-1.5 w-10 bg-[#FAB12F] rounded-full"></div>
+              <div className="h-1 w-16 bg-gradient-to-l from-transparent to-[#FAB12F] rounded-full"></div>
+            </div>
+          </div>
 
-        {/* Pagination */}
-        <div className="flex justify-center mt-10 gap-2">
-          {[...Array(totalPages).keys()].map((num) => (
+          {/* Gallery Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {currentImages.map((img, index) => (
+              <div
+                key={index}
+                className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+                style={{
+                  animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`
+                }}
+              >
+                {/* Image Container */}
+                <div className="relative overflow-hidden aspect-[4/5]">
+                  <img
+                    src={img}
+                    alt={`Gallery item ${index + 1}`}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  {/* Hover Border Effect */}
+                  <div className="absolute inset-0 border-4 border-[#FAB12F]/0 group-hover:border-[#FAB12F]/50 transition-all duration-500 rounded-2xl"></div>
+                </div>
+
+                {/* Image Number Badge */}
+                <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-[#005461] font-bold text-xs px-3 py-1.5 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  #{startIndex + index + 1}
+                </div>
+
+                {/* Bottom Info Bar */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#005461] to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                  <div className="flex items-center justify-between text-white">
+                    <span className="text-sm font-semibold">View Details</span>
+                    <svg 
+                      className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Pagination */}
+          <div className="flex flex-wrap justify-center items-center mt-12 gap-3">
+            {/* Previous Button */}
             <button
-              key={num}
-              onClick={() => setCurrentPage(num + 1)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium border transition
-                ${
-                  currentPage === num + 1
-                    ? "bg-yellow-500 text-white border-yellow-500"
-                    : "bg-white text-gray-700 hover:bg-gray-100"
-                }
-              `}
+              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+              disabled={currentPage === 1}
+              className={`px-4 py-2.5 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 ${
+                currentPage === 1
+                  ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                  : "bg-white text-[#005461] hover:bg-[#005461] hover:text-white shadow-lg hover:shadow-xl border-2 border-[#005461]/20"
+              }`}
             >
-              {num + 1}
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+              Previous
             </button>
-          ))}
+
+            {/* Page Numbers */}
+            <div className="flex gap-2">
+              {[...Array(totalPages).keys()].map((num) => (
+                <button
+                  key={num}
+                  onClick={() => setCurrentPage(num + 1)}
+                  className={`w-12 h-12 rounded-xl text-sm font-bold transition-all duration-300 transform hover:scale-110 ${
+                    currentPage === num + 1
+                      ? "bg-gradient-to-br from-[#FAB12F] to-amber-500 text-white shadow-lg shadow-amber-300/50 scale-110"
+                      : "bg-white text-gray-700 hover:bg-gray-100 border-2 border-gray-200 hover:border-[#FAB12F]/50"
+                  }`}
+                >
+                  {num + 1}
+                </button>
+              ))}
+            </div>
+
+            {/* Next Button */}
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+              disabled={currentPage === totalPages}
+              className={`px-4 py-2.5 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 ${
+                currentPage === totalPages
+                  ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                  : "bg-white text-[#005461] hover:bg-[#005461] hover:text-white shadow-lg hover:shadow-xl border-2 border-[#005461]/20"
+              }`}
+            >
+              Next
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
+    </div>
   );
 };
 

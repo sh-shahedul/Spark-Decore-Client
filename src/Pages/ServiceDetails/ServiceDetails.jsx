@@ -13,8 +13,7 @@ import { FaChartSimple, FaUserGroup } from "react-icons/fa6";
 import { BiSolidCategoryAlt } from "react-icons/bi";
 import { ImCross } from "react-icons/im";
 import Loading from "../../Component/Loading/Loading";
-// import PageNotFound from "../Error/PageNotFound/PageNotFound";
-import Error404 from "../Error/Error404/Error404";
+import ServiceNotFound from "../Error/ServiceNotFound/ServiceNotFound";
 
 const ServiceDetails = () => {
   const { user } = useAuth();
@@ -90,7 +89,7 @@ const ServiceDetails = () => {
   };
 
   if (isLoading) return <Loading></Loading>;
-  if (!service) return <Error404></Error404>
+  if (!service) return <ServiceNotFound></ServiceNotFound>
 
   return (
     <motion.div
