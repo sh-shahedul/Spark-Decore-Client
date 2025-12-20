@@ -2,6 +2,7 @@
 import React from "react";
 import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 import Container from "../../../Component/Container/Container";
+import { Link } from "react-router";
 
 const Footer = () => {
   return (
@@ -22,10 +23,10 @@ const Footer = () => {
               every celebration truly remarkable.
             </p>
             <div className="flex space-x-4 mt-4">
-              <a href="#" className="hover:text-[#FAB12F] transition"><FaFacebookF  size={25} /></a>
-              <a href="#" className="hover:text-[#FAB12F] transition"><FaInstagram  size={25}/></a>
-              <a href="#" className="hover:text-[#FAB12F] transition"><FaTwitter size={25} /></a>
-              <a href="#" className="hover:text-[#FAB12F] transition"><FaLinkedinIn size={25} /></a>
+              <Link to='https://www.facebook.com/shahedulhoquee/' className="hover:text-[#FAB12F] transition"><FaFacebookF  size={25} /></Link>
+              <Link to='https://www.instagram.com/sh.shahedul/' className="hover:text-[#FAB12F] transition"><FaInstagram  size={25}/></Link>
+              <Link to='https://x.com/sh_shahedul' className="hover:text-[#FAB12F] transition"><FaTwitter size={25} /></Link>
+              <Link to='https://www.linkedin.com/in/sh-shahedul/' className="hover:text-[#FAB12F] transition"><FaLinkedinIn size={25} /></Link>
              </div>
           </div>
 
@@ -33,11 +34,11 @@ const Footer = () => {
           <div className="md:ml-30">
             <h2 className="text-xl font-semibold mb-4 text-[#FAB12F]">Quick Links</h2>
             <ul className="space-y-2">
-              <li><a href="#" className="hover:text-[#FAB12F] transition">Home</a></li>
-              <li><a href="#" className="hover:text-[#FAB12F] transition">Services</a></li>
-              <li><a href="#" className="hover:text-[#FAB12F] transition">Booking</a></li>
-              <li><a href="#" className="hover:text-[#FAB12F] transition">Gallery</a></li>
-              <li><a href="#" className="hover:text-[#FAB12F] transition">Contact</a></li>
+              <li><Link to='/' className="hover:text-[#FAB12F] transition">Home</Link></li>
+              <li><Link to='/service' className="hover:text-[#FAB12F] transition">Services</Link></li>
+              <li><Link to='/about' className="hover:text-[#FAB12F] transition">About</Link></li>
+              <li><Link to='/coverage' className="hover:text-[#FAB12F] transition">Coverage</Link></li>
+              <li><Link to='/contact' className="hover:text-[#FAB12F] transition">Contact</Link></li>
             </ul>
           </div>
 

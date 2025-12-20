@@ -25,7 +25,7 @@ const Coverage = () => {
 
   return (
     <div className='mt-20'>
-      <title>spark decore | Coverage</title>
+      {/* <title>spark decore | Coverage</title> */}
       {/* Title */}
       <h1 className='text-4xl text-center font-bold'>
         We Are Available in All 64 Districts of Bangladesh
