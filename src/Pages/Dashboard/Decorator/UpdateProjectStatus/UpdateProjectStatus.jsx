@@ -65,6 +65,7 @@ const UpdateProjectStatusRow = ({ booking, index, refetch }) => {
 
   return (
     <tr className="hover:bg-gray-50 transition-colors ">
+      <title>spark decore | Update Project Status</title>
       <th className="px-2 sm:px-3 py-2 text-xs sm:text-sm whitespace-nowrap ">{index + 1}</th>
       <td className="px-2 sm:px-3 py-2 font-medium text-xs sm:text-sm whitespace-nowrap"><span className="bg-sky-100 px-2 py-1 rounded-full text-sky-500">{booking.serviceName}</span></td>
       <td className="px-2 sm:px-3 py-2 text-xs sm:text-sm whitespace-nowrap text-[#FAB12F] font-bold">{booking.userName}</td>

@@ -45,7 +45,7 @@ const AddService = () => {
   return (
     <div className="min-h-screen bg-[#e6f3f5]  py-8 px-2 sm:px-6 lg:px-12">
       <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl p-6 sm:p-8 lg:p-10">
-        
+        <title>spark decore | Add Service</title>
         {/* Header */}
         <div className="flex items-center gap-3 mb-8">
           <FaPlusCircle className="text-[#FAB12F] text-3xl" />

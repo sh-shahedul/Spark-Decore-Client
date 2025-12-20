@@ -85,7 +85,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-     
+     <title>spark decore | Contact</title>
 
       {/* Hero */}
       <div className="relative bg-gradient-to-r from-[#005461] to-[#003844] text-white overflow-hidden py-16">

@@ -5,6 +5,7 @@ import { FaTimesCircle } from 'react-icons/fa';
 const PaymentCancelled = () => {
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-6">
+            <title>spark decore | payment cancel</title>
             <div className="w-full max-w-3xl bg-white rounded-lg shadow-md p-12 text-center">
                 <FaTimesCircle className="text-red-600 text-8xl mb-6 mx-auto" />
                 <h1 className="text-4xl font-extrabold text-gray-800 mb-4">Payment Cancelled</h1>

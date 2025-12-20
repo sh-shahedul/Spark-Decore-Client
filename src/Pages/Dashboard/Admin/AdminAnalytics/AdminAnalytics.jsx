@@ -35,7 +35,7 @@ const AdminAnalytics = () => {
 
   return (
     <div className="p-2 md:p-6 space-y-8 md:space-y-10">
-
+     <title>spark decore | Analytics </title>
       {/* ================= KPI Cards ================= */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
         <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-5 sm:p-6 md:p-8 rounded-2xl shadow-xl">

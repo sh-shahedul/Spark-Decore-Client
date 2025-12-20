@@ -24,6 +24,7 @@ const PaymentHistory = () => {
 
   return (
     <div className="p-4 md:p-6 lg:p-8 min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50">
+      <title>spark decore | payment history</title>
       <div className="max-w-7xl mx-auto">
         <motion.h2 
           className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-8 text-[#005461] text-center"

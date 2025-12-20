@@ -47,6 +47,7 @@ const AllService = () => {
 
   return (
     <section className="py-16 bg-gray-100 mt-15">
+      <title>spark decore | All Service</title>
       <Container>
         <h1 className="text-4xl font-bold text-center text-[#005461] mb-6">
           All <span className="text-[#FAB12F]">Services</span>

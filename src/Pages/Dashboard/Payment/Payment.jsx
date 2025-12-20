@@ -46,6 +46,7 @@ const Payment = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-4">
+      <title>spark decore | Payment</title>
       {/* Go Back Button */}
       <div className="max-w-3xl mx-auto mb-6">
         <button

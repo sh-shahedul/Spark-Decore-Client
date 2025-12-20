@@ -76,7 +76,7 @@ const Navbar = () => {
                 <label tabIndex={0} className="btn btn-ghost lg:hidden -mr-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-black"
+                    className="h-6 w-6 text-white -ml-4"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -92,7 +92,7 @@ const Navbar = () => {
 
                 <ul
                   tabIndex={0}
-                  className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-white/90 backdrop-blur-xl rounded-box w-52"
+                  className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-[#005461] backdrop-blur-xl rounded-box w-52"
                 >
                   {links}
                 </ul>

@@ -10,6 +10,7 @@ import Coverage from '../../Covergae/Coverage';
 const Home = () => {
     return (
         <div>
+            <title>spark decore | Home</title>
          <Hero></Hero> 
          <Service></Service>
          <WhyChoose></WhyChoose>

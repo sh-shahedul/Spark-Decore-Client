@@ -98,6 +98,7 @@ const ServiceDetails = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
+      <title>spark decore | Service Details</title>
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}

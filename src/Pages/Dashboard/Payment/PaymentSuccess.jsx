@@ -25,6 +25,7 @@ const PaymentSuccess = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+            <title>spark decore | paynment Success</title>
             <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
                 
                 {/* Check mark */}

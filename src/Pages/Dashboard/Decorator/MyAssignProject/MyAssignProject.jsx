@@ -34,7 +34,7 @@ const MyAssignProject = () => {
   return (
     <div className="sm:p-6">
       {/* Header */}
-      
+       <title>spark decore | My Assign Project</title>
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#005461] text-center p-8">My Assigned <span className="text-[#FAB12F]">Projects</span></h2>
      
 

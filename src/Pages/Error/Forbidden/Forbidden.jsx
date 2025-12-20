@@ -11,7 +11,7 @@ const Forbidden = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#005461]/10 via-[#005461]/5 to-[#FAB12F]/10 flex items-center justify-center px-4 relative overflow-hidden">
-      
+      <title>spark decore | forbidden access</title>
       {/* Animated Background Blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-20 w-72 h-72 bg-[#005461]/20 rounded-full blur-3xl animate-pulse"></div>

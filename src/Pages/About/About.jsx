@@ -118,7 +118,7 @@ const About = () => {
  if(loading) return <Loading></Loading>
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      
+      <title>spark decore | About</title>
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-[#005461]/10 to-[#FAB12F]/10"></div>
