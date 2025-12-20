@@ -121,7 +121,7 @@ const OurGallery = () => {
             <button
               onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
               disabled={currentPage === 1}
-              className={`px-4 py-2.5 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 ${
+              className={`md:px-4 px-2 md:py-3 py-1 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 ${
                 currentPage === 1
                   ? "bg-gray-200 text-gray-400 cursor-not-allowed"
                   : "bg-white text-[#005461] hover:bg-[#005461] hover:text-white shadow-lg hover:shadow-xl border-2 border-[#005461]/20"
@@ -139,7 +139,7 @@ const OurGallery = () => {
                 <button
                   key={num}
                   onClick={() => setCurrentPage(num + 1)}
-                  className={`w-12 h-12 rounded-xl text-sm font-bold transition-all duration-300 transform hover:scale-110 ${
+                  className={`md:w-12 w-8 md:h-12 h-8 rounded-xl text-sm font-bold transition-all duration-300 transform hover:scale-110 ${
                     currentPage === num + 1
                       ? "bg-gradient-to-br from-[#FAB12F] to-amber-500 text-white shadow-lg shadow-amber-300/50 scale-110"
                       : "bg-white text-gray-700 hover:bg-gray-100 border-2 border-gray-200 hover:border-[#FAB12F]/50"
@@ -154,7 +154,7 @@ const OurGallery = () => {
             <button
               onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
               disabled={currentPage === totalPages}
-              className={`px-4 py-2.5 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 ${
+              className={`md:px-4 px-2 md:py-3 py-1 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 ${
                 currentPage === totalPages
                   ? "bg-gray-200 text-gray-400 cursor-not-allowed"
                   : "bg-white text-[#005461] hover:bg-[#005461] hover:text-white shadow-lg hover:shadow-xl border-2 border-[#005461]/20"

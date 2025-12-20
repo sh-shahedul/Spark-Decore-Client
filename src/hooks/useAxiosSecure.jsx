@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import useAuth from './useAuth';
 import { useNavigate } from 'react-router';
 const axiosSecure = axios.create({
-    baseURL: 'https://spark-decore.vercel.app'
+    baseURL: 'https://spark-decoration.vercel.app'
 })
 
 

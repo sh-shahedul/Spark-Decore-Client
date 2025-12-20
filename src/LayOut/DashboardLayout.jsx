@@ -82,7 +82,7 @@ const DashboardLayout = () => {
           </NavLink>
         </li> 
          <li>
-          <NavLink to='/dashboard/manage-users' className={({ isActive }) =>`is-drawer-close:tooltip is-drawer-close:tooltip-right -ml-1 mt-2 ${isActive ? 'text-[#FAB12F]' : 'text-white' }` } data-tip="Manage Decorator">         
+          <NavLink to='/dashboard/manage-decorators' className={({ isActive }) =>`is-drawer-close:tooltip is-drawer-close:tooltip-right -ml-1 mt-2 ${isActive ? 'text-[#FAB12F]' : 'text-white' }` } data-tip="Manage Decorator">         
            <MdManageAccounts size={25} />
             <span className="is-drawer-close:hidden">Manage Decorator </span>
           </NavLink>

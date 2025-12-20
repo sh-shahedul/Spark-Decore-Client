@@ -20,7 +20,7 @@ import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 import AddService from "../Pages/Dashboard/Admin/AddService/AddService";
 import ManageService from "../Pages/Dashboard/Admin/ManageService/ManageService";
 import UpdateService from "../Pages/Dashboard/Admin/UpdateService/UpdateService";
-import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
+// import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import MyAssignProject from "../Pages/Dashboard/Decorator/MyAssignProject/MyAssignProject";
 import TodaySchedule from "../Pages/Dashboard/Decorator/TodayShedule/TodaySchedule";
 import EarningSummary from "../Pages/Dashboard/Decorator/EarningSummary/EarningSummary";
@@ -32,6 +32,7 @@ import AdminRoute from "./AdminRoute";
 import DecoratorRoute from "./DecoratorRoute";
 import PageNotFound from "../Pages/Error/PageNotFound/PageNotFound";
 import Loading from "../Component/Loading/Loading";
+import ManageDecorators from "../Pages/Dashboard/Admin/ManageDecorators/ManageDecorators";
 
 
 export const router = createBrowserRouter([
@@ -138,8 +139,8 @@ export const router = createBrowserRouter([
           element : <AdminRoute><UpdateService></UpdateService></AdminRoute>
         },
        {
-          path:'manage-users',
-          element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
+          path:'manage-decorators',
+          element: <AdminRoute><ManageDecorators></ManageDecorators></AdminRoute>
         },
          {
           path:'manage-booking',
