@@ -52,11 +52,11 @@ const AllService = () => {
         <h1 className="text-4xl font-bold text-center text-[#005461] mb-6">
           All <span className="text-[#FAB12F]">Services</span>
         </h1>
-        <p className="max-w-4xl mx-auto text-center mb-10 ">
+        <p className="max-w-4xl mx-auto text-center mb-10 text-black ">
           Explore our complete collection of professional services designed to meet every need. From home and office interiors to weddings and special events, we offer carefully crafted solutions with quality, creativity, and reliability. Easily search by service name, filter by category, and sort by budget to find the perfect service that matches your requirements. Our experienced team ensures excellence in every detail, delivering services you can trust.
         </p>
 
-        {/* 🔍 FILTER BAR */}
+        {/*  FILTER BAR */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-[#005461] p-10 rounded-lg shadow mb-10">
 
           {/* Search by service name */}
@@ -101,7 +101,7 @@ const AllService = () => {
             ))
           ) : (
             <p className="col-span-full text-center text-gray-500">
-              No services found
+              🔍 No services found
             </p>
           )}
         </div>
