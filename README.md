@@ -26,7 +26,6 @@ SparkDecore solves major challenges faced by local decoration businesses:
 ### For Users
 - 🎨 **Browse Decoration Packages** - Explore various decoration services with detailed information
 - 📅 **Smart Booking System** - Book consultations or on-site services with preferred date & time
-- 👷 **Decorator Selection** - View decorator profiles with ratings and specialties
 - 💳 **Secure Payment** - Integrated Stripe payment system for seamless transactions
 - 📍 **Service Coverage Map** - Interactive map showing service areas using React Leaflet
 - 📊 **Booking Management** - View, update, or cancel bookings from personal dashboard
