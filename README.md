@@ -85,8 +85,6 @@ SparkDecore solves major challenges faced by local decoration businesses:
 ### Data Visualization
 | Library | Purpose |
 |---------|---------|
-| **Chart.js** | Canvas-based charts |
-| **React ChartJS 2** | React wrapper for Chart.js |
 | **Recharts** | Composable chart library |
 | **React CountUp** | Animated counters |
 
