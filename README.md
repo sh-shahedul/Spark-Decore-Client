@@ -1,6 +1,6 @@
 # ✨ SparkDecore - Smart Home & Ceremony Decoration Booking System
 
-![SparkDecore Banner](https://i.ibb.co/your-banner-image.png)
+
 
 ## 🌟 Live Website
 **[Visit SparkDecore Live →](https://spark-decore.netlify.app/)**
@@ -187,84 +187,10 @@ npm run build
 
 For testing admin features, use these credentials:
 
-**Email:** `admin@sparkdecore.com`  
-**Password:** `Admin@123`
+**Email:** `sabbirrahman@gmail.com`  
+**Password:** `1234aA!`
 
----
 
-## 🌐 API Endpoints
-
-### Authentication
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `GET /api/auth/verify` - JWT token verification
-
-### Services
-- `GET /api/services` - Get all decoration services
-- `GET /api/services/:id` - Get single service details
-- `POST /api/services` - Create new service (Admin)
-- `PUT /api/services/:id` - Update service (Admin)
-- `DELETE /api/services/:id` - Delete service (Admin)
-
-### Bookings
-- `GET /api/bookings` - Get user bookings
-- `POST /api/bookings` - Create new booking
-- `PATCH /api/bookings/:id` - Update booking
-- `DELETE /api/bookings/:id` - Cancel booking
-
-### Decorators
-- `GET /api/decorators` - Get all decorators
-- `POST /api/decorators` - Add decorator (Admin)
-- `PATCH /api/decorators/:id/status` - Update project status
-
-### Payments
-- `POST /api/payments/create-intent` - Create Stripe payment intent
-- `GET /api/payments/history` - Get payment history
-
----
-
-## 📱 Routes Structure
-
-### Public Routes
-- `/` - Home page
-- `/services` - All services listing
-- `/services/:id` - Service details
-- `/about` - About us
-- `/contact` - Contact page
-- `/login` - Login page
-- `/register` - Registration page
-
-### Protected Routes (User)
-- `/dashboard` - User dashboard
-- `/dashboard/bookings` - My bookings
-- `/dashboard/profile` - User profile
-- `/dashboard/payment-history` - Payment history
-
-### Protected Routes (Decorator)
-- `/dashboard/decorator` - Decorator dashboard
-- `/dashboard/decorator/projects` - Assigned projects
-- `/dashboard/decorator/schedule` - Today's schedule
-- `/dashboard/decorator/earnings` - Earnings summary
-
-### Protected Routes (Admin)
-- `/dashboard/admin` - Admin dashboard
-- `/dashboard/admin/decorators` - Manage decorators
-- `/dashboard/admin/services` - Manage services
-- `/dashboard/admin/bookings` - Manage bookings
-- `/dashboard/admin/analytics` - Revenue analytics
-
----
-
-## 🎨 Design Philosophy
-
-SparkDecore follows a modern, clean design approach with:
-- **Consistent Color Scheme:** Primary (#005461) and Secondary (#FAB12F)
-- **Smooth Animations:** Framer Motion for page transitions and micro-interactions
-- **Mobile-First:** Responsive design that works seamlessly on all devices
-- **Clear Visual Hierarchy:** Well-organized content structure
-- **Professional UI:** DaisyUI components with custom styling
-
----
 
 ## 🔒 Security Features
 
@@ -308,11 +234,6 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
 
 ## 🙏 Acknowledgments
 
