@@ -145,8 +145,8 @@ SparkDecore solves major challenges faced by local decoration businesses:
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/sparkdecore-client.git
-cd sparkdecore-client
+git clone https://github.com/sh-shahedul/Spark-Decore-Client
+cd spark-decore-client
 ```
 
 2. **Install dependencies**
