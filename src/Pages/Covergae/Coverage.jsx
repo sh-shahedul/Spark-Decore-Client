@@ -27,12 +27,12 @@ const Coverage = () => {
     <div className='mt-20'>
       {/* <title>spark decore | Coverage</title> */}
       {/* Title */}
-      <h1 className='text-4xl text-center font-bold'>
-        We Are Available in All 64 Districts of Bangladesh
+      <h1 className='md:text-4xl text-2xl px-3 text-center font-bold pt-5 '>
+        We Are Available in All <span className='text-[#FAB12F] '>64</span> Districts of <span className='text-[#005461]'>Bangladesh</span>
       </h1>
 
       {/* Description */}
-      <p className='text-center text-gray-600 mt-4 max-w-2xl mx-auto'>
+      <p className='text-center text-gray-600 mt-4 max-w-2xl mx-auto  px-3'>
         Enter the name of your district in the search box below, and the map 
         will automatically zoom to that location and show the available service areas.
       </p>
@@ -41,9 +41,9 @@ const Coverage = () => {
       <div className='text-center py-10'>
         <form
           onSubmit={handelSerch}
-          className='flex justify-center'
+          className='flex justify-center px-3'
         >
-          <label className="flex items-center gap-3 bg-white shadow-md rounded-full px-5 py-3 w-full max-w-md border focus-within:border-blue-500 transition-all">
+          <label className="flex items-center gap-3 bg-white shadow-md rounded-full px-5 py-3 w-full max-w-md border focus-within:border-blue-500 transition-all ">
             <svg
               className="h-[1.2em] opacity-60"
               xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +66,7 @@ const Coverage = () => {
               name="location"
               required
               placeholder="Search your district..."
-              className="outline-none w-full text-lg"
+              className="outline-none w-full text-lg  "
             />
           </label>
         </form>

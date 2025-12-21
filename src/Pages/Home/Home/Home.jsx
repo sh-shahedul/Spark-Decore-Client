@@ -6,6 +6,7 @@ import SpecialOffer from '../../SpecialOffer/SpecialOffer';
 import TopDecorators from '../../TopDecorators/TopDecorators';
 import OurGallery from '../../../Component/OurGallery/OurGallery';
 import Coverage from '../../Covergae/Coverage';
+import HowItWorks from '../../HowItWorks/HowItWorks';
 
 const Home = () => {
     return (
@@ -13,8 +14,9 @@ const Home = () => {
             <title>spark decore | Home </title>
          <Hero></Hero> 
          <Service></Service>
-         <WhyChoose></WhyChoose>
          <TopDecorators></TopDecorators>
+         <WhyChoose></WhyChoose>
+         <HowItWorks></HowItWorks>
          <OurGallery></OurGallery>
          <SpecialOffer></SpecialOffer>
          <Coverage></Coverage>
