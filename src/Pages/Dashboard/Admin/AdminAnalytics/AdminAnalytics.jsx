@@ -36,8 +36,18 @@ const AdminAnalytics = () => {
   return (
     <div className="p-2 md:p-6 space-y-8 md:space-y-10">
      <title>spark decore | Analytics </title>
+     <div className="mb-6 md:mb-8 text-center">
+  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#005461] ">
+    Business <span className="text-[#FAB12F]">Analytics</span>
+  </h1>
+  <p className="text-sm md:text-base  mt-2 max-w-3xl mx-auto font-medium">
+    A comprehensive overview of key business metrics, including revenue performance,
+    service demand trends, and user booking behavior, designed to support
+    data-driven decision making.
+  </p>
+</div>
       {/* ================= KPI Cards ================= */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+      <div className="text-center">
         <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-5 sm:p-6 md:p-8 rounded-2xl shadow-xl">
           <h2 className="text-xs sm:text-sm md:text-lg font-medium uppercase tracking-wide">
             Total Revenue

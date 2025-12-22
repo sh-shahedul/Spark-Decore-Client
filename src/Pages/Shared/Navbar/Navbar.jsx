@@ -100,7 +100,7 @@ const Navbar = () => {
 
               <Link
                 to="/"
-                className="md:text-3xl text-lg text-[#3e71f1] font-bold"
+                className="md:text-3xl text-lg text-white font-bold"
               >
                 Spark <span className="text-[#FAB12F] md:text-2xl text-lg">Decore</span>
               </Link>

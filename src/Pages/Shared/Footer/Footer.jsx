@@ -14,8 +14,8 @@ const Footer = () => {
         <div className="py-8 grid grid-cols-1 md:grid-cols-3 gap-10 relative z-10">
           {/* Logo & Tagline */}
           <div className="">
-            <h1 className="text-3xl font-bold text-[#3e71f1] tracking-widest">
-              Spark<span className="text-[#FAB12F] text-2xl">Decore</span>
+            <h1 className="text-3xl font-bold text-white tracking-widest">
+              Spark <span className="text-[#FAB12F] text-2xl">Decore</span>
             </h1>
             <p className="text-gray-300 text-lg md:text-base leading-relaxed mt-4">
               We specialize in transforming your events into unforgettable memories. From smart home decorations
