@@ -226,7 +226,7 @@ Contributions are welcome! Please follow these steps:
 ## 📞 Contact Information
 
 - **Email:** shahedulhoque2003@gmail.com
-- **GitHub:** [SparkDecore Organization](https://github.com/sh-shahedul)
+- **GitHub:** [sh-shahedul](https://github.com/sh-shahedul)
 
 ---
 
