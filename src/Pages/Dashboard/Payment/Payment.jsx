@@ -1,3 +1,134 @@
+// import React from 'react';
+// import { useParams, useNavigate } from 'react-router';
+// import useAxiosSecure from '../../../hooks/useAxiosSecure';
+// import { useQuery } from '@tanstack/react-query';
+// import { FaCalendarAlt, FaClock, FaMapMarkerAlt, FaDollarSign, FaUser, FaEnvelope, FaTools, FaArrowLeft } from 'react-icons/fa';
+// import { FaBangladeshiTakaSign } from 'react-icons/fa6';
+// import Loading from '../../../Component/Loading/Loading';
+
+// const Payment = () => {
+//   const { bookingId } = useParams();
+//   const navigate = useNavigate();
+//   const axiosSecure = useAxiosSecure();
+
+//   const { isLoading, data: booking } = useQuery({
+//     queryKey: ['bookings', bookingId],
+//     queryFn: async () => {
+//       const res = await axiosSecure.get(`/bookings/${bookingId}`);
+//       return res.data;
+//     },
+//   });
+
+//    const handelPayment = async()=>{
+//       const paymentInfo = {
+//         cost : booking.totalCost,
+//         serviceName:booking.serviceName,
+//         serviceId : booking.serviceId,
+//         userEmail : booking.userEmail,
+//         bookingId
+//       }
+
+//       const res =  await axiosSecure.post('/create-checkout-session',paymentInfo)
+      
+//       console.log(res.data);
+//       window.location.href = res.data.url
+//       // window.location.assign (res.data.url)
+      
+
+//    }
+
+
+
+
+//   if (isLoading) {
+//     return <Loading></Loading>
+//   }
+
+//   return (
+//     <div className="min-h-screen bg-gray-100 py-12 px-4">
+//       <title>spark decore | Payment</title>
+//       {/* Go Back Button */}
+//       <div className="max-w-3xl mx-auto mb-6">
+//         <button
+//           onClick={() => navigate(-1)}
+//           className="flex items-center gap-2 text-[#005461] hover:text-gray-900 font-bold"
+//         >
+//           <FaArrowLeft /> Go Back
+//         </button>
+//       </div>
+
+//       {/* Header */}
+//       <div className="text-center mb-10">
+//         <h1 className="text-4xl font-bold text-[#005461] mb-2">Checkout</h1>
+//         <p className="text-gray-600">Review your booking and proceed to payment</p>
+//       </div>
+
+//       {/* Booking Card */}
+//       <div className="max-w-3xl mx-auto bg-white shadow-xl rounded-xl overflow-hidden">
+//         {/* User Info */}
+//         <div className="px-8 py-6 border-b border-gray-200">
+//           <h2 className="text-2xl font-semibold mb-4">User Information</h2>
+//           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//             <div className="flex items-center gap-2">
+//               <FaUser className="text-blue-500"/>
+//               <span>{booking.userName}</span>
+//             </div>
+//             <div className="flex items-center gap-2">
+//               <FaEnvelope className="text-blue-500"/>
+//               <span>{booking.userEmail}</span>
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* Service Info */}
+//         <div className="px-8 py-6 border-b border-gray-200">
+//           <h2 className="text-2xl font-semibold mb-4">Service Details</h2>
+//           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//             <div className="flex items-center gap-2">
+//               <FaTools className="text-green-500"/>
+//               <span>{booking.serviceName}</span>
+//             </div>
+//             <div className="flex items-center gap-2">
+//               <FaBangladeshiTakaSign className="text-green-500" />
+//               <span>{booking.totalCost}</span>
+//             </div>
+//             <div className="flex items-center gap-2">
+//               <FaCalendarAlt className="text-yellow-500"/>
+//               <span>{booking.bookingDate}</span>
+//             </div>
+//             <div className="flex items-center gap-2">
+//               <FaClock className="text-yellow-500"/>
+//               <span>{booking.bookingTime}</span>
+//             </div>
+//             <div className="flex items-center gap-2 col-span-2">
+//               <FaMapMarkerAlt className="text-red-500"/>
+//               <span>{booking.location}</span>
+//             </div>
+//             <div className="flex items-center gap-2">
+//               <span className="font-semibold">Unit:</span> {booking.unit}
+//             </div>
+//             <div className="flex items-center gap-2">
+//               <span className="font-semibold">Quantity:</span> {booking.quantity}
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* Payment Summary */}
+//         <div className="px-8 py-6 bg-gray-50 flex flex-col md:flex-row items-center justify-between gap-4">
+//           <div>
+//             <h2 className="text-xl font-semibold">Total to Pay</h2>
+//             <p className="text-3xl font-bold text-green-600 flex gap-2 items-center"><FaBangladeshiTakaSign /> {booking.totalCost}</p>
+//           </div>
+//           <button onClick={handelPayment} className="px-10 py-4 bg-[#005461] cursor-pointer text-white font-bold rounded-xl hover:text-[#FAB12F] transition-all shadow-lg">
+//             Pay Now
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Payment;
 import React from 'react';
 import { useParams, useNavigate } from 'react-router';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
@@ -45,13 +176,13 @@ const Payment = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-12 px-4">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 py-12 px-4">
       <title>spark decore | Payment</title>
       {/* Go Back Button */}
       <div className="max-w-3xl mx-auto mb-6">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-[#005461] hover:text-gray-900 font-bold"
+          className="flex items-center gap-2 text-[#005461] dark:text-cyan-400 hover:text-gray-900 dark:hover:text-cyan-300 font-bold"
         >
           <FaArrowLeft /> Go Back
         </button>
@@ -59,67 +190,67 @@ const Payment = () => {
 
       {/* Header */}
       <div className="text-center mb-10">
-        <h1 className="text-4xl font-bold text-[#005461] mb-2">Checkout</h1>
-        <p className="text-gray-600">Review your booking and proceed to payment</p>
+        <h1 className="text-4xl font-bold text-[#005461] dark:text-cyan-400 mb-2">Checkout</h1>
+        <p className="text-gray-600 dark:text-gray-400">Review your booking and proceed to payment</p>
       </div>
 
       {/* Booking Card */}
-      <div className="max-w-3xl mx-auto bg-white shadow-xl rounded-xl overflow-hidden">
+      <div className="max-w-3xl mx-auto bg-white dark:bg-gray-800 shadow-xl rounded-xl overflow-hidden">
         {/* User Info */}
-        <div className="px-8 py-6 border-b border-gray-200">
-          <h2 className="text-2xl font-semibold mb-4">User Information</h2>
+        <div className="px-8 py-6 border-b border-gray-200 dark:border-gray-700">
+          <h2 className="text-2xl font-semibold mb-4 dark:text-gray-100">User Information</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="flex items-center gap-2">
-              <FaUser className="text-blue-500"/>
+            <div className="flex items-center gap-2 dark:text-gray-300">
+              <FaUser className="text-blue-500 dark:text-blue-400"/>
               <span>{booking.userName}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <FaEnvelope className="text-blue-500"/>
+            <div className="flex items-center gap-2 dark:text-gray-300">
+              <FaEnvelope className="text-blue-500 dark:text-blue-400"/>
               <span>{booking.userEmail}</span>
             </div>
           </div>
         </div>
 
         {/* Service Info */}
-        <div className="px-8 py-6 border-b border-gray-200">
-          <h2 className="text-2xl font-semibold mb-4">Service Details</h2>
+        <div className="px-8 py-6 border-b border-gray-200 dark:border-gray-700">
+          <h2 className="text-2xl font-semibold mb-4 dark:text-gray-100">Service Details</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="flex items-center gap-2">
-              <FaTools className="text-green-500"/>
+            <div className="flex items-center gap-2 dark:text-gray-300">
+              <FaTools className="text-green-500 dark:text-green-400"/>
               <span>{booking.serviceName}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <FaBangladeshiTakaSign className="text-green-500" />
+            <div className="flex items-center gap-2 dark:text-gray-300">
+              <FaBangladeshiTakaSign className="text-green-500 dark:text-green-400" />
               <span>{booking.totalCost}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <FaCalendarAlt className="text-yellow-500"/>
+            <div className="flex items-center gap-2 dark:text-gray-300">
+              <FaCalendarAlt className="text-yellow-500 dark:text-yellow-400"/>
               <span>{booking.bookingDate}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <FaClock className="text-yellow-500"/>
+            <div className="flex items-center gap-2 dark:text-gray-300">
+              <FaClock className="text-yellow-500 dark:text-yellow-400"/>
               <span>{booking.bookingTime}</span>
             </div>
-            <div className="flex items-center gap-2 col-span-2">
-              <FaMapMarkerAlt className="text-red-500"/>
+            <div className="flex items-center gap-2 col-span-2 dark:text-gray-300">
+              <FaMapMarkerAlt className="text-red-500 dark:text-red-400"/>
               <span>{booking.location}</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 dark:text-gray-300">
               <span className="font-semibold">Unit:</span> {booking.unit}
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 dark:text-gray-300">
               <span className="font-semibold">Quantity:</span> {booking.quantity}
             </div>
           </div>
         </div>
 
         {/* Payment Summary */}
-        <div className="px-8 py-6 bg-gray-50 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="px-8 py-6 bg-gray-50 dark:bg-gray-700 flex flex-col md:flex-row items-center justify-between gap-4">
           <div>
-            <h2 className="text-xl font-semibold">Total to Pay</h2>
-            <p className="text-3xl font-bold text-green-600 flex gap-2 items-center"><FaBangladeshiTakaSign /> {booking.totalCost}</p>
+            <h2 className="text-xl font-semibold dark:text-gray-100">Total to Pay</h2>
+            <p className="text-3xl font-bold text-green-600 dark:text-green-400 flex gap-2 items-center"><FaBangladeshiTakaSign /> {booking.totalCost}</p>
           </div>
-          <button onClick={handelPayment} className="px-10 py-4 bg-[#005461] cursor-pointer text-white font-bold rounded-xl hover:text-[#FAB12F] transition-all shadow-lg">
+          <button onClick={handelPayment} className="px-10 py-4 bg-[#005461] dark:bg-cyan-600 cursor-pointer text-white font-bold rounded-xl hover:text-[#FAB12F] dark:hover:text-yellow-400 transition-all shadow-lg">
             Pay Now
           </button>
         </div>
