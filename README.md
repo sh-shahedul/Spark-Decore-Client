@@ -5,6 +5,8 @@
 ## 🌟 Live Website
 **[Visit SparkDecore Live →](https://spark-decore.netlify.app/)**
 
+**[Visit SparkDecore Servere →](https://github.com/sh-shahedul/spark-decore-server)**
+
 ---
 
 ## 📖 Project Overview
@@ -225,9 +227,8 @@ Contributions are welcome! Please follow these steps:
 
 ## 📞 Contact Information
 
-- **Email:** support@sparkdecore.com
-- **Website:** [sparkdecore.com](https://your-live-url.web.app)
-- **GitHub:** [SparkDecore Organization](https://github.com/yourusername)
+- **Email:** shahedulhoque2003@gmail.com
+- **GitHub:** [sh-shahedul](https://github.com/sh-shahedul)
 
 ---
 
