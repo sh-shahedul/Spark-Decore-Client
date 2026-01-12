@@ -178,6 +178,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
@@ -195,12 +196,35 @@ const Login = () => {
         toast.success(" 🎉 Login Successfull")
          navigate(location.state || "/")
        })
-      // .then(() => )
+      
       .catch((err) => {
         console.log(err);
         setLoginError("Invalid email or password");
       });
   };
+   const DemoCredential = {
+   admin:{
+         email : "sabbirrahman@mail.com",
+        password: "1234aA!"
+       },
+   decorator:{
+         email : "shuvo@gmail.com",
+        password: "1234aA!"
+       },
+   user:{
+         email : "habib@gmail.com",
+        password: "1234aA!"
+       },
+   }
+
+  const handelCredential = (e)=>{
+     const role = e.target.value
+     if(!DemoCredential[role]) return;
+     
+     setValue("email", DemoCredential[role].email)
+     setValue("password", DemoCredential[role].password)
+  }
+
 
   return (
     <Container>
@@ -267,14 +291,26 @@ const Login = () => {
                 )}
               </div>
 
-              {/* Forgot */}
-              <div className="text-right">
+              {/* Forgot and demo creadintial */}
+  <div className="flex  items-center justify-between">
+   <select
+   onChange={handelCredential}
+  defaultValue="Demo Credential?"
+  className="bg-transparent border-none shadow-none outline-none ring-0 focus:outline-none focus:ring-0 focus:bg-transparent p-2 h-auto min-h-0 text-sm underline cursor-pointer appearance-none text-[#005461] dark:text-teal-400">
+  <option disabled>Demo Credential?</option>
+  <option className="font-semibold" value={"admin"}>Admin</option>
+  <option className="font-semibold" value={"decorator"}>Decorator</option>
+  <option className="font-semibold" value={"user"}>User</option>
+  </select>
+
+                <div className="text-right">
                 <Link
                   to="/forgot-password"
                   className="text-sm text-[#005461] dark:text-teal-400 underline"
                 >
                   Forgot Password?
                 </Link>
+              </div>
               </div>
 
               {/*  Login Error Message */}

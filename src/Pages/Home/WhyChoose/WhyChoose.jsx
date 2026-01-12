@@ -134,7 +134,7 @@ const features = [
 
 const WhyChoose = () => {
   return (
-    <div className="py-16 bg-base-200 dark:bg-gray-900 mb-10 rounded-2xl">
+    <div className="py-16 bg-base-200 dark:bg-gray-900  rounded-2xl">
       <Container>
         <div className="text-center mb-12 ">
         <h2 className=" text-4xl md:text-5xl text-[#005461] dark:text-teal-400 mb-4 font-bold">

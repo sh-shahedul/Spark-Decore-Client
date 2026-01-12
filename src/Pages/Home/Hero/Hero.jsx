@@ -28,7 +28,7 @@ const slides = [
 
 const HeroSection = () => {
   return (
-    <section className="relative w-full bg-base-200">
+    <section className="relative w-full bg-base-200 dark:bg-gray-900">
      <Container>
        <div className="">
         <Swiper

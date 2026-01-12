@@ -215,10 +215,10 @@ const TopDecorators = () => {
   if (!decorators.length) return <p>No decorators found</p>;
 
   return (
-    <div className="relative bg-gradient-to-br from-teal-50 via-white to-amber-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
+    <div className="relative bg-gray-50 dark:bg-gray-900 overflow-hidden">
       {/* Decorative Elements */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-teal-100 dark:bg-teal-500/10 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-100 dark:bg-amber-500/10 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+       <div className="absolute top-0 left-0 w-72 h-72 bg-teal-100 dark:bg-teal-500/10 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-100 dark:bg-amber-500/10 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div> 
       
       <Container>
         <div className="py-16 lg:py-24 relative z-10">
@@ -229,7 +229,7 @@ const TopDecorators = () => {
                 ⭐ Featured Professionals
               </span>
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-[#005461] via-teal-600 to-[#005461] dark:from-teal-400 dark:via-teal-500 dark:to-teal-400 bg-clip-text text-transparent mb-3">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-[#005461] via-teal-600 to-[#005461] dark:from-teal-400 dark:via-teal-500 dark:to-teal-400 bg-clip-text text-transparent mb-3">
               Top Decorators
             </h2>
             <p className="text-gray-600 dark:text-gray-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">

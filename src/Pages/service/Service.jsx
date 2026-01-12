@@ -223,7 +223,7 @@ const Service = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-[#005461] via-teal-600 to-[#FAB12F] dark:from-teal-400 dark:via-teal-500 dark:to-amber-400 bg-clip-text text-transparent"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-[#005461] via-teal-600 to-[#FAB12F] dark:from-teal-400 dark:via-teal-500 dark:to-amber-400 bg-clip-text text-transparent"
           >
             Our Premium Services
           </motion.h1>

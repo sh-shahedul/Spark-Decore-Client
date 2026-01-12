@@ -7,6 +7,8 @@ import TopDecorators from '../../TopDecorators/TopDecorators';
 import OurGallery from '../../../Component/OurGallery/OurGallery';
 import Coverage from '../../Covergae/Coverage';
 import HowItWorks from '../../HowItWorks/HowItWorks';
+import FAQ from '../../FAQ/FAQ';
+import UpcomingEvent from '../../UpcomingEvent/UpcomingEvent';
 
 const Home = () => {
     return (
@@ -14,11 +16,13 @@ const Home = () => {
             <title>spark decore | Home </title>
          <Hero></Hero> 
          <Service></Service>
+         <UpcomingEvent></UpcomingEvent>
          <TopDecorators></TopDecorators>
          <WhyChoose></WhyChoose>
          <HowItWorks></HowItWorks>
          <OurGallery></OurGallery>
          <SpecialOffer></SpecialOffer>
+         <FAQ></FAQ>
          <Coverage></Coverage>
          
          
