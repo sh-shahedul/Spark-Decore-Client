@@ -15,6 +15,7 @@ const Login = () => {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -30,6 +31,7 @@ const Login = () => {
     signInUser(data.email, data.password)
        .then(()=>{
         toast.success(" 🎉 Login Successfull")
+        reset()
          navigate(location.state || "/")
        })
       
