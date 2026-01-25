@@ -58,6 +58,14 @@ SparkDecore solves major challenges faced by local decoration businesses:
 
 ---
 
+## 👤 Admin Credentials
+
+For testing admin features, use these credentials:
+
+**Email:** `sabbirrahman@gmail.com`  
+**Password:** `1234aA!`
+
+
 ## 🛠️ Technology Stack
 
 ### Frontend Technologies
@@ -182,12 +190,6 @@ npm run build
 
 ---
 
-## 👤 Admin Credentials
-
-For testing admin features, use these credentials:
-
-**Email:** `sabbirrahman@gmail.com`  
-**Password:** `1234aA!`
 
 
 
