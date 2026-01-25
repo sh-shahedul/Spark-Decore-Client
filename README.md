@@ -5,7 +5,7 @@
 ## 🌟 Live Website
 **[Visit SparkDecore Live →](https://spark-decore.netlify.app/)**
 
-**[Visit SparkDecore Servere →](https://github.com/sh-shahedul/spark-decore-server)**
+**[Visit SparkDecore Server →](https://github.com/sh-shahedul/spark-decore-server)**
 
 ---
 
